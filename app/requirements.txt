@@ -1,0 +1,4 @@
+flask
+uWSGI
+mysql-connector
+requests

@@ -1,0 +1,37 @@
+version: "3.7"
+
+
+services:
+    flask:
+        build: ./app
+        container_name:  flask
+        restart: always
+        environment: 
+            - APP_NAME=FlaskApp
+        volumes:
+            - './backend:/backend'
+        expose:
+            - 8080
+
+    nginx:
+        build: ./nginx
+        container_name:  nginx
+        restart: always
+        ports:
+            - "80:80"
+    frontend:
+        build: ./frontend
+        container_name:  frontend
+        restart: always
+        volumes:
+            - './frontend:/frontend'
+        ports:
+            - "8000:8000"
+            - "5000:5001"
+
+    db:
+      image: mysql:5.7
+      ports:
+        - "5001:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: sherlockeD123
