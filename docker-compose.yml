@@ -9,7 +9,7 @@ services:
         environment: 
             - APP_NAME=FlaskApp
         volumes:
-            - './backend:/backend'
+            - './app:/app'
         expose:
             - 8080
 
@@ -27,7 +27,7 @@ services:
             - './frontend:/frontend'
         ports:
             - "8000:8000"
-            - "5000:5001"
+            - "5000:5000"
 
     db:
       image: mysql:5.7
