@@ -3,9 +3,10 @@ import mysql.connector
 
 app = Flask(__name__)
 
-@app.route('/hello')
+@app.route('/api/hello')
 def hello():
-    return 'This Compose/Flask demo has been viewed %s time(s).' % redis.get('hits')
+    print('Hello Request Received')
+    return 'Hello This is the Flask App'
 
 
 if __name__ == "__main__":
