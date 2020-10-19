@@ -3,12 +3,17 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-import HelloWorld from './components/HelloWorld.vue'
+import Home from './components/Home.vue'
+import Game from './components/Game.vue'
 
 const routes = [
 	{
 		path: "/",
-		component: HelloWorld
+		component: Home
+	},
+	{
+		path: "/game",
+		component: Game
 	}
 ];
 
