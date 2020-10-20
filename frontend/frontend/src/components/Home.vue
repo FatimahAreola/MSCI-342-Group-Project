@@ -1,14 +1,8 @@
 <template>
-	<div class="hello">
-		<h1>{{ msg }}</h1>
-		<p>
-			For a guide and recipes on how to configure / customize this project,<br />
-			check out the BQALHXSCWE
-			<a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-				>vue-cli documentation</a
-			>.
-		</p>
+	<div class="home">
 		<button v-on:click="test_axios">Test Access To Flask App</button>
+		<br />
+		<button v-on:click="routeToGame">go to game</button>
 	</div>
 </template>
 
@@ -27,6 +21,10 @@ export default {
 		this.test_axios();
 	},
 	methods: {
+		routeToGame: function () {
+			console.log("yo");
+			this.$router.push("/game");
+		},
 		test_axios: function () {
 			console.log("Hey how are you");
 			const baseURI = "http://localhost:80/api/hello";
