@@ -1,7 +1,14 @@
 <template>
-	<div class="board">
-		<div class="card-slot" v-for="card in cardData" :key="card.card">
-			<Card :card="card" />
+	<div>
+		<div class="board">
+			<div
+				class="card-slot"
+				v-for="card in cardData"
+				:key="card.cardId"
+				v-on:click="emitChange(card.cardId, $event)"
+			>
+				<Card :card="card" :active="isActive[card.cardId - 1]" />
+			</div>
 		</div>
 	</div>
 </template>
@@ -15,7 +22,32 @@ export default {
 	},
 	props: ["cardData"],
 	data() {
-		return {};
+		return {
+			isActive: [
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+			],
+		};
+	},
+	methods: {
+		emitChange(id) {
+			console.log(id);
+			this.isActive[id - 1] = true;
+		},
 	},
 };
 </script>
@@ -31,5 +63,7 @@ export default {
 	margin: 5px;
 	background-color: #f1d6d6;
 	height: 200px;
+	align-content: center;
+	text-align: center;
 }
 </style>
