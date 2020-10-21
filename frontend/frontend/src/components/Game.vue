@@ -3,7 +3,10 @@
 		<div class="board-wrapper">
 			<Board :cardData="shuffled" @updateActive="updateActive" />
 		</div>
-		<div class="timer">timer</div>
+		<div>
+			<div class="timer">timer</div>
+			<button @click="returnHome">Leave Game</button>
+		</div>
 	</div>
 </template>
 
@@ -46,6 +49,9 @@ export default {
 		},
 	},
 	methods: {
+		returnHome() {
+			this.$router.push("/");
+		},
 		updateActive({ value }) {
 			this.cards.forEach((card) => {
 				if (card.cardId == value) {
