@@ -1,13 +1,15 @@
 <template>
 	<div class="board">
 		<div class="board-wrapper">
-			<Board :cardData="cards" @updateActive="updateActive" />
+			<Board :cardData="shuffled" @updateActive="updateActive" />
 		</div>
 		<div class="timer">timer</div>
 	</div>
 </template>
 
 <script>
+import _ from "lodash";
+
 import Board from "./Board.vue";
 
 export default {
@@ -35,9 +37,14 @@ export default {
 				{ cardId: 15, artName: "art15", artUrl: "", active: false },
 				{ cardId: 16, artName: "art16", artUrl: "", active: false },
 			],
+			countFlipped: 0,
 		};
 	},
-	computed: {},
+	computed: {
+		shuffled() {
+			return _.shuffle(this.cards);
+		},
+	},
 	methods: {
 		updateActive({ value }) {
 			this.cards.forEach((card) => {
