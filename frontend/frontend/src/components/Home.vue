@@ -22,7 +22,6 @@ export default {
 	},
 	methods: {
 		routeToGame: function () {
-			console.log("yo");
 			this.$router.push("/game");
 		},
 		test_axios: function () {

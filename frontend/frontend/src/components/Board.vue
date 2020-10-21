@@ -7,7 +7,7 @@
 				:key="card.cardId"
 				v-on:click="emitChange(card.cardId, $event)"
 			>
-				<Card :card="card" :active="isActive[card.cardId - 1]" />
+				<Card :card="card" :active="card.active" />
 			</div>
 		</div>
 	</div>
@@ -22,31 +22,11 @@ export default {
 	},
 	props: ["cardData"],
 	data() {
-		return {
-			isActive: [
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-				false,
-			],
-		};
+		return {};
 	},
 	methods: {
 		emitChange(id) {
-			console.log(id);
-			this.isActive[id - 1] = true;
+			this.$emit("updateActive", { value: id });
 		},
 	},
 };
