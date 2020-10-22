@@ -23,24 +23,122 @@ export default {
 	data() {
 		return {
 			cards: [
-				{ cardId: 1, artName: "art1", artUrl: "", active: false },
-				{ cardId: 2, artName: "art2", artUrl: "", active: false },
-				{ cardId: 3, artName: "art3", artUrl: "", active: false },
-				{ cardId: 4, artName: "art4", artUrl: "", active: false },
-				{ cardId: 5, artName: "art5", artUrl: "", active: false },
-				{ cardId: 6, artName: "art6", artUrl: "", active: false },
-				{ cardId: 7, artName: "art7", artUrl: "", active: false },
-				{ cardId: 8, artName: "art8", artUrl: "", active: false },
-				{ cardId: 9, artName: "art9", artUrl: "", active: false },
-				{ cardId: 10, artName: "art10", artUrl: "", active: false },
-				{ cardId: 11, artName: "art11", artUrl: "", active: false },
-				{ cardId: 12, artName: "art12", artUrl: "", active: false },
-				{ cardId: 13, artName: "art13", artUrl: "", active: false },
-				{ cardId: 14, artName: "art14", artUrl: "", active: false },
-				{ cardId: 15, artName: "art15", artUrl: "", active: false },
-				{ cardId: 16, artName: "art16", artUrl: "", active: false },
+				{
+					cardId: 1,
+					artName: "art1",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 2,
+					artName: "art2",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 3,
+					artName: "art3",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 4,
+					artName: "art4",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 5,
+					artName: "art5",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 6,
+					artName: "art6",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 7,
+					artName: "art7",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 8,
+					artName: "art8",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 9,
+					artName: "art1",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 10,
+					artName: "art2",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 11,
+					artName: "art3",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 12,
+					artName: "art4",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 13,
+					artName: "art5",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 14,
+					artName: "art6",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 15,
+					artName: "art7",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
+				{
+					cardId: 16,
+					artName: "art8",
+					artUrl: "",
+					active: false,
+					status: false,
+				},
 			],
+			countMatched: 0,
 			countFlipped: 0,
+			flipped: [],
 		};
 	},
 	computed: {
@@ -48,13 +146,48 @@ export default {
 			return _.shuffle(this.cards);
 		},
 	},
+	watch: {
+		countMatched() {
+			if (this.countMatched >= this.cards.length / 2) {
+				console.log("done");
+			}
+		},
+		countFlipped() {
+			if (this.countFlipped == 2) {
+				this.assertMatch();
+			}
+		},
+	},
 	methods: {
+		assertMatch() {
+			if (this.flipped[0].artName == this.flipped[1].artName) {
+				this.cards[this.flipped[0].cardId - 1].status = true;
+				this.cards[this.flipped[1].cardId - 1].status = true;
+				this.countFlipped = 0;
+				this.countMatched = this.countMatched + 1;
+				this.flipped = [];
+			} else {
+				this.cards[this.flipped[0].cardId - 1].active = false;
+				this.cards[this.flipped[1].cardId - 1].active = false;
+				this.countFlipped = 0;
+				this.flipped = [];
+			}
+		},
 		returnHome() {
 			this.$router.push("/");
 		},
 		updateActive({ value }) {
 			this.cards.forEach((card) => {
-				if (card.cardId == value) {
+				if (card.cardId == value.cardId) {
+					if (card.active) {
+						this.countFlipped = this.countFlipped - 1;
+						this.flipped = this.flipped.filter(
+							(item) => item.cardId != value.cardId
+						);
+					} else {
+						this.countFlipped = this.countFlipped + 1;
+						this.flipped.push(value);
+					}
 					card.active = !card.active;
 				}
 			});
