@@ -1,7 +1,7 @@
 <template>
 	<div class="card">
 		<div v-if="!active"></div>
-		<div v-else-if="status">matched!</div>
+		<div v-else-if="status">matched! {{ card.artName }}</div>
 		<div v-else class="card-info">{{ card.cardId }} {{ card.artName }}</div>
 	</div>
 </template>
