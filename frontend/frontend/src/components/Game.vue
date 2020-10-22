@@ -154,7 +154,9 @@ export default {
 		},
 		countFlipped() {
 			if (this.countFlipped == 2) {
-				this.assertMatch();
+				setTimeout(() => {
+					this.assertMatch();
+				}, 300);
 			}
 		},
 	},
