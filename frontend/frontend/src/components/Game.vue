@@ -222,7 +222,6 @@ export default {
 }
 
 .board-wrapper {
-	position: absolute;
 	width: 825px;
 	margin-left: 200px;
 	height: 860px;
