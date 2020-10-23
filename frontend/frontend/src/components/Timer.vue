@@ -6,20 +6,12 @@
   		<button @click="pause">Pause</button>
   		<button @click="reset"Reset</button>
   
- 		 <div class="btn-container">
-  		  <a id="play">Play</a>
-   		 <a id="pause">Pause</a>
-   		 <a id="reset">Reset</a>
-  </div>
-  
-  
 </div>
 
 </template>
 
 <script>
 export default {
-	var clock = new Vue({
   		el: '#clock',
   		data: {
     		time: '00:00:00.000',
@@ -28,7 +20,7 @@ export default {
     		stopppedDuration = 0,
     		started = null,
     		running = false,
-  }
+        }
   methods: {
   	play () {
   	if(running) return;
