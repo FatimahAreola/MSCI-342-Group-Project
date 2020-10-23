@@ -1,11 +1,9 @@
 <template>
 	<div class="board">
 		<div class="board-wrapper">
-			<Board :cardData="shuffled" @updateActive="updateActive" />
-		</div>
-		<div>
-			<div class="timer">timer</div>
+			<h2> Matched: {{this.countMatched}}</h2>
 			<button v-on:click="routeToProfile">Stop Game</button>
+			<Board :cardData="shuffled" @updateActive="updateActive" />
 		</div>
 	</div>
 </template>
@@ -195,7 +193,7 @@ export default {
 			});
 		},
 		routeToProfile: function () {
-			this.$router.push({ name: 'profile', params: { timer: '50', matches: 10 } });
+			this.$router.push({ name: 'profile', params: { timer: '50', matches: this.countMatched } });
 		},
 	},
 };
