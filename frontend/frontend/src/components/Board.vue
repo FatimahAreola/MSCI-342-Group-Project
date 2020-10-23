@@ -5,9 +5,10 @@
 				class="card-slot"
 				v-for="card in cardData"
 				:key="card.cardId"
-				v-on:click="emitChange(card.cardId, $event)"
+				v-on:click="emitChange(card, $event)"
+				:class="{ disabled: card.status }"
 			>
-				<Card :card="card" :active="card.active" />
+				<Card :card="card" :active="card.active" :status="card.status" />
 			</div>
 		</div>
 	</div>
@@ -25,8 +26,8 @@ export default {
 		return {};
 	},
 	methods: {
-		emitChange(id) {
-			this.$emit("updateActive", { value: id });
+		emitChange(card) {
+			this.$emit("updateActive", { value: card });
 		},
 	},
 };
@@ -45,5 +46,9 @@ export default {
 	height: 200px;
 	align-content: center;
 	text-align: center;
+}
+
+.disabled {
+	pointer-events: none;
 }
 </style>
