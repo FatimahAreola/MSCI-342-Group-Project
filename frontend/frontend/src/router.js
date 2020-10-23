@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 import Home from './components/Home.vue'
 import Game from './components/Game.vue'
-import Profile from './components/Profile.vue'
+import GameSummary from './components/GameSummary.vue'
 
 const routes = [
 	{
@@ -17,9 +17,9 @@ const routes = [
 		component: Game
 	},
 	{
-		path: "/profile",
-		name: 'profile',
-		component: Profile
+		path: "/gameSummary",
+		name: 'GameSummary',
+		component: GameSummary
 	}
 ];
 

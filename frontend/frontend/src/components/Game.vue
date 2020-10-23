@@ -1,8 +1,11 @@
 <template>
 	<div class="board">
+		<div class="summary">
+		<h2> Matched: {{this.countMatched}}</h2>
+			<button @click="routeToProfile">Stop Game</button>
+			<button @click="returnHome">Home</button>
+		</div>
 		<div class="board-wrapper">
-			<h2> Matched: {{this.countMatched}}</h2>
-			<button v-on:click="routeToProfile">Stop Game</button>
 			<Board :cardData="shuffled" @updateActive="updateActive" />
 		</div>
 	</div>
@@ -191,7 +194,10 @@ export default {
 			});
 		},
 		routeToProfile: function (gameWon=false) {
-			this.$router.push({ name: 'profile', params: { timer: '50', matches: this.countMatched, gameWon: gameWon } });
+			this.$router.push({ name: 'GameSummary', params: { timer: '50', matches: this.countMatched, gameWon: gameWon } });
+		},
+		routeToHome: function () {
+			this.$router.push('/');
 		},
 	},
 };
@@ -209,10 +215,19 @@ export default {
 	height: 70px;
 }
 
+.summary {
+	position: absolute;
+	margin-left: 40%;
+	margin-right: auto;
+}
+
 .board-wrapper {
+	position: absolute;
 	width: 825px;
+	margin-left: 20%;
 	height: 860px;
 	background-color: #ffffff;
 	border: 2px solid rgb(224, 224, 224);
+	top: 20%;
 }
 </style>
