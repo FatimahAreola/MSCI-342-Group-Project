@@ -218,7 +218,6 @@ export default {
 .summary {
 	
 	margin-left: 200px;
-	margin-right: auto;
 }
 
 .board-wrapper {
