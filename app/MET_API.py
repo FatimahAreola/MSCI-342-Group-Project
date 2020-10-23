@@ -30,6 +30,7 @@ def returnAPIImages():
     return (cardSet)
 
 
+
 #Populate Cards
 def populateCardDetails(i):
     apiResponse = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + i.toString()).json()
