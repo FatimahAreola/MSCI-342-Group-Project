@@ -163,15 +163,13 @@ export default {
 			if (this.flipped[0].artName == this.flipped[1].artName) {
 				this.cards[this.flipped[0].cardId - 1].status = true;
 				this.cards[this.flipped[1].cardId - 1].status = true;
-				this.countFlipped = 0;
 				this.countMatched = this.countMatched + 1;
-				this.flipped = [];
 			} else {
 				this.cards[this.flipped[0].cardId - 1].active = false;
 				this.cards[this.flipped[1].cardId - 1].active = false;
-				this.countFlipped = 0;
-				this.flipped = [];
 			}
+			this.countFlipped = 0;
+			this.flipped = [];
 		},
 		returnHome() {
 			this.$router.push("/");
