@@ -25,7 +25,7 @@ def returnAPIImages():
     #with request.urlopen("https://collectionapi.metmuseum.org/public/collection/v1/objects/45734")
 #Loop through CardSet
     for i in artObjectIDs:
-        artObjectIDs.append(populateCardDetails(i))
+        cardSet.append(populateCardDetails(i))
     
     return (cardSet)
 
