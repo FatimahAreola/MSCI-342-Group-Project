@@ -1,0 +1,49 @@
+<template>
+	<div>
+		<div class="board">
+			<div
+				class="card-slot"
+				v-for="card in cardData"
+				:key="card.cardId"
+				v-on:click="emitChange(card.cardId, $event)"
+			>
+				<Card :card="card" :active="card.active" />
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+import Card from "./Card.vue";
+
+export default {
+	components: {
+		Card,
+	},
+	props: ["cardData"],
+	data() {
+		return {};
+	},
+	methods: {
+		emitChange(id) {
+			this.$emit("updateActive", { value: id });
+		},
+	},
+};
+</script>
+
+<style>
+.board {
+	display: grid;
+	grid-template-columns: repeat(4, 200px);
+	padding: 10px;
+}
+
+.card-slot {
+	margin: 5px;
+	background-color: #f1d6d6;
+	height: 200px;
+	align-content: center;
+	text-align: center;
+}
+</style>

@@ -2,7 +2,7 @@
 	<div class="home">
 		<button v-on:click="test_axios">Test Access To Flask App</button>
 		<br />
-		<button v-on:click="routeToGame">go to game</button>
+		<button v-on:click="routeToGame" class="play-button">PLAY</button>
 	</div>
 </template>
 
@@ -22,7 +22,6 @@ export default {
 	},
 	methods: {
 		routeToGame: function () {
-			console.log("yo");
 			this.$router.push("/game");
 		},
 		test_axios: function () {
@@ -40,20 +39,27 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-	margin: 40px 0 0;
+<style>
+.home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
-ul {
-	list-style-type: none;
-	padding: 0;
+
+.play-button {
+	/* button */
+	width: 800px;
+	height: 300px;
+	border: 2px solid black;
+	background-color: #ffe381;
+	/* text */
+	font-size: 100px;
+	font-weight: bold;
+	color: #d282a6;
+	text-shadow: 2px 2px 4px #000000;
 }
-li {
-	display: inline-block;
-	margin: 0 10px;
-}
-a {
-	color: #42b983;
+
+.play-button:hover {
+	background-color: #f8da6c;
 }
 </style>
