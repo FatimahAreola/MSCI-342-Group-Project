@@ -217,7 +217,7 @@ export default {
 
 .summary {
 	position: absolute;
-	margin-left: 40%;
+	margin-left: 200px;
 	margin-right: auto;
 }
 
