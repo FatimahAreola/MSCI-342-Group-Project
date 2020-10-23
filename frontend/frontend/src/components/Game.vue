@@ -1,11 +1,12 @@
 <template>
 	<div class="board">
+		<div class="summary">
+		<h2> Matched: {{this.countMatched}}</h2>
+			<button @click="routeToProfile">Stop Game</button>
+			<button @click="returnHome">Home</button>
+		</div>
 		<div class="board-wrapper">
 			<Board :cardData="shuffled" @updateActive="updateActive" />
-		</div>
-		<div>
-			<div class="timer">timer</div>
-			<button @click="returnHome">Leave Game</button>
 		</div>
 	</div>
 </template>
@@ -149,7 +150,7 @@ export default {
 	watch: {
 		countMatched() {
 			if (this.countMatched >= this.cards.length / 2) {
-				console.log("done");
+				this.routeToProfile(true);
 			}
 		},
 		countFlipped() {
@@ -165,15 +166,13 @@ export default {
 			if (this.flipped[0].artName == this.flipped[1].artName) {
 				this.cards[this.flipped[0].cardId - 1].status = true;
 				this.cards[this.flipped[1].cardId - 1].status = true;
-				this.countFlipped = 0;
 				this.countMatched = this.countMatched + 1;
-				this.flipped = [];
 			} else {
 				this.cards[this.flipped[0].cardId - 1].active = false;
 				this.cards[this.flipped[1].cardId - 1].active = false;
-				this.countFlipped = 0;
-				this.flipped = [];
 			}
+			this.countFlipped = 0;
+			this.flipped = [];
 		},
 		returnHome() {
 			this.$router.push("/");
@@ -194,6 +193,12 @@ export default {
 				}
 			});
 		},
+		routeToProfile: function (gameWon=false) {
+			this.$router.push({ name: 'GameSummary', params: { timer: '50', matches: this.countMatched, gameWon: gameWon } });
+		},
+		routeToHome: function () {
+			this.$router.push('/');
+		},
 	},
 };
 </script>
@@ -210,10 +215,17 @@ export default {
 	height: 70px;
 }
 
+.summary {
+	
+	margin-left: 200px;
+}
+
 .board-wrapper {
 	width: 825px;
+	margin-left: 200px;
 	height: 860px;
 	background-color: #ffffff;
 	border: 2px solid rgb(224, 224, 224);
+	top: 20%;
 }
 </style>
