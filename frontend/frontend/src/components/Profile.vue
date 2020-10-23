@@ -1,9 +1,8 @@
 <template>
 	<div>
-        <h2> Timer Stopped at </h2>
-		<h3> {{this.$route.params.timer }} </h3>
-		<h2> Number of Matches Achieved </h2>
-		<h3> {{this.$route.params.matches }} </h3>
+		<h2> {{this.$route.params.gameWon==true? "Congratulations": "Better Luck Next Time!"  }}</h2>
+		<h3> Time Stopped at: {{this.$route.params.timer }} </h3>
+		<h3> Match Count: {{ this.$route.params.matches }} </h3>
 
     </div>
 </template>
@@ -14,14 +13,8 @@ export default {
 	data() {
 		return {};
 	},
-	
-	methods: {
-		displayParams: function () {
-            console.log("Hey")
-			console.log(this.$route.params)
-		},
-	},		
-};
+
+};	
 </script>
 
 <style scoped>

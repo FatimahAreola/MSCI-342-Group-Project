@@ -147,7 +147,7 @@ export default {
 	watch: {
 		countMatched() {
 			if (this.countMatched >= this.cards.length / 2) {
-				console.log("done");
+				this.routeToProfile(true);
 			}
 		},
 		countFlipped() {
@@ -190,8 +190,8 @@ export default {
 				}
 			});
 		},
-		routeToProfile: function () {
-			this.$router.push({ name: 'profile', params: { timer: '50', matches: this.countMatched } });
+		routeToProfile: function (gameWon=false) {
+			this.$router.push({ name: 'profile', params: { timer: '50', matches: this.countMatched, gameWon: gameWon } });
 		},
 	},
 };
