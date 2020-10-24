@@ -29,7 +29,7 @@ def returnAPIImages():
         artDetails = apiResponse.json()
 #We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
         cardSet[idx]={
-        'cardName': "Card" +str(idx+1),
+        'cardId': idx+1,
         'ObjectID': str(i),
         'artName': artDetails["title"],
         'artURL': artDetails["primaryImage"],
