@@ -3,7 +3,7 @@
 		<h2> {{this.$route.params.gameWon==true? "Congratulations": "Better Luck Next Time!"  }}</h2>
 		<h3> Time Stopped at: {{this.$route.params.timer }} </h3>
 		<h3> Match Count: {{ this.$route.params.matches }} </h3>
-		<button v-on:click="routeToHome">Home</button>
+		<button class="homeButton" v-on:click="routeToHome">Home</button>
 
     </div>
 </template>
@@ -24,4 +24,16 @@ export default {
 </script>
 
 <style scoped>
+.homeButton {
+	/* button */
+	width: 150px;
+	height: 60px;
+	border: 2px solid #ffe381;
+	background-color: #ffe381;
+	/* text */
+	font-size: 30px;
+	font-weight: bold;
+	color: #d282a6;
+	text-shadow: 2px 2px 4px #000000;
+}
 </style>
