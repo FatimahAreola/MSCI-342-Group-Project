@@ -3,8 +3,8 @@
 		<div class="summary">
 		<h2> Matched: {{this.countMatched}}</h2>
 			<Timer />
-			<button @click="routeToProfile">Stop Game</button>
-			<button @click="returnHome">Home</button>
+			<button class="summaryButton" @click="routeToProfile">Stop Game</button>
+			<button class="summaryButton" @click="returnHome">Home</button>
 		</div>
 		<div class="board-wrapper">
 			<Board :cardData="shuffled" @updateActive="updateActive" />
@@ -230,5 +230,20 @@ export default {
 	background-color: #ffffff;
 	border: 2px solid rgb(224, 224, 224);
 	top: 20%;
+}
+
+.summaryButton {
+	/* button */
+	width: 200px;
+	margin-top: 10px;
+	display: block;
+	height: 70px;
+	border: 2px solid #ffe381;
+	background-color: #ffe381;
+	/* text */
+	font-size: 30px;
+	font-weight: bold;
+	color: 	#f0899c;
+	text-shadow: 2px 2px 4px #000000;
 }
 </style>
