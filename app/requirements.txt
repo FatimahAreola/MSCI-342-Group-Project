@@ -2,3 +2,4 @@ flask
 uWSGI
 mysql-connector
 requests
+json
