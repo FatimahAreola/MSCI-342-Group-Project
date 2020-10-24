@@ -1,0 +1,5 @@
+This document contains unit tests and guidelines for the code found under the pullAPIImages method in the app.py file.
+It is likely that future iterations of this code (future sprints) will require reference to multiple documents for this method.
+This document will continue to be updated as such.
+
+Author: Fatimah Areola, October 23, 2020
