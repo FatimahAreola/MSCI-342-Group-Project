@@ -15,12 +15,8 @@ def hello():
 with the details of 8 pre-determined works of art so that they can be formatted for gameplay.
  """
 
-@app.route('/api/MetAPI')
-def returnAPIImages():
-    print('Met API Method:')
-#These are the ObjectIDs of 8 pieces we selected for this demo.
-    artObjectIDs = [16577,436944,437879,436101,40081,437329,436840,435882]
-    #Define index, and Cardset dictionary
+def fetchArtInformation(artObjectIDs):
+ #Define index, and Cardset dictionary
     idx=0
     cardSet={}  
 #This for loop goes through all IDs provided in the list of art pieces chosen and pulls the required information about them from the MET's API
@@ -39,6 +35,18 @@ def returnAPIImages():
         idx+=1
 #Returns a nested Json object, with multiple artCards inside
     return (json.dumps(cardSet))
+
+
+@app.route('/api/MetAPI')
+def pullMETAPI():
+    print('Met API Method:')
+
+#These are the ObjectIDs of 8 pieces we selected for this demo.
+#For future iterations of the game, these objectIDs will need to be selected by the system.
+    artObjectIDs = [16577,436944,437879,436101,40081,437329,436840,435882]
+    return(fetchArtInformation(artObjectIDs))
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
