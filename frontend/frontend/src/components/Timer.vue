@@ -63,10 +63,10 @@ export default {
     // timerRunning method counts up by seconds when timer is running
     TimerRunning() {
       var currentTime = new Date(),
-        timeElapsed = new Date(),
+        timeElapsed = new Date(currentTime - this.timeBegan - this.stoppedDuration),
         hours = timeElapsed.getUTCHours(),
         minutes = timeElapsed.getUTCMinutes(),
-        seceonds = timeElapsed.getUTCSeconds();
+        seconds = timeElapsed.getUTCSeconds();
 
       this.time = this.placeHolder(hours) + ":" + this.placeHolder(minutes) + ":" + this.placeHolder(seconds);
     },
