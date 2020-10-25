@@ -50,7 +50,6 @@ export default {
     },
     // End method stops timer at current time
     end() {
-      alert('Ended');
       this.$store.commit('setCurrentTimerValue', this.time)
       this.running = false;
       this.endTime = new Date();
