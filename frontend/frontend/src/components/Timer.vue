@@ -30,10 +30,11 @@ export default {
     },
   },
   methods: {
+    // Play method sets timer to 0 and starts, else stops timer and updates time
     play() {
       if (this.running) return;
       if (this.startTime === null) {
-        this.reset();
+        this.restart();
         this.startTime = new Date();
       }
       if (this.endTime !== null) {
@@ -42,12 +43,13 @@ export default {
       this.started = setInterval(this.timerRunning, 10);
       this.running = true;
     },
+    // End method stops timer at current time
     end() {
       this.running = false;
       this.endTime = new Date();
       clearInterval(this.started);
     },
-    reset() {
+    restart() {
       this.running = false;
       clearInterval(this.started);
       this.runTime = 0;
