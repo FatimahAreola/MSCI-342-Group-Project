@@ -28,8 +28,8 @@ export default {
         console.log(oldValue)
         if (newValue == "run") {
           this.play();
-        } else if (newValue == "pause") {
-          this.pause();
+        } else if (newValue == "stopped") {
+          this.end();
         }
       }
     },
@@ -50,6 +50,8 @@ export default {
     },
     // End method stops timer at current time
     end() {
+      alert('Ended');
+      this.$store.commit('setCurrentTimerValue', this.time)
       this.running = false;
       this.endTime = new Date();
       clearInterval(this.started);

@@ -5,11 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		count: 0
+		timer: 0
 	},
 	mutations: {
-		increment(state) {
-			state.count++
+		setCurrentTimerValue(state, newTime) {
+			state.timer = newTime
 		}
 	}
 })

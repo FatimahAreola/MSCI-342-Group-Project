@@ -2,8 +2,8 @@
 	<div class="board">
 		<div class="summary">
 		<h2> Matched: {{this.countMatched}}</h2>
-			<Timer />
-			<button class="summaryButton" @click="routeToProfile">Stop Game</button>
+			<Timer :state="timerState"/>
+			<button class="summaryButton" @click="stopGame">Stop Game</button>
 			<button class="summaryButton" @click="returnHome">Home</button>
 		</div>
 		<div class="board-wrapper">
@@ -26,6 +26,7 @@ export default {
 	},
 	data() {
 		return {
+			timerState: "running",
 			cards: [
 				{
 					cardId: 1,
@@ -153,7 +154,7 @@ export default {
 	watch: {
 		countMatched() {
 			if (this.countMatched >= this.cards.length / 2) {
-				this.routeToProfile(true);
+				this.stopGame(true);
 			}
 		},
 		countFlipped() {
@@ -196,8 +197,12 @@ export default {
 				}
 			});
 		},
-		routeToProfile: function (gameWon=false) {
-			this.$router.push({ name: 'GameSummary', params: { timer: '50', matches: this.countMatched, gameWon: gameWon } });
+		setTimerState(){
+			this.timerState = "stopped";
+		},
+		async stopGame(gameWon=false) {
+			await this.setTimerState();
+			await this.$router.push({ name: 'GameSummary', params: {matches: this.countMatched, gameWon: gameWon } });
 		},
 		routeToHome: function () {
 			this.$router.push('/');
