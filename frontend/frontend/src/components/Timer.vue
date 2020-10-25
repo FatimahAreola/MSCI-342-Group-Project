@@ -21,11 +21,16 @@ export default {
     };
   },
   watch: {
-    state() {
-      if (this.state == "run") {
-        this.play();
-      } else if (this.state == "end") {
-        this.end();
+    state: {
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue) {
+        console.log(oldValue)
+        if (newValue == "run") {
+          this.play();
+        } else if (newValue == "pause") {
+          this.pause();
+        }
       }
     },
   },
