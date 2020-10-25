@@ -39,7 +39,7 @@ export default {
       if (this.endTime !== null) {
         this.runTime += new Date() - this.endTime;
       }
-      this.started = setInterval(this.clockRunning, 10);
+      this.started = setInterval(this.timerRunning, 10);
       this.running = true;
     },
     end() {
@@ -55,7 +55,7 @@ export default {
       this.endTime = null;
       this.time = "00:00:00";
     },
-    clockRunning() {
+    timerRunning() {
       var currentTime = new Date(),
         timeElapsed = new Date(
           currentTime - this.startTime - this.runTime
