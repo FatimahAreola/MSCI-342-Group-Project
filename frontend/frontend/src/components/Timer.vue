@@ -63,7 +63,7 @@ export default {
     // timerRunning method sets up timer to show zeros for empty time
     TimerRunning() {
       var currentTime = new Date(),
-        timeElapsed = new Date(currentTime - this.timeBegan - this.stoppedDuration),
+        timeElapsed = new Date(currentTime - this.startTime - this.runTime),
         hours = timeElapsed.getUTCHours(),
         minutes = timeElapsed.getUTCMinutes(),
         seconds = timeElapsed.getUTCSeconds();
