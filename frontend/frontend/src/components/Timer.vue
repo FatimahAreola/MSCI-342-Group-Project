@@ -60,7 +60,7 @@ export default {
       this.runTime = 0;
       this.time = "00:00:00";
     },
-    // timerRunning method counts up by seconds when timer is running
+    // timerRunning method sets up timer to show zeros for empty time
     TimerRunning() {
       var currentTime = new Date(),
         timeElapsed = new Date(currentTime - this.timeBegan - this.stoppedDuration),
@@ -68,12 +68,15 @@ export default {
         minutes = timeElapsed.getUTCMinutes(),
         seconds = timeElapsed.getUTCSeconds();
 
-      this.time = this.placeHolder(hours) + ":" + this.placeHolder(minutes) + ":" + this.placeHolder(seconds);
+      this.time = this.placeHolder(hours, 2) + ":" + this.placeHolder(minutes, 2) + ":" + this.placeHolder(seconds, 2);
     },
-    // placeHolder method sets up timer to show zeros for empty time
-    placeHolder(num) {
-      var zero = "00";
-      return (zero + num).slice(-2);
+    // placeHolder method counts up by seconds when timer is running
+    placeHolder(num, num2) {
+      var zero = "";
+        for(var i = 0; i < num2; i++){
+          zero += "0";
+        }
+      return (zero + num).slice(-num2);
     },
   },
 };
