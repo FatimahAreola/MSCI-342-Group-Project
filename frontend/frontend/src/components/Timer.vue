@@ -24,8 +24,8 @@ export default {
     state() {
       if (this.state == "run") {
         this.play();
-      } else if (this.state == "pause") {
-        this.pause();
+      } else if (this.state == "end") {
+        this.end();
       }
     },
   },
@@ -42,7 +42,7 @@ export default {
       this.started = setInterval(this.clockRunning, 10);
       this.running = true;
     },
-    pause() {
+    end() {
       this.running = false;
       this.endTime = new Date();
       clearInterval(this.started);
