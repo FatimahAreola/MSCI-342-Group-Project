@@ -15,7 +15,7 @@ export default {
       time: "00:00:00",
       startTime: null,
       endTime: null,
-      stopppedDuration: 0,
+      runTime: 0,
       started: null,
       running: false,
     };
@@ -37,7 +37,7 @@ export default {
         this.startTime = new Date();
       }
       if (this.endTime !== null) {
-        this.stoppedDuration += new Date() - this.endTime;
+        this.runTime += new Date() - this.endTime;
       }
       this.started = setInterval(this.clockRunning, 10);
       this.running = true;
@@ -50,7 +50,7 @@ export default {
     reset() {
       this.running = false;
       clearInterval(this.started);
-      this.stoppedDuration = 0;
+      this.runTime = 0;
       this.startTime = null;
       this.endTime = null;
       this.time = "00:00:00";
@@ -58,7 +58,7 @@ export default {
     clockRunning() {
       var currentTime = new Date(),
         timeElapsed = new Date(
-          currentTime - this.startTime - this.stoppedDuration
+          currentTime - this.startTime - this.runTime
         ),
         hour = timeElapsed.getUTCHours(),
         min = timeElapsed.getUTCMinutes(),
