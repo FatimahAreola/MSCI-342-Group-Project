@@ -2,7 +2,7 @@
 	<div class="board">
 		<div class="summary">
 		<h2> Matched: {{this.countMatched}}</h2>
-			<Timer />
+		<Timer :state="timerState"/>
 			<button class="summaryButton" @click="routeToProfile">Stop Game</button>
 			<button class="summaryButton" @click="returnHome">Home</button>
 		</div>
@@ -26,6 +26,7 @@ export default {
 	},
 	data() {
 		return {
+			timerState: "run",
 			cards: [
 				{
 					cardId: 1,
@@ -196,8 +197,14 @@ export default {
 				}
 			});
 		},
-		routeToProfile: function (gameWon=false) {
-			this.$router.push({ name: 'GameSummary', params: { timer: '50', matches: this.countMatched, gameWon: gameWon } });
+		setTimerState() {
+			this.timerState = "pause";
+		},
+		async routeToProfile (gameWon=false) {
+			await this.setTimerState()
+			//console.log(gameWon)
+
+			await this.$router.push({ name: 'GameSummary', params: { matches: this.countMatched, gameWon: gameWon } });
 		},
 		routeToHome: function () {
 			this.$router.push('/');

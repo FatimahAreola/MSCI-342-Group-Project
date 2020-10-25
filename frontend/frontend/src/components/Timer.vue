@@ -6,9 +6,7 @@
 
 <script>
 export default {
-  mounted() {
-    this.play();
-  },
+
   props: ["state"],
   data() {
     return {
@@ -21,12 +19,18 @@ export default {
     };
   },
   watch: {
-    state() {
-      if (this.state == "run") {
+    state:  {
+      immediate: true,
+      deep: true,
+      handler(newValue, oldValue){
+        console.log(oldValue)  
+        if (newValue == "run") {
         this.play();
-      } else if (this.state == "pause") {
+      } else if (newValue== "pause") {
         this.pause();
       }
+      }
+    
     },
   },
   methods: {
@@ -43,6 +47,10 @@ export default {
       this.running = true;
     },
     pause() {
+      
+      console.log('pausing')
+      console.log(this.time)
+      this.$store.commit('incrementTime', this.time)
       this.running = false;
       this.timeStopped = new Date();
       clearInterval(this.started);
