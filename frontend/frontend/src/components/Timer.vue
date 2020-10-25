@@ -34,6 +34,7 @@ export default {
   methods: {
     // Play method sets timer to 0 and starts, else stops timer and updates time
     play() {
+      if (this.running) return;
       if (this.startTime === null) {
         this.restart();
         this.startTime = new Date();
@@ -41,7 +42,6 @@ export default {
       if (this.endTime !== null) {
         this.runTime += new Date() - this.endTime;
       }
-      if (this.running) return;
       this.started = setInterval(this.timerRunning, 10);
       this.running = true;
     },
