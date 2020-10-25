@@ -32,9 +32,8 @@ export default {
     },
   },
   methods: {
-    // Play method sets timer to 0 and starts, or stops timer and returns time
+    // Play method sets timer to 0 and starts, else stops timer and updates time
     play() {
-      if (this.running) return;
       if (this.startTime === null) {
         this.restart();
         this.startTime = new Date();
@@ -42,6 +41,7 @@ export default {
       if (this.endTime !== null) {
         this.runTime += new Date() - this.endTime;
       }
+      if (this.running) return;
       this.started = setInterval(this.timerRunning, 10);
       this.running = true;
     },
@@ -55,34 +55,25 @@ export default {
     restart() {
       this.running = false;
       clearInterval(this.started);
-      this.runTime = 0;
       this.startTime = null;
       this.endTime = null;
+      this.runTime = 0;
       this.time = "00:00:00";
     },
     // timerRunning method counts up by seconds when timer is running
     TimerRunning() {
       var currentTime = new Date(),
-        timeElapsed = new Date(
-        ),
+        timeElapsed = new Date(),
         hours = timeElapsed.getUTCHours(),
         minutes = timeElapsed.getUTCMinutes(),
         seceonds = timeElapsed.getUTCSeconds();
 
-      this.time =
-        this.placeHolder(hours, 2) +
-        ":" +
-        this.placeHolder(minutes, 2) +
-        ":" +
-        this.placeHolder(seconds, 2);
+      this.time = this.placeHolder(hours) + ":" + this.placeHolder(minutes) + ":" + this.placeHolder(seconds);
     },
-    // placeHolder method sets up timer to show hrs:mins:secs
-    placeHolder(num, digit) {
-      var zero = "";
-      for (var i = 0; i < digit; i++) {
-        zero += "0";
-      }
-      return (zero + num).slice(-digit);
+    // placeHolder method sets up timer to show zeros for empty time
+    placeHolder(num) {
+      var zero = "00";
+      return (zero + num).slice(-2);
     },
   },
 };
