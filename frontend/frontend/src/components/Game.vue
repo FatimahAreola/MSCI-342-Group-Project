@@ -2,6 +2,7 @@
 	<div class="board">
 		<div class="summary">
 		<h2> Matched: {{this.countMatched}}</h2>
+			<Timer />
 			<button class="summaryButton" @click="routeToProfile">Stop Game</button>
 			<button class="summaryButton" @click="returnHome">Home</button>
 		</div>
@@ -15,11 +16,13 @@
 import _ from "lodash";
 
 import Board from "./Board.vue";
+import Timer from "./Timer.vue";
 
 export default {
 	name: "Game",
 	components: {
 		Board,
+		Timer,
 	},
 	data() {
 		return {
