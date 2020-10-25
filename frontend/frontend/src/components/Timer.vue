@@ -65,18 +65,18 @@ export default {
         sec = timeElapsed.getUTCSeconds();
 
       this.time =
-        this.zeroPrefix(hour, 2) +
+        this.zeroPrefix(hour) +
         ":" +
-        this.zeroPrefix(min, 2) +
+        this.zeroPrefix(min) +
         ":" +
-        this.zeroPrefix(sec, 2);
+        this.zeroPrefix(sec);
     },
-    zeroPrefix(num, digit) {
+    zeroPrefix(num) {
       var zero = "";
-      for (var i = 0; i < digit; i++) {
-        zero += "0";
+      for (var i = 0; i < 2; i++) {
+        zero += "00";
       }
-      return (zero + num).slice(-digit);
+      return (zero + num).slice(-2);
     },
   },
 };
