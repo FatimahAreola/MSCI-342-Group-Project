@@ -65,13 +65,13 @@ export default {
         seconds = timeElapsed.getUTCSeconds();
 
       this.time =
-        this.zeroPrefix(hours) +
+        this.placeHolder(hours) +
         ":" +
-        this.zeroPrefix(minutes) +
+        this.placeHolder(minutes) +
         ":" +
-        this.zeroPrefix(seconds);
+        this.placeHolder(seconds);
     },
-    zeroPrefix(num) {
+    placeHolder(num) {
       var zero = "";
       for (var i = 0; i < 2; i++) {
         zero += "00";
