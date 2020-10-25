@@ -13,8 +13,8 @@ export default {
   data() {
     return {
       time: "00:00:00",
-      timeBegan: null,
-      timeStoppped: null,
+      startTime: null,
+      endTime: null,
       stopppedDuration: 0,
       started: null,
       running: false,
@@ -32,33 +32,33 @@ export default {
   methods: {
     play() {
       if (this.running) return;
-      if (this.timeBegan === null) {
+      if (this.startTime === null) {
         this.reset();
-        this.timeBegan = new Date();
+        this.startTime = new Date();
       }
-      if (this.timeStopped !== null) {
-        this.stoppedDuration += new Date() - this.timeStopped;
+      if (this.endTime !== null) {
+        this.stoppedDuration += new Date() - this.endTime;
       }
       this.started = setInterval(this.clockRunning, 10);
       this.running = true;
     },
     pause() {
       this.running = false;
-      this.timeStopped = new Date();
+      this.endTime = new Date();
       clearInterval(this.started);
     },
     reset() {
       this.running = false;
       clearInterval(this.started);
       this.stoppedDuration = 0;
-      this.timeBegan = null;
-      this.timeStopped = null;
+      this.startTime = null;
+      this.endTime = null;
       this.time = "00:00:00";
     },
     clockRunning() {
       var currentTime = new Date(),
         timeElapsed = new Date(
-          currentTime - this.timeBegan - this.stoppedDuration
+          currentTime - this.startTime - this.stoppedDuration
         ),
         hour = timeElapsed.getUTCHours(),
         min = timeElapsed.getUTCMinutes(),
