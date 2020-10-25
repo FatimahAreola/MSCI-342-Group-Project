@@ -60,16 +60,16 @@ export default {
         timeElapsed = new Date(
           currentTime - this.startTime - this.runTime
         ),
-        hour = timeElapsed.getUTCHours(),
-        min = timeElapsed.getUTCMinutes(),
-        sec = timeElapsed.getUTCSeconds();
+        hours = timeElapsed.getUTCHours(),
+        minutes = timeElapsed.getUTCMinutes(),
+        seconds = timeElapsed.getUTCSeconds();
 
       this.time =
-        this.zeroPrefix(hour) +
+        this.zeroPrefix(hours) +
         ":" +
-        this.zeroPrefix(min) +
+        this.zeroPrefix(minutes) +
         ":" +
-        this.zeroPrefix(sec);
+        this.zeroPrefix(seconds);
     },
     zeroPrefix(num) {
       var zero = "";
