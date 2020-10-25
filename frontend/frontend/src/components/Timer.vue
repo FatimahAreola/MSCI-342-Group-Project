@@ -12,16 +12,18 @@ export default {
   props: ["state"],
   data() {
     return {
+      // Initializing variables
       time: "00:00:00",
-      timeBegan: null,
-      timeStoppped: null,
-      stopppedDuration: 0,
+      startTime: null,
+      endTime: null,
+      runTime: 0,
       started: null,
       running: false,
     };
   },
   watch: {
     state() {
+      // Start timer if state changes to run, else pause timer
       if (this.state == "run") {
         this.play();
       } else if (this.state == "pause") {
@@ -30,48 +32,52 @@ export default {
     },
   },
   methods: {
+    // Play method sets timer to 0 and starts, or stops timer and returns time
     play() {
       if (this.running) return;
-      if (this.timeBegan === null) {
-        this.reset();
-        this.timeBegan = new Date();
+      if (this.startTime === null) {
+        this.restart();
+        this.startTime = new Date();
       }
-      if (this.timeStopped !== null) {
-        this.stoppedDuration += new Date() - this.timeStopped;
+      if (this.endTime !== null) {
+        this.runTime += new Date() - this.endTime;
       }
-      this.started = setInterval(this.clockRunning, 10);
+      this.started = setInterval(this.timerRunning, 10);
       this.running = true;
     },
+    // Pause method stops timer at current time
     pause() {
       this.running = false;
-      this.timeStopped = new Date();
+      this.endTime = new Date();
       clearInterval(this.started);
     },
-    reset() {
+    // Restart method resets variables to initial value
+    restart() {
       this.running = false;
       clearInterval(this.started);
-      this.stoppedDuration = 0;
-      this.timeBegan = null;
-      this.timeStopped = null;
+      this.runTime = 0;
+      this.startTime = null;
+      this.endTime = null;
       this.time = "00:00:00";
     },
-    clockRunning() {
+    // timerRunning method counts up by seconds when timer is running
+    TimerRunning() {
       var currentTime = new Date(),
         timeElapsed = new Date(
-          currentTime - this.timeBegan - this.stoppedDuration
         ),
-        hour = timeElapsed.getUTCHours(),
-        min = timeElapsed.getUTCMinutes(),
-        sec = timeElapsed.getUTCSeconds();
+        hours = timeElapsed.getUTCHours(),
+        minutes = timeElapsed.getUTCMinutes(),
+        seceonds = timeElapsed.getUTCSeconds();
 
       this.time =
-        this.zeroPrefix(hour, 2) +
+        this.placeHolder(hours, 2) +
         ":" +
-        this.zeroPrefix(min, 2) +
+        this.placeHolder(minutes, 2) +
         ":" +
-        this.zeroPrefix(sec, 2);
+        this.placeHolder(seconds, 2);
     },
-    zeroPrefix(num, digit) {
+    // placeHolder method sets up timer to show hrs:mins:secs
+    placeHolder(num, digit) {
       var zero = "";
       for (var i = 0; i < digit; i++) {
         zero += "0";
@@ -81,6 +87,6 @@ export default {
   },
 };
 </script>
-
+// no styling done
 <style>
 </style>
