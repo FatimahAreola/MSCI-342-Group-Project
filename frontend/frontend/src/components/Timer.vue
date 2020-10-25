@@ -49,6 +49,7 @@ export default {
       this.endTime = new Date();
       clearInterval(this.started);
     },
+    // Restart method resets variables to initial values
     restart() {
       this.running = false;
       clearInterval(this.started);
@@ -57,6 +58,7 @@ export default {
       this.endTime = null;
       this.time = "00:00:00";
     },
+    // timerRunning method counts up by seconds when timer is running
     timerRunning() {
       var currentTime = new Date(),
         timeElapsed = new Date(
@@ -73,6 +75,7 @@ export default {
         ":" +
         this.placeHolder(seconds);
     },
+    // placeHolder method sets up timer to show zeros for empty time
     placeHolder(num) {
       var zero = "";
       for (var i = 0; i < 2; i++) {
