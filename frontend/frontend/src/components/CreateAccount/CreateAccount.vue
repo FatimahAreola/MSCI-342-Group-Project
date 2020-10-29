@@ -7,20 +7,47 @@
 			type="text"
 			id="username"
 			name="username"
+			v-model="username"
 			placeholder="Ex. ArtLover123"
 		/>
 		<br />
 		<span class="feild-name">Enter Password:</span>
-		<input class="input" type="password" id="password" name="password" />
+		<input
+			class="input"
+			type="password"
+			id="password"
+			name="password"
+			v-model="password1"
+		/>
 		<br />
 		<span class="feild-name">Confirm Password:</span>
-		<input class="input" type="password" id="password2" name="password2" />
-		<button class="create-button">Create</button>
+		<input
+			class="input"
+			type="password"
+			id="password2"
+			name="password2"
+			v-model="password2"
+		/>
+		<button class="create-button" @click="createAcc">Create</button>
 	</div>
 </template>
 
 <script>
-export default {};
+export default {
+	name: "CreateAccount",
+	data() {
+		return {
+			username: "",
+			password1: "",
+			password2: "",
+		};
+	},
+	methods: {
+		createAcc() {
+			console.log(this.username, this.password1, this.password2);
+		},
+	},
+};
 </script>
 
 <style scoped>
