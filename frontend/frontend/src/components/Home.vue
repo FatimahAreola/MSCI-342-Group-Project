@@ -1,6 +1,7 @@
 <template>
 	<div class="home">
 		<button v-on:click="test_axios">Test Access To Flask App</button>
+		<CreateButton />
 		<br />
 		<button v-on:click="routeToGame" class="play-button">PLAY</button>
 	</div>
@@ -8,9 +9,13 @@
 
 <script>
 import axios from "axios";
+import CreateButton from "./CreateAccount/CreateButton.vue";
 
 export default {
 	name: "HelloWorld",
+	components: {
+		CreateButton,
+	},
 	data() {
 		return {};
 	},
@@ -50,7 +55,7 @@ export default {
 	/* button */
 	width: 800px;
 	height: 300px;
-	border: 2px solid #ffe381;;
+	border: 2px solid #ffe381;
 	background-color: #ffe381;
 	/* text */
 	font-size: 100px;
