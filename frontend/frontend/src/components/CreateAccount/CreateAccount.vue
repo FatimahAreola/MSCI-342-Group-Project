@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
 	name: "CreateAccount",
 	data() {
@@ -44,7 +46,27 @@ export default {
 	},
 	methods: {
 		createAcc() {
-			console.log(this.username, this.password1, this.password2);
+			if (this.username && this.password1 && this.password2) {
+				let formData = new FormData();
+				formData.append("userName", this.username);
+
+				if (this.password2 == this.password1) {
+					formData.append("password", this.password1);
+				} else {
+					console.log("passwords don't match");
+					return;
+				}
+
+				const baseURI = "http://localhost:80/api/createAccount";
+				axios
+					.post(baseURI, formData)
+					.then((result) => {
+						console.log(result);
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+			}
 		},
 	},
 };
