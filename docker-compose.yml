@@ -12,6 +12,8 @@ services:
             - './app:/app'
         expose:
           - 8080
+        depends_on:
+          - db
 
     nginx:
         build: ./nginx
@@ -35,3 +37,5 @@ services:
         - "5001:3306"
       environment:
         MYSQL_ROOT_PASSWORD: sherlockeD123
+      volumes:
+        - ./db:/docker-entrypoint-initdb.d/:ro

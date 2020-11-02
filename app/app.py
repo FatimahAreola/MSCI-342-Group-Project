@@ -1,4 +1,5 @@
-from flask import Flask, json, request, jsonify, make_response, send_file
+from flask import Flask, request, jsonify, make_response, send_file
+import json
 import requests
 import mysql.connector
 
@@ -24,15 +25,17 @@ def createAccount():
         "port": "3306",
         "database": "MSCI",
     }
-    # connection = mysql.connector.connect(**config)
-    # cursor = connection.cursor()
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
 
-    # query = "SELECT * FROM Users WHERE username = %s;"
+    query = "SELECT * FROM Users WHERE userName = %s;"
 
-    # cursor.execute(query, [password])
+    cursor.execute(query, [password])
 
-    # if cursor.len > 0:
-    #     return jsonify("username already exists")
+    results = cursor.fetchone()
+
+    if not results:
+        return jsonify("username already exists")
 
     return jsonify(username)
 
