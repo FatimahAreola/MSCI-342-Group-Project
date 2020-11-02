@@ -34,10 +34,18 @@ def createAccount():
 
     results = cursor.fetchone()
 
-    if not results:
+    if results:
         return jsonify("username already exists")
 
-    return jsonify(username)
+    cursor = connection.cursor()
+
+    query = "INSERT INTO Users (userName, userPassword) VALUES (%s, %s);"
+
+    cursor.execute(query, [username, password])
+
+    print(cursor)
+
+    return jsonify(message="Successfully updated resource."), 200
 
 
 """ The following code issues a call to the MET Api, and returns a json object, 
