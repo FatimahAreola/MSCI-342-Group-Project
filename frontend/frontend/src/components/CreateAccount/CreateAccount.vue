@@ -47,16 +47,18 @@ export default {
 	methods: {
 		createAcc() {
 			if (this.username && this.password1 && this.password2) {
-				let formData = new FormData();
-				formData.append("userName", this.username);
-
+				let formData = {};
 				if (this.password2 == this.password1) {
-					formData.append("password", this.password1);
+					formData = {
+						username: this.username,
+						password: this.password1,
+					};
 				} else {
 					console.log("passwords don't match");
 					return;
 				}
 
+				console.log(formData);
 				const baseURI = "http://localhost:80/api/createAccount";
 				axios
 					.post(baseURI, formData)

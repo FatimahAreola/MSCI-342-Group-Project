@@ -1,4 +1,4 @@
-from flask import Flask, json
+from flask import Flask, json, request, jsonify, make_response, send_file
 import requests
 import mysql.connector
 
@@ -14,8 +14,27 @@ def hello():
 # createAccount
 @app.route("/api/createAccount", methods=["POST"])
 def createAccount():
-    print("yo")
-    return "success"
+    username = request.get_json()["username"]
+    password = request.get_json()["password"]
+
+    config = {
+        "user": "root",
+        "password": "sherlockeD123",
+        "host": "db",
+        "port": "3306",
+        "database": "MSCI",
+    }
+    # connection = mysql.connector.connect(**config)
+    # cursor = connection.cursor()
+
+    # query = "SELECT * FROM Users WHERE username = %s;"
+
+    # cursor.execute(query, [password])
+
+    # if cursor.len > 0:
+    #     return jsonify("username already exists")
+
+    return jsonify(username)
 
 
 """ The following code issues a call to the MET Api, and returns a json object, 
