@@ -1,4 +1,8 @@
 flask
 uWSGI
 mysql-connector
+<<<<<<< HEAD
 requests
+=======
+requests
+>>>>>>> main
