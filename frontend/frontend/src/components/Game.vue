@@ -170,13 +170,14 @@ export default {
 		countFlipped() {
 			if (this.countFlipped == 2) {
 				this.showMatchModal = true;
+				this.timerState = "stopped";
 			}
 		},
 	},
 	methods: {
 		completeMatch({ value }) {
-			console.log(value);
-			if (this.flipped[0].artName == this.flipped[1].artName) {
+			this.showMatchModal = false;
+			if (value) {
 				this.cards[this.flipped[0].cardId - 1].status = true;
 				this.cards[this.flipped[1].cardId - 1].status = true;
 				this.countMatched = this.countMatched + 1;
@@ -184,9 +185,9 @@ export default {
 				this.cards[this.flipped[0].cardId - 1].active = false;
 				this.cards[this.flipped[1].cardId - 1].active = false;
 			}
-			console.log("YOOO");
-			// this.countFlipped = 0;
-			// this.flipped = [];
+			this.countFlipped = 0;
+			this.flipped = [];
+			this.timerState = "run";
 		},
 		returnHome() {
 			this.$router.push("/");

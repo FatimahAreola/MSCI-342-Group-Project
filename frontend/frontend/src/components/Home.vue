@@ -50,7 +50,7 @@ export default {
 	/* button */
 	width: 800px;
 	height: 300px;
-	border: 2px solid #ffe381;;
+	border: 2px solid #ffe381;
 	background-color: #ffe381;
 	/* text */
 	font-size: 100px;

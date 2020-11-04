@@ -13,12 +13,7 @@
 				<div class="modal-footer">
 					<slot name="footer">
 						default footer
-						<button
-							class="modal-default-button"
-							@click="$emit('close', { value: result })"
-						>
-							OK
-						</button>
+						<button class="modal-default-button" @click="close">OK</button>
 					</slot>
 				</div>
 			</div>
@@ -44,6 +39,12 @@ export default {
 					this.result = false;
 				}
 			}
+		},
+	},
+	methods: {
+		close() {
+			this.$emit("close", { value: this.result });
+			this.result = null;
 		},
 	},
 };
