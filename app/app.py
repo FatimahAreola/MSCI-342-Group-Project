@@ -30,7 +30,7 @@ def createAccount():
 
     query = "SELECT * FROM Users WHERE userName = %s;"
 
-    cursor.execute(query, [password])
+    cursor.execute(query, [username])
 
     results = cursor.fetchone()
 
@@ -42,6 +42,9 @@ def createAccount():
     query = "INSERT INTO Users (userName, userPassword) VALUES (%s, %s);"
 
     cursor.execute(query, [username, password])
+    connection.commit()
+    connection.close()
+    cursor.close()
 
     print(cursor)
 
