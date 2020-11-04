@@ -3,17 +3,21 @@
 		<div class="modal-wrapper">
 			<div class="modal-container">
 				<div class="modal-header">
-					<slot name="header"> default header </slot>
+					<slot name="header" v-if="result"> It's A Match!!</slot>
+					<slot name="header" v-else>Try Again!</slot>
 				</div>
 
 				<div class="modal-body">
-					<slot name="body"> default body </slot>
+					<div v-for="card in flipped" :key="card.cardId" class="art">
+						{{ card.cardId }}
+					</div>
 				</div>
 
 				<div class="modal-footer">
 					<slot name="footer">
-						default footer
-						<button class="modal-default-button" @click="close">OK</button>
+						<button class="modal-default-button" @click="close">
+							Back to Game
+						</button>
 					</slot>
 				</div>
 			</div>
@@ -69,26 +73,57 @@ export default {
 }
 
 .modal-container {
-	width: 300px;
+	width: 800px;
+	height: 500px;
 	margin: 0px auto;
 	padding: 20px 30px;
-	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: #ffe381;
 	border-radius: 2px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
 	transition: all 0.3s ease;
 	font-family: Helvetica, Arial, sans-serif;
 }
 
-.modal-header h3 {
+.modal-header {
 	margin-top: 0;
-	color: #42b983;
+	height: 40px;
+	line-height: 40px;
+	font-weight: 600;
+	font-size: 30px;
 }
 
 .modal-body {
 	margin: 20px 0;
+	display: flex;
+	justify-content: space-around;
+}
+
+.art {
+	width: 350px;
+	height: 370px;
+	background-color: #fff;
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: center;
 }
 
 .modal-default-button {
-	float: right;
+	/* button */
+	width: 200px;
+	margin-top: 10px;
+	display: block;
+	height: 40px;
+	border: 2px solid #e76f85;
+	background-color: #f0899c;
+	/* text */
+	font-size: 15px;
+	font-weight: bold;
+	color: #ffe381;
+	text-shadow: 2px 2px 4px #000000;
 }
 </style>
