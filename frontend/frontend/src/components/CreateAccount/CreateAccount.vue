@@ -54,20 +54,39 @@ export default {
 						password: this.password1,
 					};
 				} else {
-					console.log("passwords don't match");
+					this.$notify({
+						group: "foo",
+						title: "Passwords Don't Match",
+						text: "Please make sure you give the same password!",
+					});
 					return;
 				}
-
-				console.log(formData);
 				const baseURI = "http://localhost:80/api/createAccount";
 				axios
 					.post(baseURI, formData)
-					.then((result) => {
-						console.log(result);
+					.then(() => {
+						this.$notify({
+							group: "foo",
+							type: "success",
+							title: "Account created",
+							text: "You're all set!",
+						});
 					})
-					.catch(function (error) {
-						console.log(error);
+					.catch(() => {
+						this.$notify({
+							group: "foo",
+							type: "error",
+							title: "Username Already Exists",
+							text: "Looks like that username has been taken!",
+						});
 					});
+			} else {
+				this.$notify({
+					group: "foo",
+					type: "warn",
+					title: "Missing Information",
+					text: "It looks like you're missing some account details!",
+				});
 			}
 		},
 	},

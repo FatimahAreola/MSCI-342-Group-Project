@@ -35,7 +35,7 @@ def createAccount():
     results = cursor.fetchone()
 
     if results:
-        return jsonify("username already exists")
+        return jsonify("username already exists"), 500
 
     cursor = connection.cursor()
 
