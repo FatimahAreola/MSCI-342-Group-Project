@@ -61,7 +61,7 @@ export default {
 				console.log(formData);
 				const baseURI = "http://localhost:80/api/createAccount";
 				axios
-					.post(baseURI, formData)
+					.get(baseURI)
 					.then((result) => {
 						console.log(result);
 					})

@@ -13,10 +13,15 @@ def hello():
 
 
 # createAccount
-@app.route("/api/createAccount", methods=["POST"])
+@app.route("/api/createAccount")
 def createAccount():
-    username = request.get_json()["username"]
-    password = request.get_json()["password"]
+    print('hey')
+    req_data = request.get_json()
+    print(req_data)
+    #username = request.get_json()["username"]
+    #password = request.get_json()["password"]
+    username =  'sdsdsd'
+    password='passwordddfdummy'
 
     config = {
         "user": "root",
@@ -42,6 +47,9 @@ def createAccount():
     query = "INSERT INTO Users (userName, userPassword) VALUES (%s, %s);"
 
     cursor.execute(query, [username, password])
+    connection.commit()
+    connection.close()
+    cursor.close()
 
     print(cursor)
 
