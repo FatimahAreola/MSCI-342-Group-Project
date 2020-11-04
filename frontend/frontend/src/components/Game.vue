@@ -1,14 +1,20 @@
 <template>
 	<div class="board">
 		<div class="summary">
-		<h2> Matched: {{this.countMatched}}</h2>
-			<Timer :state="timerState"/>
+			<h2>Matched: {{ this.countMatched }}</h2>
+			<Timer :state="timerState" />
 			<button class="summaryButton" @click="stopGame">Stop Game</button>
 			<button class="summaryButton" @click="returnHome">Home</button>
 		</div>
 		<div class="board-wrapper">
 			<Board :cardData="shuffled" @updateActive="updateActive" />
 		</div>
+		<Match
+			ref="match"
+			v-show="showMatchModal"
+			:flipped="flipped"
+			@close="completeMatch"
+		/>
 	</div>
 </template>
 
@@ -18,10 +24,13 @@ import _ from "lodash";
 import Board from "./Board.vue";
 import Timer from "./Timer.vue";
 
+import Match from "./MatchPopup.vue";
+
 export default {
 	name: "Game",
 	components: {
 		Board,
+		Match,
 		Timer,
 	},
 	data() {
@@ -144,6 +153,7 @@ export default {
 			countMatched: 0,
 			countFlipped: 0,
 			flipped: [],
+			showMatchModal: false,
 		};
 	},
 	computed: {
@@ -159,14 +169,13 @@ export default {
 		},
 		countFlipped() {
 			if (this.countFlipped == 2) {
-				setTimeout(() => {
-					this.assertMatch();
-				}, 300);
+				this.showMatchModal = true;
 			}
 		},
 	},
 	methods: {
-		assertMatch() {
+		completeMatch({ value }) {
+			console.log(value);
 			if (this.flipped[0].artName == this.flipped[1].artName) {
 				this.cards[this.flipped[0].cardId - 1].status = true;
 				this.cards[this.flipped[1].cardId - 1].status = true;
@@ -175,8 +184,9 @@ export default {
 				this.cards[this.flipped[0].cardId - 1].active = false;
 				this.cards[this.flipped[1].cardId - 1].active = false;
 			}
-			this.countFlipped = 0;
-			this.flipped = [];
+			console.log("YOOO");
+			// this.countFlipped = 0;
+			// this.flipped = [];
 		},
 		returnHome() {
 			this.$router.push("/");
@@ -197,15 +207,18 @@ export default {
 				}
 			});
 		},
-		setTimerState(){
+		setTimerState() {
 			this.timerState = "stopped";
 		},
-		async stopGame(gameWon=false) {
+		async stopGame(gameWon = false) {
 			await this.setTimerState();
-			await this.$router.push({ name: 'GameSummary', params: {matches: this.countMatched, gameWon: gameWon } });
+			await this.$router.push({
+				name: "GameSummary",
+				params: { matches: this.countMatched, gameWon: gameWon },
+			});
 		},
 		routeToHome: function () {
-			this.$router.push('/');
+			this.$router.push("/");
 		},
 	},
 };
@@ -224,7 +237,6 @@ export default {
 }
 
 .summary {
-	
 	margin-left: 200px;
 }
 
@@ -248,7 +260,7 @@ export default {
 	/* text */
 	font-size: 30px;
 	font-weight: bold;
-	color: 	#f0899c;
+	color: #f0899c;
 	text-shadow: 2px 2px 4px #000000;
 }
 </style>
