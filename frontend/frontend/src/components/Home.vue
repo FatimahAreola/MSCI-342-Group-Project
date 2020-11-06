@@ -1,7 +1,6 @@
 <template>
 	<div class="home">
 		<button v-on:click="test_axios">Test Access To Flask App</button>
-		<CreateButton />
 		<br />
 		<button v-on:click="routeToGame" class="play-button">PLAY</button>
 	</div>
@@ -9,13 +8,10 @@
 
 <script>
 import axios from "axios";
-import CreateButton from "./CreateAccount/CreateButton.vue";
 
 export default {
 	name: "HelloWorld",
-	components: {
-		CreateButton,
-	},
+	components: {},
 	data() {
 		return {};
 	},
