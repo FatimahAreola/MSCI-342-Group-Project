@@ -25,7 +25,7 @@ export default {
 			this.$router.push("/game");
 		},
 		test_axios: function () {
-			const baseURI = "http://localhost:80/api/hello";
+			const baseURI = "/api/hello";
 			axios
 				.get(baseURI)
 				.then((result) => {
