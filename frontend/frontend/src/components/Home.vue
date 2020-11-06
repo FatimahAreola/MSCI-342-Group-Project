@@ -25,7 +25,8 @@ export default {
 			this.$router.push("/game");
 		},
 		test_axios: function () {
-			const baseURI = "/api/hello";
+			const baseURI = process.env.VUE_APP_HOST_URL+"api/hello";
+			console.log(baseURI)
 			axios
 				.get(baseURI)
 				.then((result) => {
