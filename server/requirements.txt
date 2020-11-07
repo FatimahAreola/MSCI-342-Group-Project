@@ -1,4 +1,4 @@
 flask
-uWSGI
 mysql-connector
 requests
+Flask-Cors
