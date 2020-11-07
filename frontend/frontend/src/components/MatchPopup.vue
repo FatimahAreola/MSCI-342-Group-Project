@@ -15,8 +15,8 @@
 
 				<div class="modal-footer">
 					<slot name="footer">
-						<button class="modal-default-button" @click="close">
-							Back to Game
+						<button v-if="result" class="modal-default-button" @click="close">
+							Continue Playing
 						</button>
 					</slot>
 				</div>
@@ -41,6 +41,9 @@ export default {
 					this.result = true;
 				} else {
 					this.result = false;
+					setTimeout(() => {
+						this.close();
+					}, 1000);
 				}
 			}
 		},
