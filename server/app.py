@@ -1,13 +1,17 @@
-from flask import Flask, json
+from flask import Flask, json, jsonify
+from flask_cors import CORS
 import requests
 import mysql.connector
 
 app = Flask(__name__)
+DEBUG = True
+app.config.from_object(__name__)
+CORS(app, resources={r'/*': {'origins': '*'}})
 
 @app.route('/api/hello')
 def hello():
     print('Hello Request Received')
-    return 'Hello This is the Flask App'
+    return jsonify('Hello This is the Flask App')
 
 
 
@@ -47,7 +51,10 @@ def pullMETAPI():
     return(fetchArtInformation(artObjectIDs))
 
 
+@app.route('/api/ping')
+def ping():
+    return jsonify('pong')
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
- 
+
+if __name__ == '__main__':
+    app.run()
