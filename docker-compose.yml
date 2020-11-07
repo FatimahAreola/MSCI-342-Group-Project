@@ -8,6 +8,11 @@ services:
         restart: always
         environment: 
             - APP_NAME=FlaskApp
+            - DB_USER=root
+            - DB_PASSWORD=sherlockeD123
+            - DB_HOST=db
+            - DB_PORT=3306
+            - DB_NAME=MSCI
         volumes:
             - './app:/app'
         expose:

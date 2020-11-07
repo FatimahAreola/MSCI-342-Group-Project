@@ -2,8 +2,30 @@ from flask import Flask, request, jsonify, make_response, send_file
 import json
 import requests
 import mysql.connector
+import os
 
 app = Flask(__name__)
+
+
+class DbSelector:
+    def __init__(self):
+        self.config = {
+            "user": os.environ["DB_USER"],
+            "password": os.environ["DB_PASSWORD"],
+            "host": os.environ["DB_HOST"],
+            "port": os.environ["DB_PORT"],
+            "database": os.environ["DB_NAME"],
+        }
+
+    def __enter__(self):
+        self.connection = mysql.connector.connect(**self.config)
+        self.cursor = self.connection.cursor(prepared=True)
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        self.connection.commit()
+        self.connection.close()
+        self.cursor.close()
 
 
 @app.route("/api/hello")
@@ -18,35 +40,20 @@ def createAccount():
     username = request.get_json()["username"]
     password = request.get_json()["password"]
 
-    config = {
-        "user": "root",
-        "password": "sherlockeD123",
-        "host": "db",
-        "port": "3306",
-        "database": "MSCI",
-    }
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
+    with DbSelector() as d:
 
-    query = "SELECT * FROM Users WHERE userName = %s;"
+        query = "SELECT * FROM Users WHERE userName = %s;"
 
-    cursor.execute(query, [username])
+        d.cursor.execute(query, [username])
 
-    results = cursor.fetchone()
+        results = d.cursor.fetchone()
 
-    if results:
-        return jsonify("username already exists"), 500
+        if results:
+            return jsonify("username already exists"), 403
 
-    cursor = connection.cursor()
+        query = "INSERT INTO Users (userName, userPassword) VALUES (%s, %s);"
 
-    query = "INSERT INTO Users (userName, userPassword) VALUES (%s, %s);"
-
-    cursor.execute(query, [username, password])
-    connection.commit()
-    connection.close()
-    cursor.close()
-
-    print(cursor)
+        d.cursor.execute(query, [username, password])
 
     return jsonify(message="Successfully updated resource."), 200
 
