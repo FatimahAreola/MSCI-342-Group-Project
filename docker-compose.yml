@@ -3,13 +3,13 @@ version: "3.7"
 
 services:
     flask:
-        build: ./app
+        build: ./server
         container_name:  flask
         restart: always
         environment: 
             - APP_NAME=FlaskApp
         volumes:
-            - './app:/app'
+            - './server:/app'
         expose:
           - 8080
 
