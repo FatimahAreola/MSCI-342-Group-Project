@@ -34,6 +34,7 @@
         },
         methods: {
             login() {
+                console.log(this.input.username)
                 if(!this.input.username || !this.input.password) {
                     this.$notify({
                         group: "foo",
@@ -42,8 +43,7 @@
                     });
                     return;
                 }
-                if (this.input.username == this.$parent.testAccount.username && this.input.password == this.$parent.testAccount.password) {
-                    const baseURI = "http://localhost:80/api/Login";
+                    const baseURI = process.env.VUE_APP_HOST_URL + "api/login";
                     axios
                         .post(baseURI)
                         .then(() => {
@@ -62,7 +62,6 @@
                                 text: "The username or password you enetered seems to be invalid."
                             });
                 });
-            }
         },
     }
     };

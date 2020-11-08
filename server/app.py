@@ -60,7 +60,7 @@ def createAccount():
 
     return jsonify(message="Successfully updated resource."), 200
 
-// Login
+# Login
 @app.route("/api/Login", methods=["POST"])
 def Login():
     username = request.get_json() ["username"]
@@ -83,11 +83,11 @@ def Login():
 
     results = cursor.fetchone()
 
-    if results{
+    if results:
         return jsonify("Successful Login"), 200
-    } else {
+    else:
         return jsonify("Invalid Username or Password"), 500
-    }
+    
 
 """ The following code issues a call to the MET Api, and returns a json object, 
 with the details of 8 pre-determined works of art so that they can be formatted for gameplay.
