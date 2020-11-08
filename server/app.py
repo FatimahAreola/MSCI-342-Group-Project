@@ -1,7 +1,8 @@
-from flask import Flask, json, jsonify
+from flask import Flask, request, json, jsonify
 from flask_cors import CORS
 import requests
 import mysql.connector
+import os
 
 import multiprocessing
 from multiprocessing import Pool, current_process
@@ -10,13 +11,58 @@ from multiprocessing import Pool, current_process
 app = Flask(__name__)
 DEBUG = True
 app.config.from_object(__name__)
-CORS(app, resources={r'/*': {'origins': '*'}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-@app.route('/api/hello')
+
+class DbSelector:
+    def __init__(self):
+        self.config = {
+            "user": os.environ["DB_USER"],
+            "password": os.environ["DB_PASSWORD"],
+            "host": os.environ["DB_HOST"],
+            "port": os.environ["DB_PORT"],
+            "database": os.environ["DB_NAME"],
+        }
+
+    def __enter__(self):
+        self.connection = mysql.connector.connect(**self.config)
+        self.cursor = self.connection.cursor(prepared=True)
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        self.connection.commit()
+        self.connection.close()
+        self.cursor.close()
+
+
+@app.route("/api/hello")
 def hello():
-    print('Hello Request Received')
-    return jsonify('Hello This is the Flask App3')
+    print("Hello Request Received")
+    return jsonify("Hello This is the Flask App")
 
+
+# createAccount
+@app.route("/api/createAccount", methods=["POST"])
+def createAccount():
+    username = request.get_json()["username"]
+    password = request.get_json()["password"]
+
+    with DbSelector() as d:
+
+        query = "SELECT * FROM Users WHERE userName = %s;"
+
+        d.cursor.execute(query, [username])
+
+        results = d.cursor.fetchone()
+
+        if results:
+            return jsonify("username already exists"), 403
+
+        query = "INSERT INTO Users (userName, userPassword) VALUES (%s, %s);"
+
+        d.cursor.execute(query, [username, password])
+
+    return jsonify(message="Successfully updated resource."), 200
 
 
 """ The following code issues a call to the MET Api, and returns a json object, 
@@ -44,9 +90,9 @@ def fetchArtInformation(i):
     return (json.dumps(cardSet))
 
 
-@app.route('/api/MetAPI')
+@app.route("/api/MetAPI")
 def pullMETAPI():
-    print('Met API Method:')
+    print("Met API Method:")
 
 #These are the ObjectIDs of 8 pieces we selected for this demo.
 #For future iterations of the game, these objectIDs will need to be selected by the system.
@@ -59,10 +105,10 @@ def pullMETAPI():
 
 
 
-@app.route('/api/ping')
+@app.route("/api/ping")
 def ping():
-    return jsonify('pong')
+    return jsonify("pong")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

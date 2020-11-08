@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 import Home from './components/Home.vue'
 import Game from './components/Game.vue'
 import GameSummary from './components/GameSummary.vue'
+import CreateAccount from './components/CreateAccount/CreateAccount.vue'
 
 const routes = [
 	{
@@ -20,6 +21,11 @@ const routes = [
 		path: "/gameSummary",
 		name: 'GameSummary',
 		component: GameSummary
+	},
+	{
+		path: "/createAccount",
+		name: 'createAccount',
+		component: CreateAccount
 	}
 ];
 
