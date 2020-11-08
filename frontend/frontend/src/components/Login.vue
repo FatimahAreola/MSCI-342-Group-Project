@@ -43,9 +43,10 @@
                     });
                     return;
                 }
-                    const baseURI = process.env.VUE_APP_HOST_URL + "api/login";
+                    let postData={username:this.input.username,password:this.input.password,};
+                    const baseURI = process.env.VUE_APP_HOST_URL + "api/Login";
                     axios
-                        .post(baseURI)
+                        .post(baseURI, postData)
                         .then(() => {
                             this.$notify({
                                 group: "foo",

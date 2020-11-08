@@ -63,15 +63,18 @@ def createAccount():
 # Login
 @app.route("/api/Login", methods=["POST"])
 def Login():
-    username = request.get_json() ["username"]
-    password = request.get_json()["password"]
+    username=request.get_json()["username"]
+    password=request.get_json()["password"]
+   
+    print('username', username)
+    print('password', password)
 
     config = {
         "user": "root",
         "password": "sherlockeD123",
         "host": "db",
         "port": "3306",
-        "datebase": "MSCI",
+        "database": "MSCI",
     }
 
     connection = mysql.connector.connect(**config)
@@ -79,14 +82,14 @@ def Login():
 
     query = "SELECT * FROM Users WHERE userName = %s AND userPassword = %s;"
 
-    cursor.execute(query, [username], [password])
+    cursor.execute(query, [username, password])
 
     results = cursor.fetchone()
 
     if results:
         return jsonify("Successful Login"), 200
     else:
-        return jsonify("Invalid Username or Password"), 500
+        return jsonify("Invalid Username or Password"), 401
     
 
 """ The following code issues a call to the MET Api, and returns a json object, 
