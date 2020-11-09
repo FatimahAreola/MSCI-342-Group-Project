@@ -64,6 +64,37 @@ def createAccount():
 
     return jsonify(message="Successfully updated resource."), 200
 
+# Login
+@app.route("/api/Login", methods=["POST"])
+def Login():
+    username=request.get_json()["username"]
+    password=request.get_json()["password"]
+   
+    print('username', username)
+    print('password', password)
+
+    config = {
+        "user": "root",
+        "password": "sherlockeD123",
+        "host": "db",
+        "port": "3306",
+        "database": "MSCI",
+    }
+
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+
+    query = "SELECT * FROM Users WHERE userName = %s AND userPassword = %s;"
+
+    cursor.execute(query, [username, password])
+
+    results = cursor.fetchone()
+
+    if results:
+        return jsonify("Successful Login"), 200
+    else:
+        return jsonify("Invalid Username or Password"), 401
+    
 
 """ The following code issues a call to the MET Api, and returns a json object, 
 with the details of 8 pre-determined works of art so that they can be formatted for gameplay.
