@@ -20,6 +20,7 @@
 
 <script>
 import _ from "lodash";
+import axios from "axios";
 
 import Board from "./Board.vue";
 import Timer from "./Timer.vue";
@@ -34,8 +35,13 @@ export default {
 		Timer,
 	},
 	mounted() {
-                axios.get('/api/MetAPI').then((response => (this.card = response.data));
-                },
+		axios.get("/api/MetAPI").then((response) => {
+			response.data.forEach((card) => {
+				this.cards.push(card);
+			});
+			this.cards = response.data;
+		});
+	},
 	data() {
 		return {
 			timerState: "running",
@@ -67,6 +73,7 @@ export default {
 	methods: {
 		completeMatch({ value }) {
 			this.showMatchModal = false;
+			console.log(this.flipped[0].cardId - 1);
 			if (value) {
 				this.cards[this.flipped[0].cardId - 1].status = true;
 				this.cards[this.flipped[1].cardId - 1].status = true;
