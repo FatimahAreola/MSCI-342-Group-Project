@@ -12,7 +12,7 @@ import Login from './components/Login.vue'
 const routes = [
 	{
 		path: "/",
-		component: Home
+		component: Login
 	},
 	{
 		path: "/game",
@@ -29,9 +29,9 @@ const routes = [
 		component: CreateAccount
 	},
 	{
-		path: "/login",
-		name: 'login',
-		component: Login
+		path: "/home",
+		name: 'home',
+		component: Home
 	}
 ];
 

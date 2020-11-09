@@ -1,7 +1,8 @@
 <template>
-    <div id="login">
+    <div id="login" class="Login">
         <h1>Login</h1>
         <input 
+            class = "input"
             type = "text"
             id = "username"
             name = "username"
@@ -9,6 +10,7 @@
             placeholder = "Username"
         />
         <input
+			class = "input"
             type = "password"
             id = "password"
             name = "password" 
@@ -16,14 +18,19 @@
             placeholder = "Password"
         />
         <button class="create-button" @click="login">Login</button>
+        <createAcc />
     </div>
 </template>
 
 <script>
     import axios from "axios";
+    import createAcc from "./CreateAccount/CreateButton.vue";
 
     export default {
         name: 'Login',
+        components: {
+            createAcc,
+        },
         data() {
             return {
                 input: {
@@ -54,7 +61,7 @@
                                 title: "Successful Login",
                                 text: "Sucessful Login",
                             });
-                            this.$router.push("/game");
+                            this.$router.push("/home");
                         })
                         .catch (() => {
                             this.$notify({
@@ -70,5 +77,35 @@
 </script>
 
 <style>
+.Login {
+    display: flex;
+    flex-direction: column;
+}
+.input {
+	margin: 10px 20px 10px 20px;
+	padding-left: 10px;
+	height: 20px;
+	background-color: transparent;
+	border: 1px solid #1b1b1b;
+}
 
+.create-button {
+	/* button */
+	width: 300px;
+	height: 40px;
+	border: 2px solid #d282a6;
+	background-color: #e794b9;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	/* text */
+	font-size: 30px;
+	font-weight: bold;
+	color: #f8da6c;
+	text-shadow: 2px 2px 4px #000000;
+}
+
+.create-button:hover {
+	background-color: #d282a6;
+}
 </style>

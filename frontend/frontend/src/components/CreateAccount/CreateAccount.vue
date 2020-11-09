@@ -71,6 +71,7 @@ export default {
 							title: "Account created",
 							text: "You're all set!",
 						});
+						this.$router.push("/");
 					})
 					.catch(() => {
 						this.$notify({

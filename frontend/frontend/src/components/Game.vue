@@ -219,7 +219,7 @@ export default {
 			});
 		},
 		routeToHome: function () {
-			this.$router.push("/");
+			this.$router.push("/home");
 		},
 	},
 };

@@ -3,8 +3,6 @@
 		<button v-on:click="test_axios">Test Access To Flask App</button>
 		<br />
 		<button v-on:click="routeToGame" class="play-button">PLAY</button>
-		<br />
-		<button v-on:click="routeToLogin" class="login-button">LOGIN</button>
 	</div>
 </template>
 
@@ -26,9 +24,6 @@ export default {
 	methods: {
 		routeToGame: function () {
 			this.$router.push("/game");
-		},
-		routeToLogin: function () {
-			this.$router.push("/login");
 		},
 		test_axios: function () {
 			const baseURI = process.env.VUE_APP_HOST_URL+"api/hello";
