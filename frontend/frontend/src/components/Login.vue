@@ -83,6 +83,9 @@
 }
 .input {
 	margin: 10px 20px 10px 20px;
+    width: 300px;
+	margin-left: auto;
+	margin-right: auto;
 	padding-left: 10px;
 	height: 20px;
 	background-color: transparent;
