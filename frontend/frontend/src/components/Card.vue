@@ -3,7 +3,7 @@
 		<div v-if="!active"></div>
 		<div v-else-if="status">matched!</div>
 		<div v-else class="card-info">
-			<img style="height: 200px; width: 200px" :src="card.artUrl" />
+			<img style="object-fit: cover" :src="card.artUrl" />
 		</div>
 	</div>
 </template>

@@ -39,7 +39,7 @@ export default {
 			response.data.forEach((card) => {
 				this.cards.push(card);
 			});
-			this.cards = response.data;
+			this.cards=response.data;
 		});
 	},
 	data() {
