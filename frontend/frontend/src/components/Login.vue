@@ -54,6 +54,7 @@
                                 title: "Successful Login",
                                 text: "Sucessful Login",
                             });
+                            this.$router.push("/game");
                         })
                         .catch (() => {
                             this.$notify({
