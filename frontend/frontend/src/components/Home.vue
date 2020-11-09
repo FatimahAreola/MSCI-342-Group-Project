@@ -64,4 +64,19 @@ export default {
 .play-button:hover {
 	background-color: #f8da6c;
 }
+.login-button {
+	/* button */
+	width: 800px;
+	height: 300px;
+	border: 2px solid #ffe381;
+	background-color: #ffe381;
+	/* text */
+	font-size: 100px;
+	font-weight: bold;
+	color: #d282a6;
+	text-shadow: 2px 2px 4px #000000;
+}
+.login-button:hover {
+	background-color: #f8da6c;
+}
 </style>

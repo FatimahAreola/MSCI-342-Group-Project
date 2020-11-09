@@ -16,7 +16,7 @@ export default {
 	},
 	methods: {
 		routeToHome: function () {
-			this.$router.push('/');
+			this.$router.push('/home');
 		},
 	}
 

@@ -190,7 +190,7 @@ export default {
 			this.timerState = "run";
 		},
 		returnHome() {
-			this.$router.push("/");
+			this.$router.push("/home");
 		},
 		updateActive({ value }) {
 			this.cards.forEach((card) => {
@@ -219,7 +219,7 @@ export default {
 			});
 		},
 		routeToHome: function () {
-			this.$router.push("/");
+			this.$router.push("/home");
 		},
 	},
 };
