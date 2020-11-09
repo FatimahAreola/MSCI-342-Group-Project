@@ -35,10 +35,14 @@ export default {
 		Timer,
 	},
 	mounted() {
+		
 		axios.get("/api/MetAPI").then((response) => {
-			response.data.forEach((card) => {
-				this.cards.push(card);
-			});
+			this.cards = response.data;
+			console.log(response);
+			console.log(response.data);
+		//	response.data.forEach((card) => {
+			//	this.cards.push(card);
+			//});
 		});
 	},
 	data() {
