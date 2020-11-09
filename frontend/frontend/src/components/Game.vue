@@ -20,6 +20,7 @@
 
 <script>
 import _ from "lodash";
+import axios from "axios";
 
 import Board from "./Board.vue";
 import Timer from "./Timer.vue";
@@ -33,123 +34,17 @@ export default {
 		Match,
 		Timer,
 	},
+	mounted() {
+		axios.get("/api/MetAPI").then((response) => {
+			response.data.forEach((card) => {
+				this.cards.push(card);
+			});
+		});
+	},
 	data() {
 		return {
 			timerState: "running",
-			cards: [
-				{
-					cardId: 1,
-					artName: "art1",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 2,
-					artName: "art2",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 3,
-					artName: "art3",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 4,
-					artName: "art4",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 5,
-					artName: "art5",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 6,
-					artName: "art6",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 7,
-					artName: "art7",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 8,
-					artName: "art8",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 9,
-					artName: "art1",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 10,
-					artName: "art2",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 11,
-					artName: "art3",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 12,
-					artName: "art4",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 13,
-					artName: "art5",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 14,
-					artName: "art6",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 15,
-					artName: "art7",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-				{
-					cardId: 16,
-					artName: "art8",
-					artUrl: "",
-					active: false,
-					status: false,
-				},
-			],
+			cards: [],
 			countMatched: 0,
 			countFlipped: 0,
 			flipped: [],
@@ -177,6 +72,7 @@ export default {
 	methods: {
 		completeMatch({ value }) {
 			this.showMatchModal = false;
+			console.log(this.flipped[0].cardId - 1);
 			if (value) {
 				this.cards[this.flipped[0].cardId - 1].status = true;
 				this.cards[this.flipped[1].cardId - 1].status = true;

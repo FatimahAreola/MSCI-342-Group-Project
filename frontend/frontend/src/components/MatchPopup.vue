@@ -9,7 +9,7 @@
 
 				<div class="modal-body">
 					<div v-for="card in flipped" :key="card.cardId" class="art">
-						{{ card.cardId }}
+						<img style="width: 350px; height: 370px" :src="card.artUrl" />
 					</div>
 				</div>
 

@@ -4,6 +4,10 @@ import requests
 import mysql.connector
 import os
 
+import multiprocessing
+from multiprocessing import Pool, current_process
+
+
 app = Flask(__name__)
 DEBUG = True
 app.config.from_object(__name__)
@@ -96,40 +100,49 @@ def Login():
 with the details of 8 pre-determined works of art so that they can be formatted for gameplay.
  """
 
-
-def fetchArtInformation(artObjectIDs):
-    # Define index, and Cardset dictionary
-    idx = 0
-    cardSet = {}
-    # This for loop goes through all IDs provided in the list of art pieces chosen and pulls the required information about them from the MET's API
-    for i in artObjectIDs:
-        apiResponse = requests.get(
-            "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i)
-        )
-        artDetails = apiResponse.json()
-        # We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
-        cardSet[idx] = {
-            "cardId": idx + 1,
-            "ObjectID": str(i),
-            "artName": artDetails["title"],
-            "artURL": artDetails["primaryImage"],
-            "active": False,
-            "status": False,
-        }
-        idx += 1
-    # Returns a nested Json object, with multiple artCards inside
-    return json.dumps(cardSet)
+def fetchArtInformation(i):
+#Numbers from 1 to number of images, identified by the number of processes created
+    idx=current_process()._identity[0]
+#pulls the required information from the MET's API
+    apiResponse = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i))
+    artDetails = apiResponse.json()
+#We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
+    cardSet={
+    'cardId': idx,
+    'ObjectID': str(i),
+    'artName': artDetails["title"],
+    'artUrl': artDetails["primaryImage"],
+    'active':  False,
+    'status': False
+    }
+#Returns a Json object
+    return (cardSet)
 
 
 @app.route("/api/MetAPI")
 def pullMETAPI():
     print("Met API Method:")
 
-    # These are the ObjectIDs of 8 pieces we selected for this demo.
-    # For future iterations of the game, these objectIDs will need to be selected by the system.
-    artObjectIDs = [16577, 436944, 437879, 436101, 40081, 437329, 436840, 435882]
-    return fetchArtInformation(artObjectIDs)
+#These are the ObjectIDs of 8 pieces we selected for this demo.
+#For future iterations of the game, these objectIDs will need to be selected by the system.
+    artObjectIDs = [16577,436944,437879,436101,40081,437329,436840,435882]
+    numPieces = len(artObjectIDs)
+   
+   #Multiprocessing here
+    p=Pool(numPieces)
+    artPieces=p.map(fetchArtInformation,artObjectIDs)
 
+    for x in range(numPieces):
+        cardSet={
+           'cardId': x+numPieces+1,
+           'ObjectID': artPieces[x].get('ObjectID'),
+           'artName': artPieces[x].get('artName'),
+            'artUrl': artPieces[x].get('artUrl'),
+            'active': False,
+            'status': False}
+        artPieces.append(cardSet)
+
+    return(jsonify(artPieces))
 
 @app.route("/api/ping")
 def ping():
