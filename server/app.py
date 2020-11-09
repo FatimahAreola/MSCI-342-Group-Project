@@ -70,14 +70,12 @@ with the details of 8 pre-determined works of art so that they can be formatted 
  """
 
 def fetchArtInformation(i):
- #Define index, and Cardset dictionary
-    
+#Numbers from 1 to number of images, identified by the number of processes created
     idx=current_process()._identity[0]
-#This for loop goes through all IDs provided in the list of art pieces chosen and pulls the required information about them from the MET's API
+#pulls the required information from the MET's API
     apiResponse = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i))
     artDetails = apiResponse.json()
 #We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
-   # cardSet[idx]={
     cardSet={
     'cardId': idx,
     'ObjectID': str(i),
@@ -86,8 +84,8 @@ def fetchArtInformation(i):
     'active':  False,
     'status': False
     }
-#Returns a nested Json object, with multiple artCards inside
-    return (json.dumps(cardSet))
+#Returns a Json object
+    return (cardSet)
 
 
 @app.route("/api/MetAPI")
@@ -97,13 +95,23 @@ def pullMETAPI():
 #These are the ObjectIDs of 8 pieces we selected for this demo.
 #For future iterations of the game, these objectIDs will need to be selected by the system.
     artObjectIDs = [16577,436944,437879,436101,40081,437329,436840,435882]
-    p=Pool(len(artObjectIDs))
-    x=p.map(fetchArtInformation,artObjectIDs)
-    return(jsonify(x))
-    #return(fetchArtInformation(artObjectIDs))
+    numPieces = len(artObjectIDs)
+   
+   #Multiprocessing here
+    p=Pool(numPieces)
+    artPieces=p.map(fetchArtInformation,artObjectIDs)
 
+    for x in range(numPieces):
+        cardSet={
+           'cardId': x+numPieces+1,
+           'ObjectID': artPieces[x].get('ObjectID'),
+           'artName': artPieces[x].get('artName'),
+            'artUrl': artPieces[x].get('artUrl'),
+            'active': False,
+            'status': False}
+        artPieces.append(cardSet)
 
-
+    return(jsonify(artPieces))
 
 @app.route("/api/ping")
 def ping():

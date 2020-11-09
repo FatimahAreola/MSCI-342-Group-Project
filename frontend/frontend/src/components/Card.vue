@@ -2,7 +2,7 @@
 	<div class="card">
 		<div v-if="!active"></div>
 		<div v-else-if="status">matched!</div>
-		<div v-else class="card-info">{{ card.cardId }} {{ card.artName }}</div>
+		<div v-else class="card-info"><img src="card.artUrl"></div>
 	</div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
 }
 
 .card-info {
-	padding-top: 50%;
+	height: 200px;
+	width: 200px;
 }
 </style>
