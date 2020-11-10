@@ -61,7 +61,7 @@ export default {
 					});
 					return;
 				}
-				const baseURI = "/api/createAccount";
+				const baseURI = process.env.VUE_APP_HOST_URL + "api/createAccount";
 				axios
 					.post(baseURI, formData)
 					.then(() => {
