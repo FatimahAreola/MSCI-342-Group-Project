@@ -70,25 +70,12 @@ def Login():
     username=request.get_json()["username"]
     password=request.get_json()["password"]
    
-    print('username', username)
-    print('password', password)
+    with DbSelector() as d:
+        query = "SELECT * FROM Users WHERE userName = %s AND userPassword = %s;"
 
-    config = {
-        "user": "root",
-        "password": "sherlockeD123",
-        "host": "db",
-        "port": "3306",
-        "database": "MSCI",
-    }
+    d.cursor.execute(query, [username, password])
 
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-
-    query = "SELECT * FROM Users WHERE userName = %s AND userPassword = %s;"
-
-    cursor.execute(query, [username, password])
-
-    results = cursor.fetchone()
+    results = d.cursor.fetchone()
 
     if results:
         return jsonify("Successful Login"), 200
