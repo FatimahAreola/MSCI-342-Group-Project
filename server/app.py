@@ -99,6 +99,7 @@ def fetchArtInformation(i):
     'ObjectID': str(i),
     'artName': artDetails["title"],
     'artUrl': artDetails["primaryImage"],
+    'artistName': artDetails["artistDisplayName"],
     'active':  False,
     'status': False
     }

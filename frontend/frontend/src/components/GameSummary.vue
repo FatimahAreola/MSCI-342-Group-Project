@@ -3,6 +3,7 @@
 		<h2> {{this.$route.params.gameWon==true? "Congratulations": "Better Luck Next Time!"  }}</h2>
 		<h3> Total Game Play Time: {{this.$store.state.timer }} </h3>
 		<h3> Match Count: {{ this.$route.params.matches }} </h3>
+		<h3> Artists in Game: {{this.$oute.ArtistName}} </h3>
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
 
     </div>
