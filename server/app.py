@@ -71,11 +71,12 @@ def Login():
     password=request.get_json()["password"]
    
     with DbSelector() as d:
+
         query = "SELECT * FROM Users WHERE userName = %s AND userPassword = %s;"
 
-    d.cursor.execute(query, [username, password])
+        d.cursor.execute(query, [username, password])
 
-    results = d.cursor.fetchone()
+        results = d.cursor.fetchone()
 
     if results:
         return jsonify("Successful Login"), 200
