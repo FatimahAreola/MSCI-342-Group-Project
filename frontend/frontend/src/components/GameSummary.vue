@@ -3,14 +3,8 @@
 		<h2> {{this.$route.params.gameWon==true? "Congratulations": "Better Luck Next Time!"  }}</h2>
 		<h3> Total Game Play Time: {{this.$store.state.timer }} </h3>
 		<h3> Match Count: {{ this.$route.params.matches }} </h3>
-		<h3> Artists in Game: {{ card.artistDisplayName }} </h3>
-		<ul>
-				<li v-for="card in cardId" v-bind:key ="card.cardId">
-					{{ card.artistDisplayName }}
-					</li>
-					</ul>
+		<h3> Artists in Game: {{ this.$route.params.cardSet }} </h3>
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
-
     </div>
 </template>
 
@@ -22,7 +16,8 @@ export default {
 	},
 	methods: {
 		routeToHome: function () {
-			this.$router.push('/home');
+			//this.$router.push('/home');
+			console.log(this.$route.params.cardSet);
 		},
 	}
 

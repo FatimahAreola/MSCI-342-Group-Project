@@ -110,10 +110,12 @@ export default {
 			this.timerState = "stopped";
 		},
 		async stopGame(gameWon = false) {
+			console.log(this.cards);
 			await this.setTimerState();
 			await this.$router.push({
 				name: "GameSummary",
-				params: { matches: this.countMatched, gameWon: gameWon },
+				params: { matches: this.countMatched, gameWon: gameWon, cardSet: this.cards },
+				
 			});
 		},
 		routeToHome: function () {
