@@ -100,6 +100,7 @@ def fetchArtInformation(i):
     'ObjectID': str(i),
     'artName': artDetails["title"],
     'artUrl': artDetails["primaryImage"],
+    'artistName': artDetails["artistDisplayName"],
     'active':  False,
     'status': False
     }
@@ -126,6 +127,7 @@ def pullMETAPI():
            'ObjectID': artPieces[x].get('ObjectID'),
            'artName': artPieces[x].get('artName'),
             'artUrl': artPieces[x].get('artUrl'),
+            'artistName' : artPieces[x].get["artistName"],
             'active': False,
             'status': False}
         artPieces.append(cardSet)
