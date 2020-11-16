@@ -94,6 +94,7 @@ def fetchArtInformation(i):
 #pulls the required information from the MET's API
     apiResponse = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i))
     artDetails = apiResponse.json()
+    print('artDetails', artDetails)
 #We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
     cardSet={
     'cardId': idx,
@@ -120,14 +121,14 @@ def pullMETAPI():
    #Multiprocessing here
     p=Pool(numPieces)
     artPieces=p.map(fetchArtInformation,artObjectIDs)
-
+    print('artPieces', artPieces)
     for x in range(numPieces):
         cardSet={
            'cardId': x+numPieces+1,
            'ObjectID': artPieces[x].get('ObjectID'),
            'artName': artPieces[x].get('artName'),
             'artUrl': artPieces[x].get('artUrl'),
-            'artistName' : artPieces[x].get["artistName"],
+            'artistName' : artPieces[x].get("artistName"),
             'active': False,
             'status': False}
         artPieces.append(cardSet)
