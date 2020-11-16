@@ -3,11 +3,12 @@
 		<h2> {{this.$route.params.gameWon==true? "Congratulations": "Better Luck Next Time!"  }}</h2>
 		<h3> Total Game Play Time: {{this.$store.state.timer }} </h3>
 		<h3> Match Count: {{ this.$route.params.matches }} </h3>
-		<ul id="example-1">
-  			<li v-for="card in cards">
-   			 {{ card.artistDisplayName}}
-  		</li>
-		</ul>
+		<h3> Artists in Game: {{ card.artistDisplayName }} </h3>
+		<ul>
+				<li v-for="card in cardId" v-bind:key ="card.cardId">
+					{{ card.artistDisplayName }}
+					</li>
+					</ul>
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
 
     </div>
