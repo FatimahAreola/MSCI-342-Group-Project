@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
 	name: "GameSummary",
 	data() {
@@ -30,25 +32,48 @@ export default {
 		},
 		bestTime() {
 			if (this.isWon) {
+				if (this.$store.state.userBestTime == "00:00:00") {
+					this.$store.commit(
+						"setCurrentUserBestTimeValue",
+						this.$store.state.timer
+					);
+					// send new best time to database
+					this.updateBestTime();
+					return this.$store.state.timer;
+				}
 				if (this.$store.state.timer < this.$store.state.userBestTime) {
 					this.$store.commit(
 						"setCurrentUserBestTimeValue",
 						this.$store.state.timer
 					);
 					// send new best time to database
-
+					this.updateBestTime();
 					return this.$store.state.timer;
 				} else {
 					return this.$store.state.userBestTime;
 				}
 			} else {
-				return this.$store.state.timer;
+				if (this.$store.state.userBestTime == "00:00:00") {
+					return "None";
+				}
+				return this.$store.state.userBestTime;
 			}
 		},
 	},
 	methods: {
 		routeToHome: function () {
 			this.$router.push("/home");
+		},
+		updateBestTime() {
+			let formData = {
+				userId: this.$store.state.userId,
+				bestTime: this.$store.state.timer,
+			};
+			const baseURI = process.env.VUE_APP_HOST_URL + "api/updateBestTime";
+			axios
+				.post(baseURI, formData)
+				.then(() => {})
+				.catch(() => {});
 		},
 	},
 };
