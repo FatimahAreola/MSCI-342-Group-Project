@@ -8,3 +8,6 @@ MSCI 342 Software Engineering Group Project: Art Card Matching Game for Kids
 4. Navigate to Tasks > Serve > Parameters . Update host to be 0.0.0.0 and the port to be 5000 and click save. Then click ```Run Task```
 5. In another window type localhost:5000 and now you can start development on flask/vue app and after saving/refreshing you should see your changes!
 
+## How to Test in Production
+ 1. ```docker build --build-arg build_type=build -t registry.heroku.com/serene-basin-71075/web . --no-cache```
+ 2. ```docker run -d --name flask-vue -e "PORT=80" -p 80:80 registry.heroku.com/serene-basin-71075/web```
