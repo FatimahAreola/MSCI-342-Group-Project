@@ -64,12 +64,13 @@ def createAccount():
 
     return jsonify(message="Successfully updated resource."), 200
 
+
 # Login
 @app.route("/api/Login", methods=["POST"])
 def Login():
-    username=request.get_json()["username"]
-    password=request.get_json()["password"]
-   
+    username = request.get_json()["username"]
+    password = request.get_json()["password"]
+
     with DbSelector() as d:
 
         query = "SELECT * FROM Users WHERE userName = %s AND userPassword = %s;"
@@ -79,58 +80,63 @@ def Login():
         results = d.cursor.fetchone()
 
     if results:
-        return jsonify("Successful Login"), 200
+        return jsonify(results[0], results[3].decode()), 200
     else:
         return jsonify("Invalid Username or Password"), 401
-    
+
 
 """ The following code issues a call to the MET Api, and returns a json object, 
 with the details of 8 pre-determined works of art so that they can be formatted for gameplay.
  """
 
+
 def fetchArtInformation(i):
-#Numbers from 1 to number of images, identified by the number of processes created
-    idx=current_process()._identity[0]
-#pulls the required information from the MET's API
-    apiResponse = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i))
+    # Numbers from 1 to number of images, identified by the number of processes created
+    idx = current_process()._identity[0]
+    # pulls the required information from the MET's API
+    apiResponse = requests.get(
+        "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i)
+    )
     artDetails = apiResponse.json()
-#We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
-    cardSet={
-    'cardId': idx,
-    'ObjectID': str(i),
-    'artName': artDetails["title"],
-    'artUrl': artDetails["primaryImage"],
-    'active':  False,
-    'status': False
+    # We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
+    cardSet = {
+        "cardId": idx,
+        "ObjectID": str(i),
+        "artName": artDetails["title"],
+        "artUrl": artDetails["primaryImage"],
+        "active": False,
+        "status": False,
     }
-#Returns a Json object
-    return (cardSet)
+    # Returns a Json object
+    return cardSet
 
 
 @app.route("/api/MetAPI")
 def pullMETAPI():
     print("Met API Method:")
 
-#These are the ObjectIDs of 8 pieces we selected for this demo.
-#For future iterations of the game, these objectIDs will need to be selected by the system.
-    artObjectIDs = [16577,436944,437879,436101,40081,437329,436840,435882]
+    # These are the ObjectIDs of 8 pieces we selected for this demo.
+    # For future iterations of the game, these objectIDs will need to be selected by the system.
+    artObjectIDs = [16577, 436944, 437879, 436101, 40081, 437329, 436840, 435882]
     numPieces = len(artObjectIDs)
-   
-   #Multiprocessing here
-    p=Pool(numPieces)
-    artPieces=p.map(fetchArtInformation,artObjectIDs)
+
+    # Multiprocessing here
+    p = Pool(numPieces)
+    artPieces = p.map(fetchArtInformation, artObjectIDs)
 
     for x in range(numPieces):
-        cardSet={
-           'cardId': x+numPieces+1,
-           'ObjectID': artPieces[x].get('ObjectID'),
-           'artName': artPieces[x].get('artName'),
-            'artUrl': artPieces[x].get('artUrl'),
-            'active': False,
-            'status': False}
+        cardSet = {
+            "cardId": x + numPieces + 1,
+            "ObjectID": artPieces[x].get("ObjectID"),
+            "artName": artPieces[x].get("artName"),
+            "artUrl": artPieces[x].get("artUrl"),
+            "active": False,
+            "status": False,
+        }
         artPieces.append(cardSet)
 
-    return(jsonify(artPieces))
+    return jsonify(artPieces)
+
 
 @app.route("/api/ping")
 def ping():

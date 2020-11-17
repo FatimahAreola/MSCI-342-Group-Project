@@ -1,11 +1,17 @@
 <template>
 	<div>
-		<h2> {{this.$route.params.gameWon==true? "Congratulations": "Better Luck Next Time!"  }}</h2>
-		<h3> Total Game Play Time: {{this.$store.state.timer }} </h3>
-		<h3> Match Count: {{ this.$route.params.matches }} </h3>
+		<h2>
+			{{
+				this.$route.params.gameWon == true
+					? "Congratulations"
+					: "Better Luck Next Time!"
+			}}
+		</h2>
+		<h3>Total Game Play Time: {{ this.$store.state.timer }}</h3>
+		<h3>Best Game Play Time: {{ bestTime }}</h3>
+		<h3>Match Count: {{ this.$route.params.matches }}</h3>
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
-
-    </div>
+	</div>
 </template>
 
 <script>
@@ -14,13 +20,38 @@ export default {
 	data() {
 		return {};
 	},
+	computed: {
+		isWon() {
+			if (this.$route.params.matches == 8) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		bestTime() {
+			if (this.isWon) {
+				if (this.$store.state.timer < this.$store.state.userBestTime) {
+					this.$store.commit(
+						"setCurrentUserBestTimeValue",
+						this.$store.state.timer
+					);
+					// send new best time to database
+
+					return this.$store.state.timer;
+				} else {
+					return this.$store.state.userBestTime;
+				}
+			} else {
+				return this.$store.state.timer;
+			}
+		},
+	},
 	methods: {
 		routeToHome: function () {
-			this.$router.push('/home');
+			this.$router.push("/home");
 		},
-	}
-
-};	
+	},
+};
 </script>
 
 <style scoped>
