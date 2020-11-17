@@ -64,7 +64,7 @@ export default {
 						title: "Successful Login",
 						text: "Sucessful Login",
 					});
-					this.$store.commit("setCurrentUserValue", result.data[0]);
+					this.$store.commit("setUserIdForSession", result.data[0]);
 					this.$store.commit("setCurrentUserBestTimeValue", result.data[1]);
 					this.$router.push("/home");
 				})

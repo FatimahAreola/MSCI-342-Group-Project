@@ -13,7 +13,7 @@ export default new Vuex.Store({
 		setCurrentTimerValue(state, newTime) {
 			state.timer = newTime
 		},
-		setCurrentUserValue(state, userId) {
+		setUserIdForSession(state, userId) {
 			state.userId = userId
 		},
 		setCurrentUserBestTimeValue(state, bestTime) {
