@@ -5,10 +5,17 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY ./frontend/frontend/package*.json ./
 RUN npm install
 COPY ./frontend/frontend .
-RUN npm run build_prod
+ARG build_type
+RUN npm run $build_type
 
 # production
 FROM nginx:stable-alpine as production
+ENV APP_NAME=FlaskApp
+ENV DB_USER=b994f4285d5410
+ENV DB_PASSWORD=0b190067
+ENV DB_HOST=us-cdbr-east-02.cleardb.com
+ENV DB_PORT=3306
+ENV DB_NAME=heroku_8a93ca0fef811b1
 WORKDIR /app
 RUN apk update && apk add --no-cache python3 && \
     python3 -m ensurepip && \
