@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		timer: 0,
-		userId: null
+		userId: null,
+		userBestTime: null
 	},
 	mutations: {
 		setCurrentTimerValue(state, newTime) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
 		},
 		setUserIdForSession(state, userId) {
 			state.userId = userId
+		},
+		setCurrentUserBestTimeValue(state, bestTime) {
+			state.userBestTime = bestTime
 		}
 	}
 })

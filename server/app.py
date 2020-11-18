@@ -80,7 +80,7 @@ def Login():
         results = d.cursor.fetchone()
 
     if results:
-        return jsonify(results[0]), 200
+        return jsonify(results[0], results[3].decode()), 200
     else:
         return jsonify("Invalid Username or Password"), 401
 
@@ -136,6 +136,25 @@ def pullMETAPI():
         artPieces.append(cardSet)
 
     return jsonify(artPieces)
+
+
+@app.route("/api/updateBestTime", methods=["POST"])
+def updateTime():
+    userID = request.get_json()["userId"]
+    bestTime = request.get_json()["bestTime"]
+
+    with DbSelector() as d:
+
+        query = "UPDATE Users SET Users.bestTime = %s WHERE userId = %s;"
+
+        d.cursor.execute(query, [bestTime, userID])
+
+        results = d.cursor.rowcount
+
+    if results:
+        return jsonify(results), 200
+    else:
+        return jsonify("Error updating best time"), 401
 
 
 @app.route("/api/ping")
