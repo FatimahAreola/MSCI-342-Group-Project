@@ -104,6 +104,11 @@ def fetchArtInformation(i):
         "ObjectID": str(i),
         "artName": artDetails["title"],
         "artUrl": artDetails["primaryImage"],
+        "artistName": artDetails["artistDisplayName"],
+        "artCulture": artDetails["culture"],
+        "artPeriod": artDetails["period"],
+        "birthYear": artDetails["artistBeginDate"],
+        "deathYear": artDetails["artistEndDate"],
         "active": False,
         "status": False,
     }
@@ -130,6 +135,11 @@ def pullMETAPI():
             "ObjectID": artPieces[x].get("ObjectID"),
             "artName": artPieces[x].get("artName"),
             "artUrl": artPieces[x].get("artUrl"),
+            "artistName": artPieces[x].get("artistDisplayName"),
+            "artCulture": artPieces[x].get("culture"),
+            "artPeriod": artPieces[x].get("period"),
+            "birthYear": artPieces[x].get("artistBeginDate"),
+            "deathYear": artPieces[x].get("artistEndDate"),
             "active": False,
             "status": False,
         }
