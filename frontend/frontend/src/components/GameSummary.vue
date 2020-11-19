@@ -11,9 +11,9 @@
 <script>
 export default {
 	name: "GameSummary",
-	mounted() {
-		console.log(this.artistsList());
-	},
+  mounted() {
+    console.log(this.artistsList());
+  },
 	data() {
 		return {};
 	},
@@ -22,7 +22,7 @@ export default {
 			//this.$router.push('/home');
 			console.log("hey");
 		},
-		artistsList: function() {
+		artistsList: function () {
 			var artistNames = [];
 			var cardSet = this.$route.params.cardSet;
 			cardSet.forEach((card) => {
