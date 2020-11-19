@@ -4,12 +4,24 @@
 		<h3> Total Game Play Time: {{this.$store.state.timer }} </h3>
 		<h3> Match Count: {{ this.$route.params.matches }} </h3>
 		<h3> Artists in Game: {{ this.artistsList()}} </h3>
+        <ul>
+            <li v-for="artistsName in artistsName" v-bind:key ="artistsName.artistsList">
+                {{ artistName }}
+                </li>
+                </ul>
+        <h3> Artists in Game: {{ artistDisplayName }} </h3>
+
+
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
     </div>
 </template>
 
 <script>
 export default {
+	components:{
+		artistsName
+	},
+	props: ["artistsName"],
 	name: "GameSummary",
   mounted() {
     console.log(this.artistsList());
