@@ -9,20 +9,21 @@
 		</h2>
 		<h3>Total Game Play Time: {{ this.$store.state.timer }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
-		<h3>Artists in Game: {{ this.artistsList() }}</h3>
-		<ul>
-			<li v-for="name in artistNames" v-bind:key="name">
-				{{ name }}
-			</li>
-		</ul>
-		<h3>Artists in Game: {{ artistDisplayName }}</h3>
-
+		<SavedArtist
+			v-for="name in artistNames"
+			:artistName="name"
+			v-bind:key="name"
+		/>
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
 	</div>
 </template>
 
 <script>
+import SavedArtist from "./SavedArtist";
 export default {
+	components: {
+		SavedArtist,
+	},
 	name: "GameSummary",
 	mounted() {
 		console.log(this.artistsList());
@@ -30,11 +31,11 @@ export default {
 	data() {
 		return {
 			artistNames: this.artistsList(),
+			savedArtists: [],
 		};
 	},
 	methods: {
 		routeToHome: function () {
-			//this.$router.push('/home');
 			console.log("hey");
 		},
 		artistsList: function () {
@@ -44,6 +45,13 @@ export default {
 				artistNames.push(card.artistName);
 			});
 			return artistNames;
+		},
+		saveArtist: function (name) {
+			if (this.savedArtists.contains(name)) {
+				this.savedArtists.remo;
+			}
+
+			this.savedArtists.push(name);
 		},
 	},
 };

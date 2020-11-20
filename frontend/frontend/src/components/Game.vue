@@ -21,7 +21,6 @@
 <script>
 import _ from "lodash";
 import axios from "axios";
-
 import Board from "./Board.vue";
 import Timer from "./Timer.vue";
 
@@ -35,10 +34,9 @@ export default {
 		Timer,
 	},
 	mounted() {
-		
 		axios.get("/api/MetAPI").then((response) => {
 			this.cards = response.data;
-		//	response.data.forEach((card) => {
+			//	response.data.forEach((card) => {
 			//	this.cards.push(card);
 			//});
 		});
@@ -114,8 +112,11 @@ export default {
 			await this.setTimerState();
 			await this.$router.push({
 				name: "GameSummary",
-				params: { matches: this.countMatched, gameWon: gameWon, cardSet: this.cards },
-				
+				params: {
+					matches: this.countMatched,
+					gameWon: gameWon,
+					cardSet: this.cards,
+				},
 			});
 		},
 		routeToHome: function () {

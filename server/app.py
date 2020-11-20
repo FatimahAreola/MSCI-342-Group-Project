@@ -94,7 +94,6 @@ def fetchArtInformation(i):
 #pulls the required information from the MET's API
     apiResponse = requests.get("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i))
     artDetails = apiResponse.json()
-    print('artDetails', artDetails)
 #We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
     cardSet={
     'cardId': idx,
@@ -128,12 +127,26 @@ def pullMETAPI():
            'ObjectID': artPieces[x].get('ObjectID'),
            'artName': artPieces[x].get('artName'),
             'artUrl': artPieces[x].get('artUrl'),
-            'artistName' : artPieces[x].get("artistName"),
+            'artistName': artPieces[x].get("artistName"),
             'active': False,
             'status': False}
         artPieces.append(cardSet)
 
     return(jsonify(artPieces))
+
+@app.route("/api/artist", methods=['POST'])
+def saveArtist():
+    data = request.get_json()
+    artistName = data['artistName']
+    action = data['action']
+    print(artistName)
+    print(action)
+    results = True
+    if results:
+        return jsonify("Successful Login"), 200
+    else:
+        return jsonify("Invalid Username or Password"), 401
+    return jsonify('Success')
 
 @app.route("/api/ping")
 def ping():
