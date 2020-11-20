@@ -1,33 +1,36 @@
 <template>
 	<div>
-		<h2> {{this.$route.params.gameWon==true? "Congratulations": "Better Luck Next Time!"  }}</h2>
-		<h3> Total Game Play Time: {{this.$store.state.timer }} </h3>
-		<h3> Match Count: {{ this.$route.params.matches }} </h3>
-		<h3> Artists in Game: {{ this.artistsList()}} </h3>
-        <ul>
-            <li v-for="artistsName in artistsName" v-bind:key ="artistsName.artistsList">
-                {{ artistName }}
-                </li>
-                </ul>
-        <h3> Artists in Game: {{ artistDisplayName }} </h3>
-
+		<h2>
+			{{
+				this.$route.params.gameWon == true
+					? "Congratulations"
+					: "Better Luck Next Time!"
+			}}
+		</h2>
+		<h3>Total Game Play Time: {{ this.$store.state.timer }}</h3>
+		<h3>Match Count: {{ this.$route.params.matches }}</h3>
+		<h3>Artists in Game: {{ this.artistsList() }}</h3>
+		<ul>
+			<li v-for="name in artistNames" v-bind:key="name">
+				{{ name }}
+			</li>
+		</ul>
+		<h3>Artists in Game: {{ artistDisplayName }}</h3>
 
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
-    </div>
+	</div>
 </template>
 
 <script>
 export default {
-	components:{
-		artistsName
-	},
-	props: ["artistsName"],
 	name: "GameSummary",
-  mounted() {
-    console.log(this.artistsList());
-  },
+	mounted() {
+		console.log(this.artistsList());
+	},
 	data() {
-		return {};
+		return {
+			artistNames: this.artistsList(),
+		};
 	},
 	methods: {
 		routeToHome: function () {
@@ -40,11 +43,10 @@ export default {
 			cardSet.forEach((card) => {
 				artistNames.push(card.artistName);
 			});
-			return (artistNames)
+			return artistNames;
 		},
-	}
-
-};	
+	},
+};
 </script>
 
 <style scoped>
