@@ -98,7 +98,6 @@ def fetchArtInformation(i):
         "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i)
     )
     artDetails = apiResponse.json()
-    print('artDetails', artDetails)
 #We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
     cardSet={
     'cardId': idx,

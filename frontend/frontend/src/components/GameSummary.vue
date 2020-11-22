@@ -11,8 +11,8 @@
 		<h3>Best Game Play Time: {{ bestTime }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
 		<h3> Artists in Game {{ }} </h3>
-        <ul>
-			<li v-for="name in artistNames" v-bind:key ="name">
+        <ul style="list-style: none">
+			<li v-for="name in artistsList" v-bind:key ="name">
 				{{ name }}
 				</li>
 		</ul>
@@ -25,13 +25,8 @@ import axios from "axios";
 
 export default {
 	name: "GameSummary",
-	mounted() {
-		console.log(this.artistsList());
-		},
 	data() {
-		return{
-			artistNames: this.artistsList()
-		};
+		return{};
 	},
 	computed: {
 		isWon() {
@@ -58,7 +53,7 @@ export default {
 						this.$store.state.timer
 					);
 					// send new best time to database
-					this.updateBestTime();
+					this.update4BestTime();
 					return this.$store.state.timer;
 				} else {
 					return this.$store.state.userBestTime;
