@@ -3,7 +3,7 @@
 		<button v-on:click="routeToHome" class="back-button">BACK</button>
 		<h1>Profile</h1>
 		<h2>Your Favourite Artists</h2>
-		<h3 v-if="loadingArtists">Searching for Your Saved Artists ..</h3>
+		<h3 v-if="loadingArtists">Looking Up Your Favourited Artists ..</h3>
 		<h3 v-if="!loadingArtists && artists.length == 0">
 			No artists favourited yet
 		</h3>
