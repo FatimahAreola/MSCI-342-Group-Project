@@ -152,8 +152,8 @@ def pullMETAPI():
     # These are the ObjectIDs of 8 pieces we selected for this demo.
     # For future iterations of the game, these objectIDs will need to be selected by the system.
     # Multiprocessing here
-    selectedArtist = 'Gauguin' #request.get_json()["selectArtist"]
-    artObjectIDs = selectArt(selectedArtist) #temporary
+    selectedArtist = request.get_json()["selectArtist"]
+    artObjectIDs = selectArt(selectedArtist)
     numPieces = len(artObjectIDs)
     p = Pool(numPieces)
     artPieces = p.map(fetchArtInformation, artObjectIDs)
