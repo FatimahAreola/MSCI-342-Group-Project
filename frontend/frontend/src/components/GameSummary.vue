@@ -10,7 +10,7 @@
 		<h3>Total Game Play Time: {{ this.$store.state.timer }}</h3>
 		<h3>Best Game Play Time: {{ bestTime }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
-		<h3> Artists in Game {{ }} </h3>
+		<h3>Artists in Game</h3>
         <ul style="list-style: none">
 			<li v-for="name in artistsList" v-bind:key ="name">
 				{{ name }}
