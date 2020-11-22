@@ -126,21 +126,22 @@ def selectArt (selectedArtist):
     
     artists= ["Paul Gauguin", "Vincent van Gogh", "Rembrandt", "Asher Brown Durand", "Albert Bierstadt", "Paul Cézanne", "Auguste Edouart", "Frederic Remington"]
     
-    for a in range(len(artists)):
+    for a in range(8):
         if selectedArtist == artists[a]:
             artistIdx=artists.index(artists[a]) 
             artObjectIDs=artArray[artistIdx]
             return (artObjectIDs)
     
     #If none of the listed artists have been selected, a random game is generated
-    for i in range (8):
+    artObjectIDs = [] 
+    for i in range(8):
         x=0
         y=0
         while x==y:
             x=random.randint(0,7)
             y=random.randint(0,7)
-            
-        artObjectIDs[i]=artArray[x][y]
+          
+        artObjectIDs.append(artArray[x][y])
     return (artObjectIDs)
 
 
