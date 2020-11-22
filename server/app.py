@@ -106,7 +106,8 @@ def fetchArtInformation(i):
          "artUrl": artDetails["primaryImage"],
          "artistName": artDetails["artistDisplayName"],
          "active": False,
-         "status": False,
+         "status": False
+     }
     # Returns a Json object
     return cardSet
 
@@ -122,7 +123,7 @@ def pullMETAPI():
    
    # Multiprocessing here
     p = Pool(numPieces)
-    artPieces = p.map(fetchArtInformation,artObjectIDs)
+    artPieces = p.map(fetchArtInformation, artObjectIDs)
     for x in range(numPieces):
         cardSet = {
              "cardId": x + numPieces + 1,
@@ -131,7 +132,7 @@ def pullMETAPI():
              "artUrl": artPieces[x].get("artUrl"),
              "artistName": artPieces[x].get("artistName"),
              "active": False,
-             "status": False,
+             "status": False
          }
         artPieces.append(cardSet)
 
