@@ -35,13 +35,13 @@ export default {
 		Timer,
 	},
 	mounted() {
+<<<<<<< HEAD
 		let artist = this.$route.query.artist
 		console.log(artist)
+=======
+>>>>>>> main
 		axios.get("/api/MetAPI").then((response) => {
 			this.cards = response.data;
-		//	response.data.forEach((card) => {
-			//	this.cards.push(card);
-			//});
 		});
 	},
 	data() {
