@@ -53,7 +53,7 @@ export default {
 						this.$store.state.timer
 					);
 					// send new best time to database
-					this.update4BestTime();
+					this.updateBestTime();
 					return this.$store.state.timer;
 				} else {
 					return this.$store.state.userBestTime;
