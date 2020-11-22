@@ -115,35 +115,34 @@ def fetchArtInformation(i):
 
 def selectArt (selectedArtist):
 
-    artArray = [[437112,438008,437135,438004,437133,437127,437124,438007],
+    artArray = [[438821,436449,437999,438001,436448,337858,344577,337172],
     [336327,436527,436530,436531,436524,436534,437998,436529],
     [437397,437392,337491,437390,437402,437396,437389,437398],
     [10793,10786,10795,10796,10794,10790,10788,10798],
     [10154,10155,10151,10150,10158,21186,10156,10149],
     [435882,435885,437990,435871,435874,435873,435870,435879],
     [786115,370826,365307,337070,786093,785991,785974,691010],
-    [488319,352408,369076,360146,369093,369079,369096,359991]]
+    [752047,11865,11859,11862,11866,11860,11863,11872]]
     
-    artists= ['Monet', 'VanGogh', 'Rembrandt','Durand','Bierstadt','Cezanne','Edouart','Kandinsky']
+    artists= ['Gauguin', 'VanGogh', 'Rembrandt','Durand','Bierstadt','Cezanne','Edouart','Reamington']
     
-    for a in artists:
+    for a in range(len(artists)):
         if selectedArtist == artists[a]:
-            artistIdx=artists.index(a) 
+            artistIdx=artists.index(artists[a]) 
             artObjectIDs=artArray[artistIdx]
+            return (artObjectIDs)
     
-
-    #we need to figure out which
-    if (selectedArtist == "") or (selectedArtist is None):
-        for i in range (8):
-            x=0
-            y=0
-            while x==y:
-                x=random.randint(0,7)
-                y=random.randint(0,7)
-
+    #If none of the listed artists have been selected, a random game is generated
+    for i in range (8):
+        x=0
+        y=0
+        while x==y:
+            x=random.randint(0,7)
+            y=random.randint(0,7)
+            
         artObjectIDs[i]=artArray[x][y]
-
     return (artObjectIDs)
+
 
 
 @app.route("/api/MetAPI")
@@ -153,7 +152,7 @@ def pullMETAPI():
     # These are the ObjectIDs of 8 pieces we selected for this demo.
     # For future iterations of the game, these objectIDs will need to be selected by the system.
     # Multiprocessing here
-    selectedArtist = request.get_json()["selectArtist"]
+    selectedArtist = 'Gauguin' #request.get_json()["selectArtist"]
     artObjectIDs = selectArt(selectedArtist) #temporary
     numPieces = len(artObjectIDs)
     p = Pool(numPieces)
