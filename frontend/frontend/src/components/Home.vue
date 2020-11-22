@@ -2,7 +2,17 @@
 	<div class="home">
 		<button v-on:click="test_axios">Test Access To Flask App</button>
 		<br />
-		<button v-on:click="routeToGame" class="play-button">PLAY</button>
+		<h3> Select Artist to Include in Game {{ }} </h3>
+		<button v-on:click="selectArtist(artist[0],$event)" value="Claude Monet" class="artist-button">Claude Monet</button>
+		<button v-on:click="selectArtist(artist[1],$event)" value="Vincent van Gogh" class="artist-button">Vincent van Gogh</button>
+		<button v-on:click="selectArtist(artist[2],$event)" value="Rembrandt" class="artist-button">Rembrandt</button>
+		<button v-on:click="selectArtist(artist[3],$event)" value="Asher Brown Durand" class="artist-button">Asher Brown Durand</button>
+		<button v-on:click="selectArtist(artist[4],$event)" value="Albert Bierstadt" class="artist-button">Albert Bierstadt</button>
+		<button v-on:click="selectArtist(artist[5],$event)" value="Paul Cézanne" class="artist-button">Paul Cézanne</button>
+		<button v-on:click="selectArtist(artist[6],$event)" value="Auguste Edouart" class="artist-button">Auguste Edouart</button>
+		<button v-on:click="selectArtist(artist[7],$event)" value="Wassily Kandinsky" class="artist-button">Wassily Kandinsky</button>
+		<h3> Or {{ }} </h3>
+		<button v-on:click="routeToGame" class="play-button">Play Game</button>
 	</div>
 </template>
 
@@ -13,7 +23,9 @@ export default {
 	name: "HelloWorld",
 	components: {},
 	data() {
-		return {};
+		return {
+			artist: ["Claude Monet", "Vincent van Gogh", "Rembrandt", "Asher Brown Durand", "Albert Bierstadt", "Paul Cézanne", "Auguste Edouart", "Wassily Kandinsky"]
+		};
 	},
 	props: {
 		msg: String,
@@ -23,11 +35,19 @@ export default {
 	},
 	methods: {
 		routeToGame: function () {
-			this.$router.push("/game");
+			this.$router.push({ path: "/game", query: { artist: 'random' } });
+		},
+
+		selectArtist: function (artist) {
+			//console.log(artist);
+			//this.$router.push("/game", params:artist);
+			//this.$router.push({ path: '/game', params: {artist}})
+			this.$router.push({ path: "/game", query: { artist  } });
+
 		},
 		test_axios: function () {
-			const baseURI = process.env.VUE_APP_HOST_URL+"api/hello";
-			console.log(baseURI)
+			const baseURI = process.env.VUE_APP_HOST_URL + "api/hello";
+			console.log(baseURI);
 			axios
 				.get(baseURI)
 				.then((result) => {
@@ -77,6 +97,21 @@ export default {
 	text-shadow: 2px 2px 4px #000000;
 }
 .login-button:hover {
+	background-color: #f8da6c;
+}
+.artist-button {
+	/* button */
+	width: 800px;
+	height: 45px;
+	border: 2px solid #ffe381;
+	background-color: #ffe381;
+	/* text */
+	font-size: 25px;
+	font-weight: bold;
+	color: #d282a6;
+	text-shadow: 1px 1px 2px #000000;
+}
+.artist-button:hover {
 	background-color: #f8da6c;
 }
 </style>
