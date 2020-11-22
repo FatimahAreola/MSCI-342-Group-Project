@@ -11,10 +11,10 @@
 		<h3>Best Game Play Time: {{ bestTime }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
 		<h3>Artists in Game</h3>
-        <ul style="list-style: none">
-			<li v-for="name in artistsList" v-bind:key ="name">
+		<ul style="list-style: none">
+			<li v-for="name in artistsList" v-bind:key="name">
 				{{ name }}
-				</li>
+			</li>
 		</ul>
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
 	</div>
@@ -26,9 +26,20 @@ import axios from "axios";
 export default {
 	name: "GameSummary",
 	data() {
-		return{};
+		return {};
 	},
 	computed: {
+		artistsList() {
+			var artistNames = [];
+			var cardSet = this.$route.params.cardSet;
+			cardSet.forEach((card) => {
+				if (artistNames.includes(card.artistName)) {
+					return;
+					}
+					artistNames.push(card.artistName);
+					});
+					return artistNames;
+					},
 		isWon() {
 			if (this.$route.params.matches == 8) {
 				return true;
@@ -68,19 +79,8 @@ export default {
 	},
 	methods: {
 		routeToHome: function () {
-			this.$router.push('/home');
+			this.$router.push("/home");
 		},
-		artistsList: function () {
-			var artistNames = [];
-			var cardSet = this.$route.params.cardSet;
-			cardSet.forEach((card) => {
-				if (artistNames.includes(card.artistName)) {
-					return;
-					}
-					artistNames.push(card.artistName);
-					});
-					return artistNames;
-					},
 		updateBestTime() {
 			let formData = {
 				userId: this.$store.state.userId,
