@@ -67,7 +67,8 @@ export default {
 }
 .saveButton {
 	/* button */
-	width: 55px;
+	margin-top: 2px;
+	width: 95px;
 	height: 20px;
 	border: 2px solid #ffe381;
 	background-color: #ffe381;
