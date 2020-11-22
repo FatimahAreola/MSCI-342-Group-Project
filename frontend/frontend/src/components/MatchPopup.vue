@@ -26,16 +26,6 @@
 							{{ flipped[0].artistName }} <br />
 							{{ flipped[0].birthYear }} - {{ flipped[0].deathYear }}
 						</div>
-						<br />
-						<div>
-							Period: <br />
-							{{ flipped[0].artPeriod }} <br />
-						</div>
-						<br />
-						<div>
-							Culture: <br />
-							{{ flipped[0].artCulture }} <br />
-						</div>
 					</div>
 				</div>
 
