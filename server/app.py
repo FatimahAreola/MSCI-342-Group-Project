@@ -98,7 +98,6 @@ def fetchArtInformation(i):
         "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i)
     )
     artDetails = apiResponse.json()
-<<<<<<< HEAD
     print('artDetails', artDetails)
 #We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
     cardSet={
@@ -109,16 +108,6 @@ def fetchArtInformation(i):
     'artistName': artDetails["artistDisplayName"],
     'active':  False,
     'status': False
-=======
-    # We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
-    cardSet = {
-        "cardId": idx,
-        "ObjectID": str(i),
-        "artName": artDetails["title"],
-        "artUrl": artDetails["primaryImage"],
-        "active": False,
-        "status": False,
->>>>>>> main
     }
     # Returns a Json object
     return cardSet
@@ -132,7 +121,6 @@ def pullMETAPI():
     # For future iterations of the game, these objectIDs will need to be selected by the system.
     artObjectIDs = [16577, 436944, 437879, 436101, 40081, 437329, 436840, 435882]
     numPieces = len(artObjectIDs)
-<<<<<<< HEAD
    
    #Multiprocessing here
     p=Pool(numPieces)
@@ -147,22 +135,6 @@ def pullMETAPI():
             'artistName' : artPieces[x].get("artistName"),
             'active': False,
             'status': False}
-=======
-
-    # Multiprocessing here
-    p = Pool(numPieces)
-    artPieces = p.map(fetchArtInformation, artObjectIDs)
-
-    for x in range(numPieces):
-        cardSet = {
-            "cardId": x + numPieces + 1,
-            "ObjectID": artPieces[x].get("ObjectID"),
-            "artName": artPieces[x].get("artName"),
-            "artUrl": artPieces[x].get("artUrl"),
-            "active": False,
-            "status": False,
-        }
->>>>>>> main
         artPieces.append(cardSet)
 
     return jsonify(artPieces)
