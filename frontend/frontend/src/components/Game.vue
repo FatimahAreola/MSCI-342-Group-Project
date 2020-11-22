@@ -36,9 +36,10 @@ export default {
 	},
 	mounted() {
 		let artist = this.$route.query.artist;
+		
 		let data = {
 			selectedArtist: artist,
-			};
+		};
 
 			axios.post("/api/MetAPI", data).then((response) => {
 			this.cards = response.data;
@@ -118,7 +119,7 @@ export default {
 					matches: this.countMatched,
 					gameWon: gameWon,
 					cardSet: this.cards,
-					},
+				},
 			});
 		},
 		routeToHome: function () {
