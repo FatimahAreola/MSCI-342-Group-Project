@@ -37,14 +37,18 @@ export default {
 		routeToGame: function () {
 			this.$router.push({ path: "/game", query: { artist: 'random' } });
 		},
+		artistsList: function () {
+			var artistNames = [];
+			var cardSet = this.$route.params.cardSet;
+			cardSet.forEach((card) => {
+				if (artistNames.includes(card.artistName)) {
+					return;
+					}
+					artistNames.push(card.artistName);
+					});
+					return artistNames;
+					},
 
-		selectArtist: function (artist) {
-			//console.log(artist);
-			//this.$router.push("/game", params:artist);
-			//this.$router.push({ path: '/game', params: {artist}})
-			this.$router.push({ path: "/game", query: { artist  } });
-
-		},
 		test_axios: function () {
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/hello";
 			console.log(baseURI);
