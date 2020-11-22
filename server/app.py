@@ -85,9 +85,9 @@ def Login():
         return jsonify("Invalid Username or Password"), 401
 
 
-""" The following code issues a call to the MET Api, and returns a json object, 
+# The following code issues a call to the MET Api, and returns a json object, 
 with the details of 8 pre-determined works of art so that they can be formatted for gameplay.
- """
+#
 
 
 def fetchArtInformation(i):
