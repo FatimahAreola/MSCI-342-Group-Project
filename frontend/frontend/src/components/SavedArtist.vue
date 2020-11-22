@@ -60,6 +60,11 @@ export default {
 	display: inline-block;
 	padding-left: 10px;
 }
+.right {
+	display: inline-block;
+	padding-left: 10px;
+	padding-top: 12px;
+}
 .saveButton {
 	/* button */
 	width: 55px;
