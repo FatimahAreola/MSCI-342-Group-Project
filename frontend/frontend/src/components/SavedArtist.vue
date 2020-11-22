@@ -1,9 +1,10 @@
 <template>
 	<div class="artists">
+<div class="artist-bin">
 		<div class="left">
 			<p>{{ artistName }}</p>
 		</div>
-		<div class="left">
+		<div class="right">
 			<button
 				class="saveButton"
 				v-on:click="
@@ -12,9 +13,10 @@
 						: updateArtistRelationship('save')
 				"
 			>
-				{{ savedArtist ? "UNSAVE" : "SAVE" }}
+				{{ savedArtist ? "UNFAVOURITE" : "FAVOUTIRE" }}
 			</button>
 		</div>
+</div>
 	</div>
 </template>
 
