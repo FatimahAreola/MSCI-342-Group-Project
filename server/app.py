@@ -124,7 +124,7 @@ def selectArt (selectedArtist):
     [786115,370826,365307,337070,786093,785991,785974,691010],
     [752047,11865,11859,11862,11866,11860,11863,11872]]
     
-    artists= ['Gauguin', 'VanGogh', 'Rembrandt','Durand','Bierstadt','Cezanne','Edouart','Reamington']
+    artists= ["Paul Gauguin", "Vincent van Gogh", "Rembrandt", "Asher Brown Durand", "Albert Bierstadt", "Paul Cézanne", "Auguste Edouart", "Frederic Remington"]
     
     for a in range(len(artists)):
         if selectedArtist == artists[a]:
