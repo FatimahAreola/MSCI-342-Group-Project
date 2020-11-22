@@ -74,16 +74,18 @@ export default {
 	methods: {
 		routeToHome: function () {
 			this.$router.push('/home');
-			//console.log("hey");
 		},
 		artistsList: function () {
 			var artistNames = [];
 			var cardSet = this.$route.params.cardSet;
 			cardSet.forEach((card) => {
-				artistNames.push(card.artistName);
-			});
-			return (artistNames)
-		},
+				if (artistNames.includes(card.artistName)) {
+					return;
+					}
+					artistNames.push(card.artistName);
+					});
+					return artistNames;
+					},
 		updateBestTime() {
 			let formData = {
 				userId: this.$store.state.userId,
