@@ -41,6 +41,21 @@ export default {
 </script>
 
 <style scoped>
+.back-button {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	/* button */
+	margin-top: 2px;
+	width: 95px;
+	height: 23px;
+	border: 2px solid #ffe381;
+	background-color: #ffe381;
+	/* text */
+	font-size: 15px;
+	font-weight: bold;
+	color: #cf4985;
+}
 .card {
 	width: 100%;
 	height: 100%;
