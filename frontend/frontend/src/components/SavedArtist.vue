@@ -46,6 +46,16 @@ export default {
 </script>
 
 <style scoped>
+.artists {
+	display: flex;
+	margin: auto;
+	justify-content: space-around;
+}
+.artist-bin {
+	display: flex;
+	justify-content: space-between;
+	width: 300px;
+}
 .left {
 	display: inline-block;
 	padding-left: 10px;
