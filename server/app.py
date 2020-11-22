@@ -124,7 +124,6 @@ def pullMETAPI():
    #Multiprocessing here
     p=Pool(numPieces)
     artPieces=p.map(fetchArtInformation,artObjectIDs)
-    print('artPieces', artPieces)
     for x in range(numPieces):
         cardSet={
            'cardId': x+numPieces+1,
