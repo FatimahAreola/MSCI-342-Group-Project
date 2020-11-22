@@ -31,6 +31,11 @@ export default {
 		axios.post(baseURI, postData).then((response) => {
 			this.artists = response.data;
 		});
+	methods: {
+		routeToHome: function () {
+			this.$router.push("/home");
+		},
+	},
 	},
 };
 </script>
