@@ -1,22 +1,22 @@
 <template>
 	<div class="artists">
-<div class="artist-bin">
-		<div class="left">
-			<p>{{ artistName }}</p>
+		<div class="artist-bin">
+			<div class="left">
+				<p>{{ artistName }}</p>
+			</div>
+			<div class="right">
+				<button
+					class="saveButton"
+					v-on:click="
+						savedArtist
+							? updateArtistRelationship('remove')
+							: updateArtistRelationship('save')
+					"
+				>
+					{{ savedArtist ? "UNFAVOURITE" : "FAVOURITE" }}
+				</button>
+			</div>
 		</div>
-		<div class="right">
-			<button
-				class="saveButton"
-				v-on:click="
-					savedArtist
-						? updateArtistRelationship('remove')
-						: updateArtistRelationship('save')
-				"
-			>
-				{{ savedArtist ? "UNFAVOURITE" : "FAVOUTIRE" }}
-			</button>
-		</div>
-</div>
 	</div>
 </template>
 

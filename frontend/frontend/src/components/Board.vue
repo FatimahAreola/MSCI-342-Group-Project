@@ -27,7 +27,7 @@ export default {
 	},
 	methods: {
 		emitChange(card) {
-			this.$emit("updateActive", { value: card });
+			this.$emit("updateactive", { value: card });
 		},
 	},
 };

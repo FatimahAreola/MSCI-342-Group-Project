@@ -173,7 +173,7 @@ def artist():
 
 def artistSaved(userID, artistName):
     with DbSelector() as d:
-        query = "SELECT * FROM  UserArtist WHERE userID=%s AND artist=%s"
+        query = "SELECT * FROM  UserArtist WHERE userId=%s AND artist=%s"
         d.cursor.execute(query, [userID, artistName])
         result = d.cursor.fetchone()
         if result:
@@ -195,7 +195,7 @@ def savedArtists():
     userID = request.get_json()['userID']
     with DbSelector() as d:
 
-        query = "SELECT artist FROM UserArtist WHERE userID = %s"
+        query = "SELECT artist FROM UserArtist WHERE userId = %s"
 
         d.cursor.execute(query, [userID])
 
