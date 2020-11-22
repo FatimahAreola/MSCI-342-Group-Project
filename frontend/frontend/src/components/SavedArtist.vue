@@ -24,9 +24,10 @@
 import axios from "axios";
 export default {
 	props: ["artistName"],
+	mounted() {},
 	data() {
 		return {
-			savedArtist: false,
+			savedArtist: this.isArtistFavourited(),
 		};
 	},
 	methods: {
@@ -40,6 +41,16 @@ export default {
 			axios.post(baseURI, postData).then(() => {
 				this.savedArtist = this.savedArtist ? false : true;
 			});
+		},
+		isArtistFavourited: function () {
+			const favouritedArtistsInDB = [];
+			this.$store.state.favouritedArtists.forEach((artist) => {
+				favouritedArtistsInDB.push(artist.name);
+			});
+			const val_a = favouritedArtistsInDB.includes(this.artistName);
+			console.log(val_a);
+			this.savedArtist = val_a;
+			return val_a;
 		},
 	},
 };

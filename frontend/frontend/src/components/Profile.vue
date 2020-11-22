@@ -3,10 +3,7 @@
 		<button v-on:click="routeToHome" class="back-button">BACK</button>
 		<h1>Profile</h1>
 		<h2>Your Favourite Artists</h2>
-		<h3 v-if="loadingArtists">Looking Up Your Favourited Artists ..</h3>
-		<h3 v-if="!loadingArtists && artists.length == 0">
-			No artists favourited yet
-		</h3>
+		<h3 v-if="artists.length == 0">No artists favourited yet</h3>
 		<Artist
 			v-for="artist in artists"
 			:artistName="artist.name"
@@ -17,7 +14,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Artist from "./Artist";
 export default {
 	components: {
@@ -25,19 +21,10 @@ export default {
 	},
 	data() {
 		return {
-			artists: [],
-			loadingArtists: true,
+			artists: this.$store.state.favouritedArtists,
 		};
 	},
-	mounted() {
-		const baseURI = process.env.VUE_APP_HOST_URL + "api/artist/saved";
-		const postData = { userID: this.$store.state.userId };
-		axios.post(baseURI, postData).then((response) => {
-			this.artists = response.data;
-			console.log("Returned");
-			this.loadingArtists = false;
-		});
-	},
+	mounted() {},
 	methods: {
 		routeToHome: function () {
 			this.$router.push("/home");

@@ -34,7 +34,7 @@ export default {
 	data() {
 		return {
 			artistNames: this.artistsList(),
-			savedArtists: [],
+			favouritedArtists: this.$store.state.favouritedArtists,
 		};
 	},
 	computed: {

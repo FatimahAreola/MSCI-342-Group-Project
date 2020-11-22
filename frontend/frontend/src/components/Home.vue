@@ -22,6 +22,7 @@ export default {
 	},
 	mounted() {
 		this.test_axios();
+		this.getFavouritedArtists();
 	},
 	methods: {
 		routeToGame: function () {
@@ -41,6 +42,13 @@ export default {
 				.catch(function (error) {
 					console.log(error);
 				});
+		},
+		getFavouritedArtists: function () {
+			const baseURI = process.env.VUE_APP_HOST_URL + "api/artist/saved";
+			const postData = { userID: this.$store.state.userId };
+			axios.post(baseURI, postData).then((response) => {
+				this.$store.commit("setFavouritedArtists", response.data);
+			});
 		},
 	},
 };
