@@ -2,6 +2,7 @@ from flask import Flask, request, json, jsonify
 from flask_cors import CORS
 import requests
 import mysql.connector
+import wikipedia
 import os
 
 import multiprocessing
@@ -12,7 +13,6 @@ app = Flask(__name__)
 DEBUG = True
 app.config.from_object(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
-
 
 class DbSelector:
     def __init__(self):
@@ -33,7 +33,6 @@ class DbSelector:
         self.connection.commit()
         self.connection.close()
         self.cursor.close()
-
 
 @app.route("/api/hello")
 def hello():
@@ -98,7 +97,6 @@ def fetchArtInformation(i):
         "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i)
     )
     artDetails = apiResponse.json()
-<<<<<<< HEAD
 #We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
     cardSet={
     'cardId': idx,
@@ -108,16 +106,6 @@ def fetchArtInformation(i):
     'artistName': artDetails["artistDisplayName"],
     'active':  False,
     'status': False
-=======
-    # We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
-    cardSet = {
-        "cardId": idx,
-        "ObjectID": str(i),
-        "artName": artDetails["title"],
-        "artUrl": artDetails["primaryImage"],
-        "active": False,
-        "status": False,
->>>>>>> main
     }
     # Returns a Json object
     return cardSet
@@ -131,7 +119,6 @@ def pullMETAPI():
     # For future iterations of the game, these objectIDs will need to be selected by the system.
     artObjectIDs = [16577, 436944, 437879, 436101, 40081, 437329, 436840, 435882]
     numPieces = len(artObjectIDs)
-<<<<<<< HEAD
    
    #Multiprocessing here
     p=Pool(numPieces)
@@ -146,22 +133,6 @@ def pullMETAPI():
             'artistName': artPieces[x].get("artistName"),
             'active': False,
             'status': False}
-=======
-
-    # Multiprocessing here
-    p = Pool(numPieces)
-    artPieces = p.map(fetchArtInformation, artObjectIDs)
-
-    for x in range(numPieces):
-        cardSet = {
-            "cardId": x + numPieces + 1,
-            "ObjectID": artPieces[x].get("ObjectID"),
-            "artName": artPieces[x].get("artName"),
-            "artUrl": artPieces[x].get("artUrl"),
-            "active": False,
-            "status": False,
-        }
->>>>>>> main
         artPieces.append(cardSet)
 
     return jsonify(artPieces)
@@ -187,18 +158,51 @@ def updateTime():
 
 
 @app.route("/api/artist", methods=['POST'])
-def saveArtist():
+def artist():
     data = request.get_json()
     artistName = data['artistName']
     action = data['action']
-    print(artistName)
-    print(action)
-    results = True
-    if results:
-        return jsonify("Successful Login"), 200
+    userID = data['userID']
+    if (action == 'save'):
+        if not artistSaved(userID, artistName):
+            saveArtist(userID, artistName)
+        return jsonify('Success'), 200
     else:
-        return jsonify("Invalid Username or Password"), 401
-    return jsonify('Success')
+        unsaveArtist(userID, artistName)
+        return jsonify('Success'), 200
+
+def artistSaved(userID, artistName):
+    with DbSelector() as d:
+        query = "SELECT * FROM  UserArtist WHERE userID=%s AND artist=%s"
+        d.cursor.execute(query, [userID, artistName])
+        result = d.cursor.fetchone()
+        if result:
+            return True
+        return False
+
+def saveArtist(userID, artistName):
+    with DbSelector() as d:
+        query = "INSERT INTO UserArtist (userId, artist) VALUES (%s, %s)"
+        d.cursor.execute(query, [userID, artistName])
+
+def unsaveArtist(userID, artistName):
+    with DbSelector() as d:
+        query = f"DELETE FROM UserArtist WHERE userId=%s AND artist=%s"
+        d.cursor.execute(query, [userID, artistName])
+
+@app.route("/api/artist/saved", methods=['POST'])
+def savedArtists():
+    userID = request.get_json()['userID']
+    with DbSelector() as d:
+
+        query = "SELECT artist FROM UserArtist WHERE userID = %s"
+
+        d.cursor.execute(query, [userID])
+
+        results = d.cursor.fetchall()
+    artists= [result[0].decode() for result in results]
+    artistDetails = [{'name': artist, 'summary':wikipedia.summary(artist)} for artist in artists]
+    return jsonify(artistDetails), 200
 
 @app.route("/api/ping")
 def ping():

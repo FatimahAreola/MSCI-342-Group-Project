@@ -36,12 +36,6 @@ export default {
 	mounted() {
 		axios.get("/api/MetAPI").then((response) => {
 			this.cards = response.data;
-<<<<<<< HEAD
-			//	response.data.forEach((card) => {
-			//	this.cards.push(card);
-			//});
-=======
->>>>>>> main
 		});
 	},
 	data() {

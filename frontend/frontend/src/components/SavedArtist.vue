@@ -1,9 +1,20 @@
 <template>
-	<div>
-		<p>{{ artistName }}</p>
-		<button v-on:click="savedArtist ? unsaveArtist() : saveArtist()">
-			{{ savedArtist ? "UNSAVE" : "SAVE" }}
-		</button>
+	<div class="artists">
+		<div class="left">
+			<p>{{ artistName }}</p>
+		</div>
+		<div class="left">
+			<button
+				class="saveButton"
+				v-on:click="
+					savedArtist
+						? updateArtistRelationship('remove')
+						: updateArtistRelationship('save')
+				"
+			>
+				{{ savedArtist ? "UNSAVE" : "SAVE" }}
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -17,38 +28,35 @@ export default {
 		};
 	},
 	methods: {
-		saveArtist: function () {
+		updateArtistRelationship: function (action) {
 			const postData = {
 				artistName: this.artistName,
-				action: "save",
-				userid: this.$store.state.timer,
+				action: action,
+				userID: this.$store.state.userId,
 			};
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/artist";
-			axios
-				.post(baseURI, postData)
-				.then(() => {
-					this.$notify({
-						group: "foo",
-						type: "success",
-						title: "Success",
-						text: "Saved Artist",
-					});
-				})
-				.catch(() => {
-					this.$notify({
-						group: "foo",
-						type: "success",
-						title: "Success",
-						text: "Saved Artist",
-					});
-				});
-		},
-		unsaveArtist: function () {
-			alert("unsaving");
+			axios.post(baseURI, postData).then(() => {
+				this.savedArtist = this.savedArtist ? false : true;
+			});
 		},
 	},
 };
 </script>
 
 <style scoped>
+.left {
+	display: inline-block;
+	padding-left: 10px;
+}
+.saveButton {
+	/* button */
+	width: 55px;
+	height: 20px;
+	border: 2px solid #ffe381;
+	background-color: #ffe381;
+	/* text */
+	font-size: 10px;
+	font-weight: bold;
+	color: #d282a6;
+}
 </style>

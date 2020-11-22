@@ -26,56 +26,6 @@
 import axios from "axios";
 import createAcc from "./CreateAccount/CreateButton.vue";
 
-<<<<<<< HEAD
-    export default {
-        name: 'Login',
-        components: {
-            createAcc,
-        },
-        data() {
-            return {
-                input: {
-                    username: "",
-                    password: "",
-                }
-            };
-        },
-        methods: {
-            login() {
-                console.log(this.input.username)
-                if(!this.input.username || !this.input.password) {
-                    this.$notify({
-                        group: "foo",
-                        title: "Empty Username or Password",
-                        text: "Please enter both an username and a password."
-                    });
-                    return;
-                }
-                    let postData={username:this.input.username,password:this.input.password,};
-                    const baseURI = process.env.VUE_APP_HOST_URL + "api/Login";
-                    axios
-                        .post(baseURI, postData)
-                        .then(() => {
-                            this.$notify({
-                                group: "foo",
-                                type: "success",
-                                title: "Successful Login",
-                                text: "Sucessful Login",
-                            });
-                            this.$router.push("/home");
-                        })
-                        .catch (() => {
-                            this.$notify({
-                                group: "foo",
-                                type: "error",
-                                title: "Invalid Username or Password",
-                                text: "The username or password you entered seems to be invalid."
-                            });
-                });
-        },
-    }
-    };
-=======
 export default {
 	name: "Login",
 	components: {
@@ -129,7 +79,6 @@ export default {
 		},
 	},
 };
->>>>>>> main
 </script>
 
 <style>

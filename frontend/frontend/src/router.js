@@ -8,6 +8,7 @@ import Game from './components/Game.vue'
 import GameSummary from './components/GameSummary.vue'
 import CreateAccount from './components/CreateAccount/CreateAccount.vue'
 import Login from './components/Login.vue'
+import Profile from './components/Profile.vue'
 
 const routes = [
 	{
@@ -32,6 +33,11 @@ const routes = [
 		path: "/home",
 		name: 'home',
 		component: Home
+	},
+	{
+		path: "/profile",
+		name: 'profile',
+		component: Profile
 	}
 ];
 
