@@ -2,6 +2,7 @@
 	<div>
 		<h1>Profile</h1>
 		<h2>Your Favourite Artists</h2>
+		<h3 v-if="artists.length == 0">No artists favourited yet</h3>
 		<Artist
 			v-for="artist in artists"
 			:artistName="artist.name"
@@ -28,7 +29,6 @@ export default {
 		const postData = { userID: this.$store.state.userId };
 		axios.post(baseURI, postData).then((response) => {
 			this.artists = response.data;
-			console.log(this.artists);
 		});
 	},
 };
