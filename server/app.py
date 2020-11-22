@@ -7,7 +7,6 @@ import os
 import multiprocessing
 from multiprocessing import Pool, current_process
 
-
 app = Flask(__name__)
 DEBUG = True
 app.config.from_object(__name__)
@@ -91,8 +90,7 @@ with the details of 8 pre-determined works of art so that they can be formatted 
 
 
 def fetchArtInformation(i):
-    # Numbers from 1 to number of images, identified by the number of processes created
-    idx = current_process()._identity[0]
+
     # pulls the required information from the MET's API
     apiResponse = requests.get(
         "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i)
@@ -100,7 +98,6 @@ def fetchArtInformation(i):
     artDetails = apiResponse.json()
     # We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
     cardSet = {
-        "cardId": idx,
         "ObjectID": str(i),
         "artName": artDetails["title"],
         "artUrl": artDetails["primaryImage"],
@@ -122,9 +119,12 @@ def pullMETAPI():
 
     # Multiprocessing here
     p = Pool(numPieces)
+  
     artPieces = p.map(fetchArtInformation, artObjectIDs)
 
     for x in range(numPieces):
+        pointer = artPieces[x]
+        pointer['cardId']=x+1
         cardSet = {
             "cardId": x + numPieces + 1,
             "ObjectID": artPieces[x].get("ObjectID"),
