@@ -10,12 +10,13 @@
 		<h3>Total Game Play Time: {{ this.$store.state.timer }}</h3>
 		<h3>Best Game Play Time: {{ bestTime }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
-		<button class="homeButton" v-on:click="routeToHome">Home</button>
+		<h3>Artists in Game</h3>
 		<SavedArtist
 			v-for="name in artistNames"
 			:artistName="name"
 			v-bind:key="name"
 		/>
+		<button class="homeButton" v-on:click="routeToHome">Home</button>
 	</div>
 </template>
 
