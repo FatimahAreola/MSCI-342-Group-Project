@@ -7,9 +7,25 @@
 					<slot name="header" v-else>Try Again!</slot>
 				</div>
 
-				<div class="modal-body">
+				<div class="modal-body" v-if="!result">
 					<div v-for="card in flipped" :key="card.cardId" class="art">
 						<img style="width: 350px; height: 370px" :src="card.artUrl" />
+					</div>
+				</div>
+
+				<div class="modal-body" v-else>
+					<img style="width: 350px; height: 370px" :src="flipped[0].artUrl" />
+					<div style="display: flex; flex-direction: column">
+						<div>
+							Art Name: <br />
+							{{ flipped[0].artName }}
+						</div>
+						<br />
+						<div>
+							Artist: <br />
+							{{ flipped[0].artistName }} <br />
+							{{ flipped[0].birthYear }} - {{ flipped[0].deathYear }}
+						</div>
 					</div>
 				</div>
 
