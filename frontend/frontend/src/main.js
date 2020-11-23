@@ -4,7 +4,6 @@ import store from './store.js';
 import router from './router.js';
 // notification library
 import Notifications from 'vue-notification';
-
 Vue.config.productionTip = false;
 Vue.config.ignoredElements = ['ion-icon'];
 

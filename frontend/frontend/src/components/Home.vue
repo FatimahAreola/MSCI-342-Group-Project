@@ -60,7 +60,9 @@
 		Frederic Remington
 		</button>
 		<h3>Or</h3>
-		<button v-on:click="routeToGame" class="play-button">Play Game</button>
+		<button v-on:click="routeToGame" class="play-button options">PLAY</button>
+		<p></p>
+		<button v-on:click="routeToProfile" class="profile options">PROFILE</button>
 	</div>
 </template>
 
@@ -89,6 +91,7 @@ export default {
 	},
 	mounted() {
 		this.test_axios();
+		this.getFavouritedArtists();
 	},
 	methods: {
 		routeToGame: function () {
@@ -96,6 +99,9 @@ export default {
 		},
 		selectArtist: function (artist) {
 			this.$router.push({ path: "/game", query: { artist } });
+		},
+		routeToProfile: function () {
+			this.$router.push("/profile");
 		},
 		test_axios: function () {
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/hello";
@@ -109,6 +115,13 @@ export default {
 					console.log(error);
 				});
 		},
+		getFavouritedArtists: function () {
+			const baseURI = process.env.VUE_APP_HOST_URL + "api/artist/saved";
+			const postData = { userID: this.$store.state.userId };
+			axios.post(baseURI, postData).then((response) => {
+				this.$store.commit("setFavouritedArtists", response.data);
+			});
+		},
 	},
 };
 </script>
@@ -120,7 +133,7 @@ export default {
 	align-items: center;
 }
 
-.play-button {
+.options {
 	/* button */
 	width: 800px;
 	height: 300px;

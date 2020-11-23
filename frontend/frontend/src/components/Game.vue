@@ -21,7 +21,6 @@
 <script>
 import _ from "lodash";
 import axios from "axios";
-
 import Board from "./Board.vue";
 import Timer from "./Timer.vue";
 

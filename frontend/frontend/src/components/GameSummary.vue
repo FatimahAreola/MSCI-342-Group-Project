@@ -11,35 +11,34 @@
 		<h3>Best Game Play Time: {{ bestTime }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
 		<h3>Artists in Game</h3>
-		<ul style="list-style: none">
-			<li v-for="name in artistsList" v-bind:key="name">
-				{{ name }}
-			</li>
-		</ul>
+		<SavedArtist
+			v-for="name in artistNames"
+			:artistName="name"
+			v-bind:key="name"
+		/>
 		<button class="homeButton" v-on:click="routeToHome">Home</button>
 	</div>
 </template>
 
 <script>
+import SavedArtist from "./SavedArtist";
 import axios from "axios";
 
 export default {
+	components: {
+		SavedArtist,
+	},
 	name: "GameSummary",
+	mounted() {
+		console.log(this.artistsList());
+	},
 	data() {
-		return {};
+		return {
+			artistNames: this.artistsList(),
+			favouritedArtists: this.$store.state.favouritedArtists,
+		};
 	},
 	computed: {
-		artistsList() {
-			var artistNames = [];
-			var cardSet = this.$route.params.cardSet;
-			cardSet.forEach((card) => {
-				if (artistNames.includes(card.artistName)) {
-					return;
-					}
-					artistNames.push(card.artistName);
-					});
-					return artistNames;
-					},
 		isWon() {
 			if (this.$route.params.matches == 8) {
 				return true;
@@ -78,6 +77,15 @@ export default {
 		},
 	},
 	methods: {
+		artistsList: function () {
+			var artistNames = [];
+			var cardSet = this.$route.params.cardSet;
+			cardSet.forEach((card) => {
+				artistNames.push(card.artistName);
+			});
+			const uniq_artist_names = [...new Set(artistNames)];
+			return uniq_artist_names;
+		},
 		routeToHome: function () {
 			this.$router.push("/home");
 		},
