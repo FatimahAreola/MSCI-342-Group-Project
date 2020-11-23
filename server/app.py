@@ -99,12 +99,13 @@ def fetchArtInformation(i):
         "ObjectID": str(i),
         "artName": artDetails["title"],
         "artUrl": artDetails["primaryImage"],
-        "artistName": artDetails["artistDisplayName"],
         "birthYear": artDetails["artistBeginDate"],
         "deathYear": artDetails["artistEndDate"],
         "active": False,
         "status": False,
     }
+    if "artistDisplayName" in artDetails.viewvalues():
+        cardSet["artistName"] = artDetails["artistDisplayName"]
     # Returns a Json object
     return cardSet
 
@@ -151,18 +152,19 @@ def pullMETAPI():
     artPieces = p.map(fetchArtInformation, artObjectIDs)
     for x in range(numPieces):
         pointer = artPieces[x]
-        pointer['cardId']=x+1
+        pointer["cardId"]=x+1
         cardSet = {
             "cardId": x + numPieces + 1,
             "ObjectID": artPieces[x].get("ObjectID"),
             "artName": artPieces[x].get("artName"),
             "artUrl": artPieces[x].get("artUrl"),
-            "artistName": artPieces[x].get("artistDisplayName"),
             "birthYear": artPieces[x].get("artistBeginDate"),
             "deathYear": artPieces[x].get("artistEndDate"),
             "active": False,
             "status": False,
         }
+        if "artistName" in artPieces[x].viewvalues():
+            cardSet["artistName"] = artPieces[x].get("artistName")
         artPieces.append(cardSet)
 
     return jsonify(artPieces)
