@@ -4,7 +4,7 @@ import requests
 import mysql.connector
 import wikipedia
 import os
-
+import random
 import multiprocessing
 from multiprocessing import Pool, current_process
 
@@ -103,12 +103,39 @@ def fetchArtInformation(i):
         "birthYear": artDetails["artistBeginDate"],
         "deathYear": artDetails["artistEndDate"],
         "active": False,
-        'artistName': artDetails["artistDisplayName"],
         "status": False,
     }
     # Returns a Json object
     return cardSet
 
+
+def selectArt (selectedArtist):
+
+    artArray = [[438821,436449,437999,438001,436448,337858,344577,337172],
+    [336327,436527,436530,436531,436524,436534,437998,436529],
+    [437397,437392,337491,437390,437402,437396,437389,437398],
+    [10793,10786,10795,10796,10794,10790,10788,10798],
+    [10154,10155,10151,10150,10158,21186,10156,10149],
+    [435882,435885,437990,435871,435874,435873,435870,435879],
+    [786115,370826,365307,337070,786093,785991,785974,691010],
+    [752047,11865,11859,11862,11866,11860,11863,11872]]
+    
+    artists= ["Paul Gauguin", "Vincent van Gogh", "Rembrandt", "Asher Brown Durand", "Albert Bierstadt", "Paul Cézanne", "Auguste Edouart", "Frederic Remington"]
+    try:
+        artistIdx = artists.index(selectedArtist)
+        artObjectIDs=artArray[artistIdx]
+        return (artObjectIDs)
+    
+    except: #If none of the listed artists have been selected, a random game is generated
+        artObjectIDs = []
+        for i in range(8):
+            x=0
+            y=0
+            while x==y:
+                x=random.randint(0,7)
+                y=random.randint(0,7)  
+            artObjectIDs.append(artArray[x][y])
+    return (artObjectIDs)
 
 @app.route("/api/MetAPI", methods=["POST"])
 def pullMETAPI():
@@ -116,12 +143,11 @@ def pullMETAPI():
     print(request.get_json()["selectedArtist"])
     # These are the ObjectIDs of 8 pieces we selected for this demo.
     # For future iterations of the game, these objectIDs will need to be selected by the system.
-    artObjectIDs = [16577, 436944, 437879, 436101, 40081, 437329, 436840, 435882]
-    numPieces = len(artObjectIDs)
-
     # Multiprocessing here
+    selectedArtist = request.get_json()["selectedArtist"]
+    artObjectIDs = selectArt(selectedArtist)
+    numPieces = len(artObjectIDs)
     p = Pool(numPieces)
-  
     artPieces = p.map(fetchArtInformation, artObjectIDs)
     for x in range(numPieces):
         pointer = artPieces[x]
@@ -134,7 +160,6 @@ def pullMETAPI():
             "artistName": artPieces[x].get("artistDisplayName"),
             "birthYear": artPieces[x].get("artistBeginDate"),
             "deathYear": artPieces[x].get("artistEndDate"),
-            'artistName': artPieces[x].get("artistName"),
             "active": False,
             "status": False,
         }
