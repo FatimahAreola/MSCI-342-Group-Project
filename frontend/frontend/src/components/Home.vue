@@ -4,63 +4,65 @@
 		<br />
 		<h3>Select Artist to Play</h3>
 		<button
-		v-on:click="selectArtist(artist[0], $event)"
-		value="Paul Gauguin"
-		class="artist-button"
+			v-on:click="selectArtist(artist[0], $event)"
+			value="Paul Gauguin"
+			class="artist-button"
 		>
-		Paul Gauguin
+			Paul Gauguin
 		</button>
 		<button
-		v-on:click="selectArtist(artist[1], $event)"
-		value="Vincent van Gogh"
-		class="artist-button"
+			v-on:click="selectArtist(artist[1], $event)"
+			value="Vincent van Gogh"
+			class="artist-button"
 		>
-		Vincent van Gogh
+			Vincent van Gogh
 		</button>
 		<button
-		v-on:click="selectArtist(artist[2], $event)"
-		value="Rembrandt"
-		class="artist-button"
+			v-on:click="selectArtist(artist[2], $event)"
+			value="Rembrandt"
+			class="artist-button"
 		>
-		Rembrandt
+			Rembrandt
 		</button>
 		<button
-		v-on:click="selectArtist(artist[3], $event)"
-		value="Asher Brown Durand"
-		class="artist-button"
+			v-on:click="selectArtist(artist[3], $event)"
+			value="Asher Brown Durand"
+			class="artist-button"
 		>
-		Asher Brown Durand
+			Asher Brown Durand
 		</button>
 		<button
-		v-on:click="selectArtist(artist[4], $event)"
-		value="Albert Bierstadt"
-		class="artist-button"
+			v-on:click="selectArtist(artist[4], $event)"
+			value="Albert Bierstadt"
+			class="artist-button"
 		>
-		Albert Bierstadt
+			Albert Bierstadt
 		</button>
 		<button
-		v-on:click="selectArtist(artist[5], $event)"
-		value="Paul Cézanne"
-		class="artist-button"
+			v-on:click="selectArtist(artist[5], $event)"
+			value="Paul Cézanne"
+			class="artist-button"
 		>
-		Paul Cézanne
+			Paul Cézanne
 		</button>
 		<button
-		v-on:click="selectArtist(artist[6], $event)"
-		value="Auguste Edouart"
-		class="artist-button"
+			v-on:click="selectArtist(artist[6], $event)"
+			value="Auguste Edouart"
+			class="artist-button"
 		>
-		Auguste Edouart
+			Auguste Edouart
 		</button>
 		<button
-		v-on:click="selectArtist(artist[7], $event)"
-		value="Frederic Remington"
-		class="artist-button"
+			v-on:click="selectArtist(artist[7], $event)"
+			value="Frederic Remington"
+			class="artist-button"
 		>
-		Frederic Remington
+			Frederic Remington
 		</button>
 		<h3>Or</h3>
-		<button v-on:click="routeToGame" class="play-button options">RANDOM PLAY</button>
+		<button v-on:click="routeToGame" class="play-button options">
+			RANDOM PLAY
+		</button>
 		<p></p>
 		<button v-on:click="routeToProfile" class="profile options">PROFILE</button>
 	</div>
@@ -83,7 +85,7 @@ export default {
 				"Paul Cézanne",
 				"Auguste Edouart",
 				"Frederic Remington",
-				],
+			],
 		};
 	},
 	props: {
@@ -105,7 +107,6 @@ export default {
 		},
 		test_axios: function () {
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/hello";
-			console.log(baseURI);
 			axios
 				.get(baseURI)
 				.then((result) => {

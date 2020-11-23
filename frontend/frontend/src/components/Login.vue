@@ -41,7 +41,6 @@ export default {
 	},
 	methods: {
 		login() {
-			console.log(this.input.username);
 			if (!this.input.username || !this.input.password) {
 				this.$notify({
 					group: "foo",
