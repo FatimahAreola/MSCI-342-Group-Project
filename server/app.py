@@ -103,7 +103,6 @@ def fetchArtInformation(i):
         "birthYear": artDetails["artistBeginDate"],
         "deathYear": artDetails["artistEndDate"],
         "active": False,
-        'artistName': artDetails["artistDisplayName"],
         "status": False,
     }
     # Returns a Json object
@@ -123,6 +122,7 @@ def selectArt (selectedArtist):
     
     artists= ["Paul Gauguin", "Vincent van Gogh", "Rembrandt", "Asher Brown Durand", "Albert Bierstadt", "Paul Cézanne", "Auguste Edouart", "Frederic Remington"]
     for a in range(8):
+        print(selectedArtist)
         if selectedArtist == artists[a]:
             artistIdx=artists.index(artists[a]) 
             artObjectIDs=artArray[artistIdx]
@@ -163,7 +163,6 @@ def pullMETAPI():
             "artistName": artPieces[x].get("artistDisplayName"),
             "birthYear": artPieces[x].get("artistBeginDate"),
             "deathYear": artPieces[x].get("artistEndDate"),
-            'artistName': artPieces[x].get("artistName"),
             "active": False,
             "status": False,
         }
