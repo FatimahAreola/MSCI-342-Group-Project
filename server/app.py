@@ -2,6 +2,7 @@ from flask import Flask, request, json, jsonify
 from flask_cors import CORS
 import requests
 import mysql.connector
+import wikipedia
 import os
 import random
 import multiprocessing
@@ -11,7 +12,6 @@ app = Flask(__name__)
 DEBUG = True
 app.config.from_object(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
-
 
 class DbSelector:
     def __init__(self):
@@ -32,7 +32,6 @@ class DbSelector:
         self.connection.commit()
         self.connection.close()
         self.cursor.close()
-
 
 @app.route("/api/hello")
 def hello():
@@ -102,11 +101,10 @@ def fetchArtInformation(i):
         "artName": artDetails["title"],
         "artUrl": artDetails["primaryImage"],
         "artistName": artDetails["artistDisplayName"],
-        "artCulture": artDetails["culture"],
-        "artPeriod": artDetails["period"],
         "birthYear": artDetails["artistBeginDate"],
         "deathYear": artDetails["artistEndDate"],
         "active": False,
+        'artistName': artDetails["artistDisplayName"],
         "status": False,
     }
     # Returns a Json object
@@ -168,10 +166,9 @@ def pullMETAPI():
             "artName": artPieces[x].get("artName"),
             "artUrl": artPieces[x].get("artUrl"),
             "artistName": artPieces[x].get("artistDisplayName"),
-            "artCulture": artPieces[x].get("culture"),
-            "artPeriod": artPieces[x].get("period"),
             "birthYear": artPieces[x].get("artistBeginDate"),
             "deathYear": artPieces[x].get("artistEndDate"),
+            'artistName': artPieces[x].get("artistName"),
             "active": False,
             "status": False,
         }
@@ -198,6 +195,53 @@ def updateTime():
     else:
         return jsonify("Error updating best time"), 401
 
+
+@app.route("/api/artist", methods=['POST'])
+def artist():
+    data = request.get_json()
+    artistName = data['artistName']
+    action = data['action']
+    userID = data['userID']
+    if (action == 'save'):
+        if not artistSaved(userID, artistName):
+            saveArtist(userID, artistName)
+        return jsonify('Success'), 200
+    else:
+        unsaveArtist(userID, artistName)
+        return jsonify('Success'), 200
+
+def artistSaved(userID, artistName):
+    with DbSelector() as d:
+        query = "SELECT * FROM  UserArtist WHERE userId=%s AND artist=%s"
+        d.cursor.execute(query, [userID, artistName])
+        result = d.cursor.fetchone()
+        if result:
+            return True
+        return False
+
+def saveArtist(userID, artistName):
+    with DbSelector() as d:
+        query = "INSERT INTO UserArtist (userId, artist) VALUES (%s, %s)"
+        d.cursor.execute(query, [userID, artistName])
+
+def unsaveArtist(userID, artistName):
+    with DbSelector() as d:
+        query = f"DELETE FROM UserArtist WHERE userId=%s AND artist=%s"
+        d.cursor.execute(query, [userID, artistName])
+
+@app.route("/api/artist/saved", methods=['POST'])
+def savedArtists():
+    userID = request.get_json()['userID']
+    with DbSelector() as d:
+
+        query = "SELECT artist FROM UserArtist WHERE userId = %s"
+
+        d.cursor.execute(query, [userID])
+
+        results = d.cursor.fetchall()
+    artists= [result[0].decode() for result in results]
+    artistDetails = [{'name': artist, 'summary':wikipedia.summary(artist)} for artist in artists]
+    return jsonify(artistDetails), 200
 
 @app.route("/api/ping")
 def ping():
