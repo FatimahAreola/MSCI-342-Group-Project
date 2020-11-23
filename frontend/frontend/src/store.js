@@ -7,7 +7,8 @@ export default new Vuex.Store({
 	state: {
 		timer: 0,
 		userId: null,
-		userBestTime: null
+		userBestTime: null,
+		favouritedArtists: []
 	},
 	mutations: {
 		setCurrentTimerValue(state, newTime) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
 		},
 		setCurrentUserBestTimeValue(state, bestTime) {
 			state.userBestTime = bestTime
+		},
+		setFavouritedArtists(state, favouritedArtists) {
+			state.favouritedArtists = favouritedArtists
 		}
 	}
 })

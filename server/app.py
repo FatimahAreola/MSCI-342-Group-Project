@@ -2,17 +2,16 @@ from flask import Flask, request, json, jsonify
 from flask_cors import CORS
 import requests
 import mysql.connector
+import wikipedia
 import os
 
 import multiprocessing
 from multiprocessing import Pool, current_process
 
-
 app = Flask(__name__)
 DEBUG = True
 app.config.from_object(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
-
 
 class DbSelector:
     def __init__(self):
@@ -33,7 +32,6 @@ class DbSelector:
         self.connection.commit()
         self.connection.close()
         self.cursor.close()
-
 
 @app.route("/api/hello")
 def hello():
@@ -91,8 +89,7 @@ with the details of 8 pre-determined works of art so that they can be formatted 
 
 
 def fetchArtInformation(i):
-    # Numbers from 1 to number of images, identified by the number of processes created
-    idx = current_process()._identity[0]
+
     # pulls the required information from the MET's API
     apiResponse = requests.get(
         "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(i)
@@ -100,7 +97,6 @@ def fetchArtInformation(i):
     artDetails = apiResponse.json()
     # We add another object to the Cardset dictionary for each art piece, containing info on Name, ObjectID, URL and status
     cardSet = {
-        "cardId": idx,
         "ObjectID": str(i),
         "artName": artDetails["title"],
         "artUrl": artDetails["primaryImage"],
@@ -108,6 +104,7 @@ def fetchArtInformation(i):
         "birthYear": artDetails["artistBeginDate"],
         "deathYear": artDetails["artistEndDate"],
         "active": False,
+        'artistName': artDetails["artistDisplayName"],
         "status": False,
     }
     # Returns a Json object
@@ -125,9 +122,12 @@ def pullMETAPI():
 
     # Multiprocessing here
     p = Pool(numPieces)
+  
     artPieces = p.map(fetchArtInformation, artObjectIDs)
 
     for x in range(numPieces):
+        pointer = artPieces[x]
+        pointer['cardId']=x+1
         cardSet = {
             "cardId": x + numPieces + 1,
             "ObjectID": artPieces[x].get("ObjectID"),
@@ -136,6 +136,7 @@ def pullMETAPI():
             "artistName": artPieces[x].get("artistDisplayName"),
             "birthYear": artPieces[x].get("artistBeginDate"),
             "deathYear": artPieces[x].get("artistEndDate"),
+            'artistName': artPieces[x].get("artistName"),
             "active": False,
             "status": False,
         }
@@ -162,6 +163,53 @@ def updateTime():
     else:
         return jsonify("Error updating best time"), 401
 
+
+@app.route("/api/artist", methods=['POST'])
+def artist():
+    data = request.get_json()
+    artistName = data['artistName']
+    action = data['action']
+    userID = data['userID']
+    if (action == 'save'):
+        if not artistSaved(userID, artistName):
+            saveArtist(userID, artistName)
+        return jsonify('Success'), 200
+    else:
+        unsaveArtist(userID, artistName)
+        return jsonify('Success'), 200
+
+def artistSaved(userID, artistName):
+    with DbSelector() as d:
+        query = "SELECT * FROM  UserArtist WHERE userId=%s AND artist=%s"
+        d.cursor.execute(query, [userID, artistName])
+        result = d.cursor.fetchone()
+        if result:
+            return True
+        return False
+
+def saveArtist(userID, artistName):
+    with DbSelector() as d:
+        query = "INSERT INTO UserArtist (userId, artist) VALUES (%s, %s)"
+        d.cursor.execute(query, [userID, artistName])
+
+def unsaveArtist(userID, artistName):
+    with DbSelector() as d:
+        query = f"DELETE FROM UserArtist WHERE userId=%s AND artist=%s"
+        d.cursor.execute(query, [userID, artistName])
+
+@app.route("/api/artist/saved", methods=['POST'])
+def savedArtists():
+    userID = request.get_json()['userID']
+    with DbSelector() as d:
+
+        query = "SELECT artist FROM UserArtist WHERE userId = %s"
+
+        d.cursor.execute(query, [userID])
+
+        results = d.cursor.fetchall()
+    artists= [result[0].decode() for result in results]
+    artistDetails = [{'name': artist, 'summary':wikipedia.summary(artist)} for artist in artists]
+    return jsonify(artistDetails), 200
 
 @app.route("/api/ping")
 def ping():
