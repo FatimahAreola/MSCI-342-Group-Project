@@ -123,7 +123,7 @@ def selectArt (selectedArtist):
     
     artists= ["Paul Gauguin", "Vincent van Gogh", "Rembrandt", "Asher Brown Durand", "Albert Bierstadt", "Paul Cézanne", "Auguste Edouart", "Frederic Remington"]
     
-    if artistIdx = artists.index(selectedArtist)
+    if artistIdx == artists.index(selectedArtist)
         artObjectIDs=artArray[artistIdx]
         return (artObjectIDs)
     
