@@ -48,7 +48,6 @@ export default {
 				favouritedArtistsInDB.push(artist.name);
 			});
 			const val_a = favouritedArtistsInDB.includes(this.artistName);
-			console.log(val_a);
 			this.savedArtist = val_a;
 			return val_a;
 		},
@@ -65,7 +64,7 @@ export default {
 .artist-bin {
 	display: flex;
 	justify-content: space-between;
-	width: 300px;
+	width: 400px;
 }
 .left {
 	display: inline-block;

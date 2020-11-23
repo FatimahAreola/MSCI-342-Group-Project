@@ -29,9 +29,6 @@ export default {
 		SavedArtist,
 	},
 	name: "GameSummary",
-	mounted() {
-		console.log(this.artistsList());
-	},
 	data() {
 		return {
 			artistNames: this.artistsList(),
@@ -84,7 +81,10 @@ export default {
 				artistNames.push(card.artistName);
 			});
 			const uniq_artist_names = [...new Set(artistNames)];
-			return uniq_artist_names;
+			var filtered = uniq_artist_names.filter(function (el) {
+				return el != null;
+			});
+			return filtered;
 		},
 		routeToHome: function () {
 			this.$router.push("/home");
