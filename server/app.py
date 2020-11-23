@@ -134,7 +134,7 @@ def selectArt (selectedArtist):
             while x==y:
                 x=random.randint(0,7)
                 y=random.randint(0,7)  
-        artObjectIDs.append(artArray[x][y])
+            artObjectIDs.append(artArray[x][y])
     return (artObjectIDs)
 
 @app.route("/api/MetAPI", methods=["POST"])
