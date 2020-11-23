@@ -34,7 +34,13 @@ export default {
 		Timer,
 	},
 	mounted() {
-		axios.get("/api/MetAPI").then((response) => {
+		let artist = this.$route.query.artist;
+		
+		let data = {
+			selectedArtist: artist,
+		};
+
+			axios.post("/api/MetAPI", data).then((response) => {
 			this.cards = response.data;
 		});
 	},
@@ -105,7 +111,6 @@ export default {
 			this.timerState = "stopped";
 		},
 		async stopGame(gameWon = false) {
-			console.log(this.cards);
 			await this.setTimerState();
 			await this.$router.push({
 				name: "GameSummary",

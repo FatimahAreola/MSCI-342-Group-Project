@@ -73,7 +73,7 @@ export default {
 						group: "foo",
 						type: "error",
 						title: "Invalid Username or Password",
-						text: "The username or password you enetered seems to be invalid.",
+						text: "The username or password you entered seems to be invalid.",
 					});
 				});
 		},

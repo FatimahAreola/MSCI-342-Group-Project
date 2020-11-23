@@ -83,9 +83,8 @@ def Login():
         return jsonify("Invalid Username or Password"), 401
 
 
-""" The following code issues a call to the MET Api, and returns a json object, 
-with the details of 8 pre-determined works of art so that they can be formatted for gameplay.
- """
+# The following code issues a call to the MET Api, and returns a json object, 
+# with the details of 8 pre-determined works of art so that they can be formatted for gameplay.
 
 
 def fetchArtInformation(i):
@@ -111,10 +110,10 @@ def fetchArtInformation(i):
     return cardSet
 
 
-@app.route("/api/MetAPI")
+@app.route("/api/MetAPI", methods=["POST"])
 def pullMETAPI():
     print("Met API Method:")
-
+    print(request.get_json()["selectedArtist"])
     # These are the ObjectIDs of 8 pieces we selected for this demo.
     # For future iterations of the game, these objectIDs will need to be selected by the system.
     artObjectIDs = [16577, 436944, 437879, 436101, 40081, 437329, 436840, 435882]
@@ -124,7 +123,6 @@ def pullMETAPI():
     p = Pool(numPieces)
   
     artPieces = p.map(fetchArtInformation, artObjectIDs)
-
     for x in range(numPieces):
         pointer = artPieces[x]
         pointer['cardId']=x+1
