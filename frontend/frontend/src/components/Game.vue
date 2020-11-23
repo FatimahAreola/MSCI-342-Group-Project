@@ -35,12 +35,12 @@ export default {
 	},
 	mounted() {
 		let artist = this.$route.query.artist;
-		
+
 		let data = {
 			selectedArtist: artist,
 		};
 
-			axios.post("/api/MetAPI", data).then((response) => {
+		axios.post("/api/MetAPI", data).then((response) => {
 			this.cards = response.data;
 		});
 	},
@@ -75,7 +75,6 @@ export default {
 	methods: {
 		completeMatch({ value }) {
 			this.showMatchModal = false;
-			console.log(this.flipped[0].cardId - 1);
 			if (value) {
 				this.cards[this.flipped[0].cardId - 1].status = true;
 				this.cards[this.flipped[1].cardId - 1].status = true;
