@@ -2,7 +2,7 @@
 	<div class="home">
 		<button v-on:click="test_axios">Test Access To Flask App</button>
 		<br />
-		<h3>Select Artist to Include in Game</h3>
+		<h3>Select Artist to Play</h3>
 		<button
 		v-on:click="selectArtist(artist[0], $event)"
 		value="Paul Gauguin"
@@ -60,7 +60,7 @@
 		Frederic Remington
 		</button>
 		<h3>Or</h3>
-		<button v-on:click="routeToGame" class="play-button options">PLAY</button>
+		<button v-on:click="routeToGame" class="play-button options">RANDOM PLAY</button>
 		<p></p>
 		<button v-on:click="routeToProfile" class="profile options">PROFILE</button>
 	</div>
@@ -136,32 +136,17 @@ export default {
 .options {
 	/* button */
 	width: 800px;
-	height: 300px;
+	height: 100px;
 	border: 2px solid #ffe381;
 	background-color: #ffe381;
 	/* text */
-	font-size: 100px;
+	font-size: 50px;
 	font-weight: bold;
 	color: #d282a6;
 	text-shadow: 2px 2px 4px #000000;
 }
 
 .play-button:hover {
-	background-color: #f8da6c;
-}
-.login-button {
-	/* button */
-	width: 800px;
-	height: 300px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
-	/* text */
-	font-size: 100px;
-	font-weight: bold;
-	color: #d282a6;
-	text-shadow: 2px 2px 4px #000000;
-}
-.login-button:hover {
 	background-color: #f8da6c;
 }
 .artist-button {
