@@ -1,8 +1,15 @@
 <template>
 	<div>
-		<button v-on:click="routeToHome" class="back-button">BACK</button>
-		<h1>Profile</h1>
-		<h2>Your Favourite Artists</h2>
+		<button v-on:click="routeToHome" class="back-button">HOME</button>
+		<div class="title">Profile</div>
+		<div class="sub-title">Best Time</div>
+		<div class="best-time">
+			<div style="font-size: 50px; font-weight: bold">
+				{{ this.$store.state.userBestTime }}
+			</div>
+		</div>
+		<br />
+		<div class="sub-title">Your Favourite Artists</div>
 		<h3 v-if="artists.length == 0">No artists favourited yet</h3>
 		<Artist
 			v-for="artist in artists"
@@ -24,7 +31,6 @@ export default {
 			artists: this.$store.state.favouritedArtists,
 		};
 	},
-	mounted() {},
 	methods: {
 		routeToHome: function () {
 			this.$router.push("/home");
@@ -34,18 +40,35 @@ export default {
 </script>
 
 <style scoped>
+.title {
+	font-size: 100px;
+}
+.sub-title {
+	font-size: 40px;
+}
+.best-time {
+	width: 300px;
+	height: 100px;
+	background-color: rgba(255, 238, 0, 0.938);
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	border-radius: 10px;
+}
 .back-button {
 	position: absolute;
 	left: 10px;
 	top: 10px;
 	/* button */
 	margin-top: 2px;
-	width: 95px;
-	height: 23px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	width: 200px;
+	height: 50px;
+	border: 2px solid rgba(255, 238, 0, 0.938);
+	background-color: rgba(255, 238, 0, 0.938);
+	border-radius: 10px;
 	/* text */
-	font-size: 15px;
+	font-size: 30px;
 	font-weight: bold;
 	color: #cf4985;
 }
