@@ -11,12 +11,15 @@
 		<br />
 		<div class="sub-title">Your Favourite Artists</div>
 		<h3 v-if="artists.length == 0">No artists favourited yet</h3>
-		<Artist
-			v-for="artist in artists"
-			:artistName="artist.name"
-			:artistSummary="artist.summary"
-			v-bind:key="artist.artistName"
-		/>
+		<div class="artist-container">
+			<Artist
+				v-for="artist in artists"
+				:artistName="artist.name"
+				:artistSummary="artist.summary"
+				:artistWork="artist.picture"
+				v-bind:key="artist.artistName"
+			/>
+		</div>
 	</div>
 </template>
 
@@ -56,6 +59,15 @@ export default {
 	justify-content: space-around;
 	border-radius: 10px;
 }
+
+.artist-container {
+	height: 570px;
+	overflow: scroll;
+	background-color: #dddddd;
+	margin: 0px 10px 10px 10px;
+	border-radius: 5px;
+}
+
 .back-button {
 	position: absolute;
 	left: 10px;
