@@ -11,7 +11,7 @@
 		<br />
 		<div class="sub-title">Your Favourite Artists</div>
 		<h3 v-if="artists.length == 0">No artists favourited yet</h3>
-		<div class="artist-container">
+		<div v-else class="artist-container">
 			<Artist
 				v-for="artist in artists"
 				:artistName="artist.name"

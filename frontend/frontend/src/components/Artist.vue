@@ -7,7 +7,7 @@
 				src="@/assets/AugusteEdouart.png"
 			/>
 			<img
-				v-if="artistName == 'Vincent Van Gogh'"
+				v-if="artistName == 'Vincent van Gogh'"
 				src="@/assets/VincentVanGogh.png"
 			/>
 			<img v-if="artistName == 'Rembrandt'" src="@/assets/Rembrandt.png" />
