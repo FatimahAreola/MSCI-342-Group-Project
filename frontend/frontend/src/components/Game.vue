@@ -158,8 +158,8 @@ export default {
 	margin-top: 10px;
 	display: block;
 	height: 70px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	border: 2px solid #f5e55b;
+	background-color: #f5e55b;
 	/* text */
 	font-size: 30px;
 	font-weight: bold;

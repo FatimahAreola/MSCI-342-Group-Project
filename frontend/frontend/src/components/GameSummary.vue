@@ -109,8 +109,8 @@ export default {
 	/* button */
 	width: 150px;
 	height: 60px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	border: 2px solid #f5e55b;
+	background-color: #f5e55b;
 	/* text */
 	font-size: 30px;
 	font-weight: bold;

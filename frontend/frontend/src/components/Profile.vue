@@ -40,14 +40,17 @@ export default {
 	top: 10px;
 	/* button */
 	margin-top: 2px;
-	width: 95px;
-	height: 23px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	width: 200px;
+	height: 75px;
+	border: 2px solid #f5e55b;
+	background-color: #f5e55b;
 	/* text */
-	font-size: 15px;
+	font-size: 35px;
 	font-weight: bold;
 	color: #cf4985;
+}
+.back-button:hover {
+	background-color: #f8da6c;
 }
 .card {
 	width: 100%;

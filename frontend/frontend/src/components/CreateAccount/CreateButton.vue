@@ -18,12 +18,12 @@ export default {
 .create-button {
 	/* button */
 	width: 300px;
-	height: 40px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	height: 50px;
+	border: 2px solid #f5e55b;
+	background-color: #f5e55b;
 	/* text */
 	font-size: 30px;
-	color: #d282a6;
+	color: #f75151;
 	text-shadow: 1px 1px 1px #000000;
 }
 
