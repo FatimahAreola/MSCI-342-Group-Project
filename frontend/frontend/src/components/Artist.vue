@@ -3,9 +3,28 @@
 		<div class="left-side">
 			<h4>{{ artistName }}</h4>
 			<img
-				style="width: 325px; height: 235px; object-fit: contain"
-				:src="artistWork[0]"
+				v-if="artistName == 'Auguste Edouart'"
+				src="@/assets/AugusteEdouart.png"
 			/>
+			<img
+				v-if="artistName == 'Vincent Van Gogh'"
+				src="@/assets/VincentVanGogh.png"
+			/>
+			<img v-if="artistName == 'Rembrandt'" src="@/assets/Rembrandt.png" />
+			<img v-if="artistName == 'Paul Gauguin'" src="@/assets/PaulGauguin.png" />
+			<img
+				v-if="artistName == 'Asher Brown Durand'"
+				src="@/assets/AsherBrownDurand.png"
+			/>
+			<img
+				v-if="artistName == 'Albert Bierstadt'"
+				src="@/assets/AugusteEdouart.png"
+			/>
+			<img
+				v-if="artistName == 'Frederic Remington'"
+				src="@/assets/FredericRemington.png"
+			/>
+			<img v-if="artistName == 'Paul Cézanne'" src="@/assets/PaulCezanne.png" />
 		</div>
 		<div class="right-side">
 			<p>{{ artistSummary }}</p>
@@ -15,7 +34,16 @@
 
 <script>
 export default {
-	props: ["artistName", "artistSummary", "artistWork"],
+	props: ["artistName", "artistSummary"],
+	computed: {
+		artLink() {
+			if (this.artistName == "Auguste Edouart") {
+				return "@/assets/AugusteEdouart.png";
+			} else {
+				return "@/assets/AugusteEdouart.png";
+			}
+		},
+	},
 };
 </script>
 
@@ -32,12 +60,12 @@ h4 {
 }
 
 .left-side {
-	width: 350px;
+	width: 25%;
 	margin-right: 10px;
 }
 
 .right-side {
-	width: 1000px;
+	width: 70%;
 	height: 280px;
 	overflow: scroll;
 }
