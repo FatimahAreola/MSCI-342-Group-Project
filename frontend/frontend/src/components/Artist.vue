@@ -2,29 +2,40 @@
 	<div class="artist-slot">
 		<div class="left-side">
 			<h4>{{ artistName }}</h4>
-			<img
-				v-if="artistName == 'Auguste Edouart'"
-				src="@/assets/AugusteEdouart.png"
-			/>
-			<img
-				v-if="artistName == 'Vincent van Gogh'"
-				src="@/assets/VincentVanGogh.png"
-			/>
-			<img v-if="artistName == 'Rembrandt'" src="@/assets/Rembrandt.png" />
-			<img v-if="artistName == 'Paul Gauguin'" src="@/assets/PaulGauguin.png" />
-			<img
-				v-if="artistName == 'Asher Brown Durand'"
-				src="@/assets/AsherBrownDurand.png"
-			/>
-			<img
-				v-if="artistName == 'Albert Bierstadt'"
-				src="@/assets/AugusteEdouart.png"
-			/>
-			<img
-				v-if="artistName == 'Frederic Remington'"
-				src="@/assets/FredericRemington.png"
-			/>
-			<img v-if="artistName == 'Paul Cézanne'" src="@/assets/PaulCezanne.png" />
+			<div class="container">
+				<img
+					v-if="artistName == 'Auguste Edouart'"
+					src="@/assets/AugusteEdouart.png"
+				/>
+				<img
+					v-if="artistName == 'Vincent van Gogh'"
+					src="@/assets/VincentVanGogh.png"
+				/>
+				<img v-if="artistName == 'Rembrandt'" src="@/assets/Rembrandt.png" />
+				<img
+					v-if="artistName == 'Paul Gauguin'"
+					src="@/assets/PaulGauguin.png"
+				/>
+				<img
+					v-if="artistName == 'Asher Brown Durand'"
+					src="@/assets/AsherBrownDurand.png"
+				/>
+				<img
+					v-if="artistName == 'Albert Bierstadt'"
+					src="@/assets/AugusteEdouart.png"
+				/>
+				<img
+					v-if="artistName == 'Frederic Remington'"
+					src="@/assets/FredericRemington.png"
+				/>
+				<img
+					v-if="artistName == 'Paul Cézanne'"
+					src="@/assets/PaulCezanne.png"
+				/>
+				<div class="overlay" @click="sendToGame">
+					<div class="text">PLAY WITH {{ artistName }}</div>
+				</div>
+			</div>
 		</div>
 		<div class="right-side">
 			<p>{{ artistSummary }}</p>
@@ -44,18 +55,62 @@ export default {
 			}
 		},
 	},
+	methods: {
+		sendToGame() {
+			this.$router.push({ path: "/game", query: { artist: this.artistName } });
+		},
+	},
 };
 </script>
 
 <style scoped>
 h4 {
-	margin: 5px 0px 2px 0px;
+	margin: 5px 0px 5px 0px;
 }
+
+.container {
+	position: relative;
+}
+
+img {
+	border: 5px solid black;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: 0.5s ease;
+	background-color: #f57575;
+}
+
+.container:hover .overlay {
+	opacity: 0.95;
+}
+
+.text {
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
 .artist-slot {
 	height: 300px;
 	display: flex;
 	flex-direction: row;
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(250, 235, 184);
 	margin: 10px;
 }
 

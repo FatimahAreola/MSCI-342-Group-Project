@@ -44,14 +44,20 @@ export default {
 <style scoped>
 .title {
 	font-size: 100px;
+	/* color: #ffffff; */
+	text-shadow: 2px 2px 3px #ffffff;
 }
 .sub-title {
 	font-size: 40px;
+	color: #ffffff;
+	text-shadow: 1px 1px 2px #313131;
 }
 .best-time {
 	width: 300px;
 	height: 100px;
-	background-color: rgba(255, 238, 0, 0.938);
+	background-color: #f5e55b;
+	color: #ffffff;
+	text-shadow: 2px 2px 3px #313131;
 	margin: auto;
 	display: flex;
 	flex-direction: column;
@@ -62,7 +68,7 @@ export default {
 .artist-container {
 	height: 570px;
 	overflow: scroll;
-	background-color: #dddddd;
+	background-color: #f5e55b;
 	margin: 0px 10px 10px 10px;
 	border-radius: 5px;
 }
@@ -75,14 +81,21 @@ export default {
 	margin-top: 2px;
 	width: 200px;
 	height: 50px;
-	border: 2px solid rgba(255, 238, 0, 0.938);
-	background-color: rgba(255, 238, 0, 0.938);
-	border-radius: 10px;
+	border: 2px solid #f5e55b;
+	background-color: #f5e55b;
+	border-radius: 2px;
 	/* text */
 	font-size: 30px;
 	font-weight: bold;
-	color: #cf4985;
+	color: #ffffff;
+	text-shadow: 1px 1px 2px #313131;
 }
+
+.back-button:hover {
+	border: 2px solid #f57575;
+	background-color: #f57575;
+}
+
 .card {
 	width: 100%;
 	height: 100%;
