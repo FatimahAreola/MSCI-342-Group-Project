@@ -1,6 +1,5 @@
 <template>
 	<div class="home">
-		<button v-on:click="test_axios">Test Access To Flask App</button>
 		<br />
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
