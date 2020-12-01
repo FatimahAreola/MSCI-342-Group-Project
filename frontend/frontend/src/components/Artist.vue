@@ -11,7 +11,10 @@
 					v-if="artistName == 'Vincent van Gogh'"
 					src="@/assets/VincentVanGogh.png"
 				/>
-				<img v-if="artistName == 'Rembrandt'" src="@/assets/Rembrandt.png" />
+				<img
+					v-if="artistName == 'Rembrandt (Rembrandt van Rijn)'"
+					src="@/assets/Rembrandt (Rembrandt van Rijn).png"
+				/>
 				<img
 					v-if="artistName == 'Paul Gauguin'"
 					src="@/assets/PaulGauguin.png"
@@ -22,7 +25,7 @@
 				/>
 				<img
 					v-if="artistName == 'Albert Bierstadt'"
-					src="@/assets/AugusteEdouart.png"
+					src="@/assets/AlbertBierstadt.png"
 				/>
 				<img
 					v-if="artistName == 'Frederic Remington'"
