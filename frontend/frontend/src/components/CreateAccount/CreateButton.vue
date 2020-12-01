@@ -1,6 +1,6 @@
 <template>
 	<button class="create-button" @click="routeToCreateAccount">
-		Create an Account
+		CREATE AN ACCOUNT
 	</button>
 </template>
 
@@ -17,17 +17,15 @@ export default {
 <style scoped>
 .create-button {
 	/* button */
-	width: 300px;
-	height: 40px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	width: 400px;
+	height: 50px;
+	background-color: #84c078;
 	/* text */
 	font-size: 30px;
-	color: #d282a6;
-	text-shadow: 1px 1px 1px #000000;
+	color: #040563;
 }
 
 .create-button:hover {
-	background-color: #f8da6c;
+	background-color: #ece281;
 }
 </style>

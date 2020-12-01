@@ -19,7 +19,7 @@ export default {
 	text-align: center;
 	color: #2c3e50;
 	padding-top: 2vh;
-	background-color: rgb(147, 211, 147);
+	background-color: rgba(28, 111, 206, 0.925);
 	height: 98vh;
 }
 </style>

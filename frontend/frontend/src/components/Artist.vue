@@ -1,8 +1,8 @@
 <template>
 	<div class="artist-slot">
 		<div class="left-side">
-			<h4>{{ artistName }}</h4>
 			<div class="container">
+				<h4>{{ artistName }}</h4>
 				<img
 					v-if="artistName == 'Auguste Edouart'"
 					src="@/assets/AugusteEdouart.png"
@@ -70,6 +70,7 @@ h4 {
 
 .container {
 	position: relative;
+	height: 100%;
 }
 
 img {
@@ -86,7 +87,8 @@ img {
 	width: 100%;
 	opacity: 0;
 	transition: 0.5s ease;
-	background-color: #f57575;
+	background-color: #84c078;
+	margin-top: -5px;
 }
 
 .container:hover .overlay {
@@ -110,7 +112,7 @@ img {
 	height: 300px;
 	display: flex;
 	flex-direction: row;
-	background-color: rgb(250, 235, 184);
+	background-color: rgb(251, 243, 216);
 	margin: 10px;
 }
 

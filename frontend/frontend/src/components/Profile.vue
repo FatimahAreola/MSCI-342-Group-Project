@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<button v-on:click="routeToHome" class="back-button">HOME</button>
+		<button v-on:click="routeToHome" class="back-button">BACK</button>
 		<div class="title">Profile</div>
 		<div class="sub-title">Best Time</div>
 		<div class="best-time">
@@ -44,20 +44,21 @@ export default {
 <style scoped>
 .title {
 	font-size: 100px;
-	/* color: #ffffff; */
-	text-shadow: 2px 2px 3px #ffffff;
+	font-weight: bold;
+	color: #ffffff;
 }
 .sub-title {
-	font-size: 40px;
+	font-size: 30px;
+	font-weight: bold;
 	color: #ffffff;
-	text-shadow: 1px 1px 2px #313131;
 }
 .best-time {
 	width: 300px;
 	height: 100px;
-	background-color: #f5e55b;
-	color: #ffffff;
-	text-shadow: 2px 2px 3px #313131;
+	background-color: #ece281;
+	font-size: 50px;
+	font-weight: bold;
+	color: #040563;
 	margin: auto;
 	display: flex;
 	flex-direction: column;
@@ -68,11 +69,19 @@ export default {
 .artist-container {
 	height: 570px;
 	overflow: scroll;
-	background-color: #f5e55b;
+	background-color: #ece281;
 	margin: 0px 10px 10px 10px;
 	border-radius: 5px;
 }
 
+.savedArtists {
+	display: flex;
+	flex-direction: column;
+	/* text */
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+}
 .back-button {
 	position: absolute;
 	left: 10px;
@@ -80,20 +89,17 @@ export default {
 	/* button */
 	margin-top: 2px;
 	width: 200px;
-	height: 50px;
-	border: 2px solid #f5e55b;
-	background-color: #f5e55b;
-	border-radius: 2px;
+	height: 75px;
+	background-color: #ece281;
 	/* text */
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
-	color: #ffffff;
-	text-shadow: 1px 1px 2px #313131;
+	color: #040563;
 }
 
 .back-button:hover {
-	border: 2px solid #f57575;
-	background-color: #f57575;
+	border: 2px solid #84c078;
+	background-color: #84c078;
 }
 
 .card {
