@@ -1,6 +1,6 @@
 <template>
 	<div class="create-wrapper">
-		<br /><br />
+		<h1>Create An Account</h1>
 		<span class="feild-name">Enter Username:</span>
 		<input
 			class="input"
@@ -28,7 +28,7 @@
 			name="password2"
 			v-model="password2"
 		/>
-		<button class="create-button" @click="createAcc">Create</button>
+		<button class="create-button" @click="createAcc">CREATE</button>
 	</div>
 </template>
 
@@ -100,10 +100,11 @@ export default {
 	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
-	width: 500px;
+	width: 600px;
 	height: 600px;
-	background-color: #fae59a;
-	border: 2px solid #f8da6c;
+	background-color: #ece281;
+	border: 2px solid #ece281;
+	color: #040563;
 }
 
 .feild-name {
@@ -111,33 +112,33 @@ export default {
 	padding-left: 20px;
 	font-size: 30px;
 	font-weight: bold;
+	color: #040563;
 }
 
 .input {
 	margin: 10px 20px 10px 20px;
 	padding-left: 10px;
-	height: 20px;
+	height: 40px;
+	width: 540px;
 	background-color: transparent;
-	border: 1px solid #1b1b1b;
+	border: 1px solid #000;
 }
 
 .create-button {
 	/* button */
 	width: 300px;
-	height: 40px;
-	border: 2px solid #d282a6;
-	background-color: #e794b9;
+	height: 75px;
+	background-color: #84c078;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;
 	/* text */
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
-	color: #f8da6c;
-	text-shadow: 2px 2px 4px #000000;
+	color: #040563;
 }
 
 .create-button:hover {
-	background-color: #d282a6;
+	background-color: #f7e43c;
 }
 </style>

@@ -3,7 +3,7 @@
 		<div class="modal-wrapper">
 			<div class="modal-container">
 				<div class="modal-header">
-					<slot name="header" v-if="result"> It's A Match!!</slot>
+					<slot name="header" v-if="result"> It's A Match!</slot>
 					<slot name="header" v-else>Try Again!</slot>
 				</div>
 
@@ -99,10 +99,10 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	background-color: #ffe381;
+	background-color: #ece281;
 	border-radius: 2px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-	transition: all 0.3s ease;
+	transition: all 1s ease;
 	font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -112,6 +112,10 @@ export default {
 	line-height: 40px;
 	font-weight: 600;
 	font-size: 30px;
+	/* text */
+	font-size: 35px;
+	font-weight: bold;
+	color: #040563;
 }
 
 .modal-body {
@@ -134,15 +138,16 @@ export default {
 .modal-default-button {
 	/* button */
 	width: 200px;
-	margin-top: 10px;
+	margin-top: 5px;
 	display: block;
-	height: 40px;
-	border: 2px solid #e76f85;
-	background-color: #f0899c;
+	height: 50px;
+	background-color: #84c078;
 	/* text */
-	font-size: 15px;
+	font-size: 20px;
 	font-weight: bold;
-	color: #ffe381;
-	text-shadow: 2px 2px 4px #000000;
+	color: #040563;
+}
+.modal-default-button:hover {
+	background-color: #f7e43c;
 }
 </style>

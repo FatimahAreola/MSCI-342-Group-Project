@@ -68,7 +68,7 @@ export default {
 }
 .left {
 	display: inline-block;
-	padding-left: 10px;
+	padding-left: 50px;
 }
 .right {
 	display: inline-block;
@@ -77,14 +77,13 @@ export default {
 }
 .saveButton {
 	/* button */
-	margin-top: 2px;
-	width: 95px;
-	height: 20px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	margin-top: 7px;
+	width: 130px;
+	height: 30px;
+	background-color: #ece281;
 	/* text */
-	font-size: 10px;
+	font-size: 15px;
 	font-weight: bold;
-	color: #d282a6;
+	color: #040563;
 }
 </style>

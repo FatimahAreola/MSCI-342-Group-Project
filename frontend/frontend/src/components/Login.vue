@@ -1,6 +1,6 @@
 <template>
 	<div id="login" class="Login">
-		<h1>Login</h1>
+		<h1>Welcome to Art Match!</h1>
 		<input
 			class="input"
 			type="text"
@@ -17,7 +17,7 @@
 			v-model="input.password"
 			placeholder="Password"
 		/>
-		<button class="create-button" @click="login">Login</button>
+		<button class="create-button" @click="login">LOGIN</button>
 		<createAcc />
 	</div>
 </template>
@@ -84,35 +84,40 @@ export default {
 .Login {
 	display: flex;
 	flex-direction: column;
+	/* text */
+	font-size: 30px;
+	font-weight: bold;
+	color: #fff;
 }
 .input {
 	margin: 10px 20px 10px 20px;
-	width: 300px;
+	width: 390px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 10px;
-	height: 20px;
-	background-color: transparent;
-	border: 1px solid #1b1b1b;
+	height: 30px;
+	background-color: #ece281;
+	/* text */
+	font-size: 20px;
+	font-weight: bold;
+	color: #000;
 }
 
 .create-button {
 	/* button */
-	width: 300px;
-	height: 40px;
-	border: 2px solid #d282a6;
-	background-color: #e794b9;
+	width: 400px;
+	height: 50px;
+	background-color: #ece281;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;
 	/* text */
 	font-size: 30px;
 	font-weight: bold;
-	color: #f8da6c;
-	text-shadow: 2px 2px 4px #000000;
+	color: #040563;
 }
 
 .create-button:hover {
-	background-color: #d282a6;
+	background-color: #84c078;
 }
 </style>
