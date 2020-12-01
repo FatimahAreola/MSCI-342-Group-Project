@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="gameSummary">
 		<h2>
 			{{
 				this.$route.params.gameWon == true
@@ -16,7 +16,8 @@
 			:artistName="name"
 			v-bind:key="name"
 		/>
-		<button class="homeButton" v-on:click="routeToHome">Home</button>
+		<br /><br />
+		<button class="homeButton" v-on:click="routeToHome">HOME</button>
 	</div>
 </template>
 
@@ -105,16 +106,27 @@ export default {
 </script>
 
 <style scoped>
+.gameSummary {
+	display: flex;
+	flex-direction: column;
+	/* text */
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+}
 .homeButton {
 	/* button */
+	margin-left: auto;
+	margin-right: auto;
 	width: 150px;
 	height: 60px;
-	border: 2px solid #f5e55b;
-	background-color: #f5e55b;
+	background-color: #ece281;
 	/* text */
 	font-size: 30px;
 	font-weight: bold;
-	color: #d282a6;
-	text-shadow: 2px 2px 4px #000000;
+	color: #040563;
+}
+.homeButton:hover {
+	background-color: #84c078;
 }
 </style>

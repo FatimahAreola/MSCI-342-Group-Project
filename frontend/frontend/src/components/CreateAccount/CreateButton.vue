@@ -19,15 +19,13 @@ export default {
 	/* button */
 	width: 400px;
 	height: 50px;
-	border: 2px solid #f57575;
-	background-color: #f57575;
+	background-color: #84c078;
 	/* text */
 	font-size: 30px;
-	color: #ffffff;
-	text-shadow: 2px 2px 4px #000000;
+	color: #040563;
 }
 
 .create-button:hover {
-	background-color: #f8da6c;
+	background-color: #ece281;
 }
 </style>

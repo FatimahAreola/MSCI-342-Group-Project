@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="savedArtists">
 		<button v-on:click="routeToHome" class="back-button">BACK</button>
 		<h1>Profile</h1>
 		<h2>Your Favourite Artists</h2>
@@ -34,6 +34,14 @@ export default {
 </script>
 
 <style scoped>
+.savedArtists{
+	display: flex;
+	flex-direction: column;
+	/* text */
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;	
+}
 .back-button {
 	position: absolute;
 	left: 10px;
@@ -42,15 +50,14 @@ export default {
 	margin-top: 2px;
 	width: 200px;
 	height: 75px;
-	border: 2px solid #f5e55b;
-	background-color: #f5e55b;
+	background-color: #ece281;
 	/* text */
-	font-size: 35px;
+	font-size: 40px;
 	font-weight: bold;
-	color: #cf4985;
+	color: #040563;
 }
 .back-button:hover {
-	background-color: #f8da6c;
+	background-color: #84c078;
 }
 .card {
 	width: 100%;

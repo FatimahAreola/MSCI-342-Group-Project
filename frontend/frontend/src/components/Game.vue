@@ -3,8 +3,9 @@
 		<div class="summary">
 			<h2>Matched: {{ this.countMatched }}</h2>
 			<Timer :state="timerState" />
-			<button class="summaryButton" @click="stopGame">Stop Game</button>
-			<button class="summaryButton" @click="returnHome">Home</button>
+			<br />
+			<button class="summaryButton" @click="stopGame">STOP GAME</button>
+			<button class="summaryButton" @click="returnHome">HOME</button>
 		</div>
 		<div class="board-wrapper">
 			<Board :cardData="shuffled" @updateActive="updateActive" />
@@ -141,6 +142,10 @@ export default {
 
 .summary {
 	margin-left: 200px;
+	/* text */
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
 }
 
 .board-wrapper {
@@ -157,13 +162,14 @@ export default {
 	width: 200px;
 	margin-top: 10px;
 	display: block;
-	height: 70px;
-	border: 2px solid #f5e55b;
-	background-color: #f5e55b;
+	height: 75px;
+	background-color: #ece281;
 	/* text */
 	font-size: 30px;
 	font-weight: bold;
-	color: #f0899c;
-	text-shadow: 2px 2px 4px #000000;
+	color: #040563;
+}
+.summaryButton:hover {
+	background-color: #84c078;
 }
 </style>

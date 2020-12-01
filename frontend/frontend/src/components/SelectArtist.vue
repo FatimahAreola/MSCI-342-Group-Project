@@ -3,7 +3,6 @@
         <br />
 		<button v-on:click="routeToHome" class="back-button">BACK</button>
 		<h1>Select An Artist To Play</h1>
-        <br />
 		<button
 			v-on:click="selectArtist(artist[0], $event)"
 			value="Paul Gauguin"
@@ -123,6 +122,14 @@ export default {
 </script>
 
 <style>
+.selectArtist {
+	display: flex;
+	flex-direction: column;
+	/* text */
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+}
 .back-button {
 	position: absolute;
 	left: 10px;
@@ -131,30 +138,28 @@ export default {
 	margin-top: 2px;
 	width: 200px;
 	height: 75px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	background-color: #ece281;
 	/* text */
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
-	color: #cf4985;
+	color: #040563;
 }
 .back-button:hover {
-	background-color: #f8da6c;
+	background-color: #84c078;
 }
 .artist-button {
 	/* button */
+	margin-left: auto;
+	margin-right: auto;
 	width: 800px;
-	height: 35px;
-	border: 2px solid #ffe381;
-	background-color: #ffe381;
+	height: 60px;
+	background-color: #ece281;
 	/* text */
-	font-size: 25px;
+	font-size: 30px;
 	font-weight: bold;
-	color: #d282a6;
-	text-shadow: 1px 1px 2px #000000;
+	color: #040563;
 }
 .artist-button:hover {
-	background-color: #f8da6c;
+	background-color: #84c078;
 }
 </style>
-

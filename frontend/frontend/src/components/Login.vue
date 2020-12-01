@@ -84,6 +84,10 @@ export default {
 .Login {
 	display: flex;
 	flex-direction: column;
+	/* text */
+	font-size: 30px;
+	font-weight: bold;
+	color: #fff;
 }
 .input {
 	margin: 10px 20px 10px 20px;
@@ -92,31 +96,28 @@ export default {
 	margin-right: auto;
 	padding-left: 10px;
 	height: 30px;
-	background-color: #f5e55b;
-	border: 2px solid #1b1b1b;
+	background-color: #ece281;
 	/* text */
 	font-size: 20px;
 	font-weight: bold;
-	color: #f5e55b;
+	color: #000;
 }
 
 .create-button {
 	/* button */
 	width: 400px;
 	height: 50px;
-	border: 2px solid #f5e55b;
-	background-color: #f5e55b;
+	background-color: #ece281;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;
 	/* text */
 	font-size: 30px;
 	font-weight: bold;
-	color: #ffffff;
-	text-shadow: 2px 2px 4px #000000;
+	color: #040563;
 }
 
 .create-button:hover {
-	background-color: #f57575;
+	background-color: #84c078;
 }
 </style>

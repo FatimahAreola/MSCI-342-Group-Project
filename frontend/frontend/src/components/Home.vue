@@ -5,10 +5,11 @@
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
 		</button>
+		<br />
 		<button v-on:click="selectArtist" class="play-button options">
 			ARTIST PLAY
 		</button>
-		<p></p>
+		<br /><br /><br />
 		<button v-on:click="routeToProfile" class="profile options">
 			MY PROFILE
 		</button>
@@ -85,33 +86,16 @@ export default {
 	/* button */
 	width: 800px;
 	height: 100px;
-	border: 2px solid #f5e55b;
-	background-color: #f5e55b;
+	background-color: #ece281;
 	/* text */
 	font-size: 50px;
 	font-weight: bold;
-	color: #ffffff;
-	text-shadow: 2px 2px 4px #000000;
+	color: #040563;
 }
 .options:hover {
-	background-color: #f57575;
+	background-color: #84c078;
 }
 .play-button:hover {
-	background-color: #f57575;
-}
-.artist-button {
-	/* button */
-	width: 800px;
-	height: 45px;
-	border: 2px solid #f5e55b;
-	background-color: #f5e55b;
-	/* text */
-	font-size: 25px;
-	font-weight: bold;
-	color: #d282a6;
-	text-shadow: 1px 1px 2px #000000;
-}
-.artist-button:hover {
-	background-color: #f57575;
+	background-color: #84c078;
 }
 </style>
