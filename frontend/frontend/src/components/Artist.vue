@@ -38,6 +38,7 @@
 				<div class="overlay" @click="sendToGame">
 					<div class="text">PLAY WITH {{ artistName }}</div>
 				</div>
+				<p>psst... hover over me!</p>
 			</div>
 		</div>
 		<div class="right-side">

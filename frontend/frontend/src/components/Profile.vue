@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
 .title {
-	font-size: 100px;
+	font-size: 60px;
 	font-weight: bold;
 	color: #ffffff;
 }
@@ -67,7 +67,7 @@ export default {
 }
 
 .artist-container {
-	height: 570px;
+	height: 650px;
 	overflow: scroll;
 	background-color: #ece281;
 	margin: 0px 10px 10px 10px;
