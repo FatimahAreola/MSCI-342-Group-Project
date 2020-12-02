@@ -113,7 +113,7 @@ img {
 }
 
 .artist-slot {
-	height: 300px;
+	height: 315px;
 	display: flex;
 	flex-direction: row;
 	background-color: rgb(251, 243, 216);
