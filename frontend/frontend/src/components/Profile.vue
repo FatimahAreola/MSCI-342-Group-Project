@@ -1,15 +1,24 @@
 <template>
-	<div class="savedArtists">
+	<div>
 		<button v-on:click="routeToHome" class="back-button">BACK</button>
-		<h1>Profile</h1>
-		<h2>Your Favourite Artists</h2>
+		<div class="title">Profile</div>
+		<div class="sub-title">Best Time</div>
+		<div class="best-time">
+			<div style="font-size: 50px; font-weight: bold">
+				{{ this.$store.state.userBestTime }}
+			</div>
+		</div>
+		<br />
+		<div class="sub-title">Your Favourite Artists</div>
 		<h3 v-if="artists.length == 0">No artists favourited yet</h3>
-		<Artist
-			v-for="artist in artists"
-			:artistName="artist.name"
-			:artistSummary="artist.summary"
-			v-bind:key="artist.artistName"
-		/>
+		<div v-else class="artist-container">
+			<Artist
+				v-for="artist in artists"
+				:artistName="artist.name"
+				:artistSummary="artist.summary"
+				v-bind:key="artist.artistName"
+			/>
+		</div>
 	</div>
 </template>
 
@@ -24,7 +33,6 @@ export default {
 			artists: this.$store.state.favouritedArtists,
 		};
 	},
-	mounted() {},
 	methods: {
 		routeToHome: function () {
 			this.$router.push("/home");
@@ -34,13 +42,45 @@ export default {
 </script>
 
 <style scoped>
-.savedArtists{
+.title {
+	font-size: 60px;
+	font-weight: bold;
+	color: #ffffff;
+}
+.sub-title {
+	font-size: 30px;
+	font-weight: bold;
+	color: #ffffff;
+}
+.best-time {
+	width: 300px;
+	height: 100px;
+	background-color: #ece281;
+	font-size: 50px;
+	font-weight: bold;
+	color: #040563;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	border-radius: 10px;
+}
+
+.artist-container {
+	height: 650px;
+	overflow: scroll;
+	background-color: #ece281;
+	margin: 0px 10px 10px 10px;
+	border-radius: 5px;
+}
+
+.savedArtists {
 	display: flex;
 	flex-direction: column;
 	/* text */
 	font-size: 20px;
 	font-weight: bold;
-	color: #ffffff;	
+	color: #ffffff;
 }
 .back-button {
 	position: absolute;
@@ -56,9 +96,12 @@ export default {
 	font-weight: bold;
 	color: #040563;
 }
+
 .back-button:hover {
+	border: 2px solid #84c078;
 	background-color: #84c078;
 }
+
 .card {
 	width: 100%;
 	height: 100%;

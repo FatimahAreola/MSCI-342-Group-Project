@@ -1,8 +1,8 @@
 <template>
 	<div class="selectArtist">
-        <br />
+		<br />
 		<button v-on:click="routeToHome" class="back-button">BACK</button>
-		<h1>Select An Artist To Play</h1>
+		<div style="font-size: 60px">Select An Artist To Play</div>
 		<button
 			v-on:click="selectArtist(artist[0], $event)"
 			value="Paul Gauguin"
@@ -11,7 +11,7 @@
 			Paul Gauguin
 		</button>
 		<br />
-        <button
+		<button
 			v-on:click="selectArtist(artist[1], $event)"
 			value="Vincent van Gogh"
 			class="artist-button"
@@ -19,7 +19,7 @@
 			Vincent van Gogh
 		</button>
 		<br />
-        <button
+		<button
 			v-on:click="selectArtist(artist[2], $event)"
 			value="Rembrandt"
 			class="artist-button"
@@ -27,7 +27,7 @@
 			Rembrandt
 		</button>
 		<br />
-        <button
+		<button
 			v-on:click="selectArtist(artist[3], $event)"
 			value="Asher Brown Durand"
 			class="artist-button"
@@ -35,7 +35,7 @@
 			Asher Brown Durand
 		</button>
 		<br />
-        <button
+		<button
 			v-on:click="selectArtist(artist[4], $event)"
 			value="Albert Bierstadt"
 			class="artist-button"
@@ -43,7 +43,7 @@
 			Albert Bierstadt
 		</button>
 		<br />
-        <button
+		<button
 			v-on:click="selectArtist(artist[5], $event)"
 			value="Paul Cézanne"
 			class="artist-button"
@@ -51,7 +51,7 @@
 			Paul Cézanne
 		</button>
 		<br />
-        <button
+		<button
 			v-on:click="selectArtist(artist[6], $event)"
 			value="Auguste Edouart"
 			class="artist-button"
@@ -59,7 +59,7 @@
 			Auguste Edouart
 		</button>
 		<br />
-        <button
+		<button
 			v-on:click="selectArtist(artist[7], $event)"
 			value="Frederic Remington"
 			class="artist-button"
@@ -126,7 +126,6 @@ export default {
 	display: flex;
 	flex-direction: column;
 	/* text */
-	font-size: 20px;
 	font-weight: bold;
 	color: #ffffff;
 }

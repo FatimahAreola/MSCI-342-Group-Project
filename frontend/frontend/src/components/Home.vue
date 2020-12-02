@@ -44,7 +44,7 @@ export default {
 	},
 	methods: {
 		routeToGame: function () {
-			this.$router.push("/game");
+			this.$router.push({ path: "/game", query: { artist: "random" } });
 		},
 		selectArtist: function () {
 			this.$router.push("/selectArtist");
