@@ -12,6 +12,10 @@
 		<button v-on:click="routeToProfile" class="profile options">
 			MY PROFILE
 		</button>
+		<br />
+		<button v-on:click="logout" class="profile options">
+			LOGOUT
+		</button>
 	</div>
 </template>
 
@@ -51,6 +55,9 @@ export default {
 		},
 		routeToProfile: function () {
 			this.$router.push("/profile");
+		},
+		logout: function () {
+			this.$router.push("/");
 		},
 		test_axios: function () {
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/hello";
