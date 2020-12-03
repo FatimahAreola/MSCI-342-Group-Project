@@ -1,6 +1,9 @@
 <template>
 	<div class="board">
 		<div class="summary">
+			<div class="gameSummary">
+			<h3>Your Best Time: {{ bestTime }}</h3>
+			</div>
 			<h2>Matched: {{ this.countMatched }}</h2>
 			<Timer :state="timerState" />
 			<br />
@@ -17,6 +20,7 @@
 			@close="completeMatch"
 		/>
 	</div>
+
 </template>
 
 <script>
@@ -134,7 +138,14 @@ export default {
 	display: flex;
 	align-content: space-between;
 }
-
+.gameSummary {
+	display: flex;
+	flex-direction: column;
+	/* text */
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+}
 .timer {
 	width: 200px;
 	height: 70px;
