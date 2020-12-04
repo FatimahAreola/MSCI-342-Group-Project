@@ -3,15 +3,15 @@
 
 # Unit Tests for PR 32: Improve Home Page and PR 33: Logout Button 
 
-# 1. Unit Test for all Buttons
+# 1. Unit Test for ALL Buttons
 # a. Navigate to "Home" compoenent
 # b. Identify code for buttons:
 # <button v-on:click="routeToGame" class="play-button options">
 #   RANDOM PLAY
 # </button>
-# c. Alter "RANDOM PLAY" code to read any text. Example "Hello"
+# c. Alter "RANDOM PLAY" code to read any text. Example "hello"
 # d. Save and route to application locally. To do so, follow instructions on project README file
-# e. Home page should display button with name "Hello"
+# e. Home page should display button with name "hello"
 # f. Note that this unit test can be used for all buttons on the home page
 
 # 2. Unit Test for ALL Page Routes
