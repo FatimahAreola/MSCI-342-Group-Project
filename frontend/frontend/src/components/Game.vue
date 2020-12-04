@@ -2,7 +2,7 @@
 	<div class="board">
 		<div class="summary">
 			<div class="gameSummary">
-			<h3>Your Best Time: {{ bestTime }}</h3>
+			<h3>Your Best Time: {{this.$store.state.userBestTime}}</h3>
 			</div>
 			<h2>Matched: {{ this.countMatched }}</h2>
 			<Timer :state="timerState" />
