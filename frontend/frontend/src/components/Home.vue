@@ -55,7 +55,6 @@ export default {
 		},
 		routeToProfile: function () {
 			this.$router.push("/profile");
-			console.log("hi");
 		},
 		logout: function () {
 			this.$router.push("/");
