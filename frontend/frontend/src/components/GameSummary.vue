@@ -10,15 +10,19 @@
 		<h3>Total Game Play Time: {{ this.$store.state.timer }}</h3>
 		<h3>Best Game Play Time: {{ bestTime }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
-		<GlobalScore :topScores="topScores" />
-		<h3>Artists in Game</h3>
-		<SavedArtist
-			v-for="name in artistNames"
-			:artistName="name"
-			v-bind:key="name"
-		/>
-		<br /><br />
 		<button class="homeButton" v-on:click="routeToHome">HOME</button>
+		<div class="game">
+			<GlobalScore class="gameChild scores" :topScores="topScores" />
+			<div class="gameChild artists">
+				<h4 id="artistTitle">Artists In Game</h4>
+				<SavedArtist
+					v-for="name in artistNames"
+					:artistName="name"
+					v-bind:key="name"
+				/>
+			</div>
+		</div>
+		<br /><br />
 	</div>
 </template>
 
@@ -40,6 +44,9 @@ export default {
 			topScores: [],
 		};
 	},
+	mounted() {
+		this.getTopUserScores();
+	},
 	computed: {
 		isWon() {
 			if (this.$route.params.matches == 8) {
@@ -60,10 +67,7 @@ export default {
 					this.updateBestTime();
 					return this.$store.state.timer;
 				}
-				alert(this.$store.state.timer);
-				alert(this.$store.state.userBestTime);
 				if (this.$store.state.timer < this.$store.state.userBestTime) {
-					alert("Current timer is smaller than best score!");
 					this.$store.commit(
 						"setCurrentUserBestTimeValue",
 						this.$store.state.timer
@@ -103,7 +107,6 @@ export default {
 				userId: this.$store.state.userId,
 				bestTime: this.$store.state.timer,
 			};
-			alert("will update best time", this.$store.state.timer);
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/updateBestTime";
 			axios
 				.post(baseURI, formData)
@@ -116,7 +119,6 @@ export default {
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/topScores";
 			axios.get(baseURI).then((response) => {
 				this.topScores = response.data;
-				alert(this.topScores);
 			});
 		},
 	},
@@ -132,6 +134,28 @@ export default {
 	font-weight: bold;
 	color: #ffffff;
 }
+.gameChild {
+	float: left;
+}
+.scores {
+	margin-left: 50px;
+}
+.artists {
+	width: 150px;
+	margin-left: 100px;
+}
+.game {
+	margin-left: 350px;
+}
+h3 {
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+h4 {
+	width: 150px;
+	margin-left: 100px;
+}
+
 .homeButton {
 	/* button */
 	margin-left: auto;

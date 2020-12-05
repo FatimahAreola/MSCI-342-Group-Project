@@ -82,7 +82,7 @@ def Login():
     if not results[3]:
         bestTime = "00:00:00"
     else:
-        bestTime = str(results[3])
+        bestTime = "0"+str(results[3])
         print('result time',bestTime)
         print('result type', type(bestTime))
     if results:

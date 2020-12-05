@@ -68,7 +68,6 @@ export default {
 }
 .left {
 	display: inline-block;
-	padding-left: 50px;
 }
 .right {
 	display: inline-block;

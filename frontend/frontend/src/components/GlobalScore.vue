@@ -1,10 +1,11 @@
 <template>
 	<div>
+		<h3>Top Players</h3>
 		<table class="scoreBoard">
 			<tr>
 				<th>Place</th>
 				<th>Username</th>
-				<th>Score</th>
+				<th>Time</th>
 			</tr>
 			<tr v-for="topScore in topScores" v-bind:key="topScore.userID">
 				<th>{{ topScore.place }}</th>
@@ -21,6 +22,9 @@ export default {
 };
 </script>
 <style scoped>
+h3 {
+	margin: 0 auto;
+}
 .scoreBoard {
 	height: 150px;
 	width: 400px;

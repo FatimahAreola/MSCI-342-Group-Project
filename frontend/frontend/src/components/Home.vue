@@ -1,7 +1,6 @@
 <template>
 	<div class="home">
 		<GlobalScore :topScores="topScores" />
-		<p>{{ this.$store.state.userBestTime }}</p>
 		<br />
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
