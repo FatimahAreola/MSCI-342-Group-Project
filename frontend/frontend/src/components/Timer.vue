@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<span>{{ time }}</span>
+		<span>{{ maxTime - time }}</span>
 	</div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
 	mounted() {
 		this.play();
 	},
-	props: ["state"],
+	props: ["state", "maxTime"],
 	data() {
 		return {
 			time: "00:00:00",
@@ -31,6 +31,11 @@ export default {
 					this.end();
 				}
 			},
+		
+
+
+
+
 		},
 	},
 	methods: {

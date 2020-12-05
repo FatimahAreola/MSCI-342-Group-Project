@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		timer: 0,
+		maxTime: '20:00:00',
 		userId: null,
 		userBestTime: null,
 		favouritedArtists: []
@@ -22,6 +23,9 @@ export default new Vuex.Store({
 		},
 		setFavouritedArtists(state, favouritedArtists) {
 			state.favouritedArtists = favouritedArtists
-		}
+		},
+		setMaxTime(state, maxTime) {
+			state.maxTime = maxTime
+		},
 	}
 })

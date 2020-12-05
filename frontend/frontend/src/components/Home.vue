@@ -1,6 +1,7 @@
 <template>
 	<div class="home">
 		<br />
+		
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
 		</button>
@@ -8,6 +9,15 @@
 		<button v-on:click="selectArtist" class="play-button options">
 			ARTIST PLAY
 		</button>
+		<br /><br /><br />
+		<div id="v-model-radiobutton">
+			<input type="radio" id="Easy" value="20:00:00" v-model="selectDifficulty"/>
+			<label for="Easy">Easy</label>
+			<input type="radio" id="Medium" value="03:00:00" v-model="selectDifficulty"/>
+			<label for="Medium">Medium</label>
+			<input type="radio" id="Challenging" value="01:00:00" v-model="selectDifficulty"/>
+			<label for="Challenging">Challenging</label>
+		</div>
 		<br /><br /><br />
 		<button v-on:click="routeToProfile" class="profile options">
 			MY PROFILE
@@ -37,6 +47,8 @@ export default {
 				"Auguste Edouart",
 				"Frederic Remington",
 			],
+
+			selectDifficulty: ''
 		};
 	},
 	props: {
@@ -46,15 +58,29 @@ export default {
 		this.test_axios();
 		this.getFavouritedArtists();
 	},
+
+	watch: {
+		selectDifficulty(){
+			this.$store.commit(
+						"setMaxTime",
+						this.selectDifficulty
+					);
+			console.log(this.$store.state.maxTime)
+		}
+
+	}
+
+
 	methods: {
 		routeToGame: function () {
-			this.$router.push({ path: "/game", query: { artist: "random" } });
+			this.$router.push({ path: "/game", query: { artist: "random" });
 		},
 		selectArtist: function () {
-			this.$router.push("/selectArtist");
+			// this.$router.push("/selectArtist");
+			this.$router.push({ path: "/selectArtist"});
 		},
 		routeToProfile: function () {
-			this.$router.push("/profile");
+			this.$router.push({ path: "/profile"});
 		},
 		logout: function () {
 			this.$router.push("/");

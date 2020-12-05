@@ -5,7 +5,7 @@
 			<h3>Your Best Time: {{this.$store.state.userBestTime}}</h3>
 			</div>
 			<h2>Matched: {{ this.countMatched }}</h2>
-			<Timer :state="timerState" />
+			<Timer ref="timer" :state="timerState" :maxTime="maxTime"/>
 			<br />
 			<button class="summaryButton" @click="stopGame">STOP GAME</button>
 			<button class="summaryButton" @click="returnHome">HOME</button>
@@ -40,7 +40,7 @@ export default {
 	},
 	mounted() {
 		let artist = this.$route.query.artist;
-
+		let maxTime = this.$route.query.selectDifficulty;
 		let data = {
 			selectedArtist: artist,
 		};
@@ -63,6 +63,13 @@ export default {
 		shuffled() {
 			return _.shuffle(this.cards);
 		},
+		timeLeft() {
+      		return this.timerState;
+	},
+	
+	watchTime (){
+		return this.$refs.timer.time;
+	}
 	},
 	watch: {
 		countMatched() {
@@ -74,6 +81,11 @@ export default {
 			if (this.countFlipped == 2) {
 				this.showMatchModal = true;
 				this.timerState = "stopped";
+			}
+		},
+		watchTime() {
+			if (this.$refs.timer.time == maxTime) {
+				this.stopGame();
 			}
 		},
 	},
