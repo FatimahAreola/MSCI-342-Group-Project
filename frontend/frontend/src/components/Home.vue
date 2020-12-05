@@ -1,5 +1,6 @@
 <template>
 	<div class="home">
+		<p>{{ this.$store.state.userBestTime }}</p>
 		<br />
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
@@ -13,9 +14,7 @@
 			MY PROFILE
 		</button>
 		<br />
-		<button v-on:click="logout" class="profile options">
-			LOGOUT
-		</button>
+		<button v-on:click="logout" class="profile options">LOGOUT</button>
 	</div>
 </template>
 

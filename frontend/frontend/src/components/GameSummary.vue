@@ -47,6 +47,7 @@ export default {
 		bestTime() {
 			if (this.isWon) {
 				if (this.$store.state.userBestTime == "00:00:00") {
+					alert("Set to 0");
 					this.$store.commit(
 						"setCurrentUserBestTimeValue",
 						this.$store.state.timer
@@ -55,12 +56,19 @@ export default {
 					this.updateBestTime();
 					return this.$store.state.timer;
 				}
+				alert("User Best Time Currently");
+				alert(this.$store.state.userBestTime);
+				alert("user timer");
+				alert(this.$store.state.timer);
 				if (this.$store.state.timer < this.$store.state.userBestTime) {
 					this.$store.commit(
 						"setCurrentUserBestTimeValue",
 						this.$store.state.timer
 					);
 					// send new best time to database
+					alert("Timer smaller than user best time");
+					alert(this.$store.state.timer);
+					alert(this.$store.state.userBestTime);
 					this.updateBestTime();
 					return this.$store.state.timer;
 				} else {
