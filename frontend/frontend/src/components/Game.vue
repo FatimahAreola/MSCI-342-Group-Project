@@ -2,10 +2,10 @@
 	<div class="board">
 		<div class="summary">
 			<div class="gameSummary">
-			<h3>Your Best Time: {{this.$store.state.userBestTime}}</h3>
+				<h3>Your Best Time: {{ this.$store.state.userBestTime }}</h3>
 			</div>
 			<h2>Matched: {{ this.countMatched }}</h2>
-			<Timer ref="timer" :state="timerState" :maxTime="maxTime"/>
+			<Timer ref="timer" :state="timerState" />
 			<br />
 			<button class="summaryButton" @click="stopGame">STOP GAME</button>
 			<button class="summaryButton" @click="returnHome">HOME</button>
@@ -20,7 +20,6 @@
 			@close="completeMatch"
 		/>
 	</div>
-
 </template>
 
 <script>
@@ -40,7 +39,6 @@ export default {
 	},
 	mounted() {
 		let artist = this.$route.query.artist;
-		let maxTime = this.$route.query.selectDifficulty;
 		let data = {
 			selectedArtist: artist,
 		};
@@ -64,12 +62,14 @@ export default {
 			return _.shuffle(this.cards);
 		},
 		timeLeft() {
-      		return this.timerState;
-	},
-	
-	watchTime (){
-		return this.$refs.timer.time;
-	}
+			return this.timerState;
+		},
+		watchTime() {
+			//THIS IS WHERE THE BUG IS!!!!! the refs thing isn't working! need to google this
+
+			console.log(this.$refs.timer);
+			return this.$refs.timer;
+		},
 	},
 	watch: {
 		countMatched() {
@@ -84,7 +84,7 @@ export default {
 			}
 		},
 		watchTime() {
-			if (this.$refs.timer.time == maxTime) {
+			if (this.watchTime >= this.$store.state.maxTime) {
 				this.stopGame();
 			}
 		},

@@ -95,17 +95,22 @@ export default {
 	mounted() {
 		this.test_axios();
 		this.getFavouritedArtists();
-		let maxTime = this.$route.query.selectDifficulty;
 	},
 	methods: {
 		routeToHome: function () {
 			this.$router.push("/home");
 		},
 		routeToGame: function () {
-			this.$router.push({ path: "/game", query: { artist: "random" } });
+			this.$router.push({
+				path: "/game",
+				query: { artist: "random" },
+			});
 		},
 		selectArtist: function (artist) {
-			this.$router.push({ path: "/game", query: { artist, selectDifficulty: maxTime} });
+			this.$router.push({
+				path: "/game",
+				query: { artist },
+			});
 		},
 		test_axios: function () {
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/hello";
