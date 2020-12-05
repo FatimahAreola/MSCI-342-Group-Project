@@ -267,14 +267,18 @@ def savedArtists():
 def topScores():
     with DbSelector() as d:
 
-        query = "SELECT userId, bestTime FROM Users ORDER BY ASC LIMIT 5"
+        query = "SELECT userName, bestTime FROM Users WHERE bestTime IS NOT NULL ORDER BY bestTime LIMIT 5"
 
         d.cursor.execute(query)
 
         results = d.cursor.fetchall()
-        print('best results', results)
-    results = [{'userID': result[0].decode(), 'bestTime': result[1]} for result in results]
-    return jsonify(results), 200
+    count = 0
+    topScores = []
+    for result in results:
+        count+=1
+        topScores.append({'userName': result[0].decode(), 'time': str(result[1]), 'place':count})
+
+    return jsonify(topScores), 200
 
 
 @app.route("/api/ping")

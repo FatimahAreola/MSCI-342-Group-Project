@@ -10,6 +10,7 @@
 		<h3>Total Game Play Time: {{ this.$store.state.timer }}</h3>
 		<h3>Best Game Play Time: {{ bestTime }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
+		<GlobalScore :topScores="topScores" />
 		<h3>Artists in Game</h3>
 		<SavedArtist
 			v-for="name in artistNames"
@@ -23,17 +24,20 @@
 
 <script>
 import SavedArtist from "./SavedArtist";
+import GlobalScore from "./GlobalScore";
 import axios from "axios";
 
 export default {
 	components: {
 		SavedArtist,
+		GlobalScore,
 	},
 	name: "GameSummary",
 	data() {
 		return {
 			artistNames: this.artistsList(),
 			favouritedArtists: this.$store.state.favouritedArtists,
+			topScores: [],
 		};
 	},
 	computed: {
@@ -56,19 +60,15 @@ export default {
 					this.updateBestTime();
 					return this.$store.state.timer;
 				}
-				alert("User Best Time Currently");
-				alert(this.$store.state.userBestTime);
-				alert("user timer");
 				alert(this.$store.state.timer);
+				alert(this.$store.state.userBestTime);
 				if (this.$store.state.timer < this.$store.state.userBestTime) {
+					alert("Current timer is smaller than best score!");
 					this.$store.commit(
 						"setCurrentUserBestTimeValue",
 						this.$store.state.timer
 					);
 					// send new best time to database
-					alert("Timer smaller than user best time");
-					alert(this.$store.state.timer);
-					alert(this.$store.state.userBestTime);
 					this.updateBestTime();
 					return this.$store.state.timer;
 				} else {
@@ -107,8 +107,17 @@ export default {
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/updateBestTime";
 			axios
 				.post(baseURI, formData)
-				.then(() => {})
+				.then(() => {
+					this.getTopUserScores();
+				})
 				.catch(() => {});
+		},
+		getTopUserScores: function () {
+			const baseURI = process.env.VUE_APP_HOST_URL + "api/topScores";
+			axios.get(baseURI).then((response) => {
+				this.topScores = response.data;
+				alert(this.topScores);
+			});
 		},
 	},
 };
