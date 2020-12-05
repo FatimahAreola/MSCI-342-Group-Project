@@ -61,7 +61,7 @@ export default {
 	},
 	methods: {
 		sendToGame() {
-			this.$router.push({ path: "/game", query: { artist, selectDifficulty: maxTime} });
+			this.$router.push({ path: "/game", query: { artist: this.artistName } });
 		},
 	},
 };

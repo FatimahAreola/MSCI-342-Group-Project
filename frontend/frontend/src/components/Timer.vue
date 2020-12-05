@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<span>{{ maxTime - time }}</span>
+		<span>{{remainingTime}}</span>
 	</div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
 	mounted() {
 		this.play();
 	},
-	props: ["state", "maxTime"],
+	props: ["state"],
 	data() {
 		return {
 			time: "00:00:00",
@@ -19,6 +19,11 @@ export default {
 			started: null,
 			running: false,
 		};
+	},
+	computed: {
+		remainingTime() {
+			return this.maxTime - this.time;
+		},
 	},
 	watch: {
 		state: {
