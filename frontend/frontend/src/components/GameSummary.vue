@@ -94,6 +94,7 @@ export default {
 				userId: this.$store.state.userId,
 				bestTime: this.$store.state.timer,
 			};
+			alert("will update best time", this.$store.state.timer);
 			const baseURI = process.env.VUE_APP_HOST_URL + "api/updateBestTime";
 			axios
 				.post(baseURI, formData)

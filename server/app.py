@@ -6,6 +6,7 @@ import wikipedia
 import os
 import random
 import multiprocessing
+import datetime
 from multiprocessing import Pool, current_process
 
 app = Flask(__name__)
@@ -76,9 +77,14 @@ def Login():
         d.cursor.execute(query, [username, password])
 
         results = d.cursor.fetchone()
-
+    if not results[3]:
+        bestTime = "00:00:00"
+    else:
+        bestTime = str(results[3])
+        print('result time',bestTime)
+        print('result type', type(bestTime))
     if results:
-        return jsonify(results[0], results[3].decode()), 200
+        return jsonify(results[0], bestTime), 200
     else:
         return jsonify("Invalid Username or Password"), 401
 
@@ -172,8 +178,12 @@ def pullMETAPI():
 def updateTime():
     userID = request.get_json()["userId"]
     bestTime = request.get_json()["bestTime"]
-
+    print('Update best time', bestTime)
+    bestTime =  datetime.datetime.strptime(bestTime, '%H:%M:%S')
+    print('betTime',bestTime)
+    print(' time type', type(bestTime))
     with DbSelector() as d:
+
 
         query = "UPDATE Users SET Users.bestTime = %s WHERE userId = %s;"
 
@@ -233,6 +243,18 @@ def savedArtists():
     artists= [result[0].decode() for result in results]
     artistDetails = [{'name': artist, 'summary':wikipedia.summary(artist)} for artist in artists]
     return jsonify(artistDetails), 200
+@app.route("/api/topScores")
+def topScores():
+    with DbSelector() as d:
+
+        query = "SELECT userId, bestTime FROM Users ORDER BY ASC LIMIT 5"
+
+        d.cursor.execute(query)
+
+        results = d.cursor.fetchall()
+        print('best results', results)
+    results = [{'userID': result[0].decode(), 'bestTime': result[1]} for result in results]
+    return jsonify(results), 200
 
 @app.route("/api/ping")
 def ping():
