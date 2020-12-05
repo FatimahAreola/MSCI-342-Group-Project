@@ -58,7 +58,6 @@ export default {
 		bestTime() {
 			if (this.isWon) {
 				if (this.$store.state.userBestTime == "00:00:00") {
-					alert("Set to 0");
 					this.$store.commit(
 						"setCurrentUserBestTimeValue",
 						this.$store.state.timer
