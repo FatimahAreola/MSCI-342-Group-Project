@@ -9,6 +9,7 @@ import GameSummary from './components/GameSummary.vue'
 import CreateAccount from './components/CreateAccount/CreateAccount.vue'
 import Login from './components/Login.vue'
 import Profile from './components/Profile.vue'
+import SelectArtist from './components/SelectArtist.vue'
 
 const routes = [
 	{
@@ -38,6 +39,11 @@ const routes = [
 		path: "/profile",
 		name: 'profile',
 		component: Profile
+	},
+	{
+		path: "/selectArtist",
+		name: 'selectArtist',
+		component: SelectArtist
 	}
 ];
 
