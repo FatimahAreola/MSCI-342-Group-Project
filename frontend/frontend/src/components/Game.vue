@@ -65,7 +65,6 @@ export default {
 			return this.timerState;
 		},
 		watchTime() {
-	
 			return this.$refs.timer;
 		},
 	},
