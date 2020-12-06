@@ -1,6 +1,7 @@
 <template>
 	<div class="home">
 		<br />
+<<<<<<< Updated upstream
 
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
@@ -11,6 +12,9 @@
 		</button>
 		<br /><br /><br />
 		<div id="v-model-radiobutton">
+=======
+		<div id="v-model-radiobutton"  >
+>>>>>>> Stashed changes
 			<input
 				type="radio"
 				id="Easy"
@@ -30,10 +34,19 @@
 				id="Challenging"
 				value="00:01:00"
 				v-model="selectDifficulty"
-			/>
+				/>
 			<label for="Challenging">Challenging</label>
 		</div>
 		<br /><br /><br />
+		<button v-on:click="routeToGame" class="play-button options">
+			RANDOM PLAY
+		</button>
+		<br />
+		<button v-on:click="selectArtist" class="play-button options">
+			ARTIST PLAY
+		</button>
+		<br /><br /><br />
+		
 		<button v-on:click="routeToProfile" class="profile options">
 			MY PROFILE
 		</button>
@@ -80,10 +93,14 @@ export default {
 	},
 	methods: {
 		routeToGame: function () {
+<<<<<<< Updated upstream
 			this.$router.push({
 				path: "/game",
 				query: { artist: "random" },
 			});
+=======
+			this.$router.push({ path: "/game", query: { artist: "random" },});
+>>>>>>> Stashed changes
 		},
 		selectArtist: function () {
 			this.$router.push({ path: "/selectArtist" });
@@ -121,6 +138,14 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+.radioButtons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 20px;
+	font-weight: bold;
+	color: #ece281;
 }
 
 .options {
