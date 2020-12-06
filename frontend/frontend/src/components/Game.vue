@@ -82,7 +82,7 @@ export default {
 			}
 		},
 		watchTime() {
-			if (this.watchTime >= this.$store.state.maxTime) {
+			if (this.watchTime == this.$store.state.maxTime) {
 				this.stopGame();
 			}
 		},
