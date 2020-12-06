@@ -2,6 +2,30 @@
 	<div class="home">
 		<GlobalScore :topScores="topScores" />
 		<br />
+		<div id="v-model-radiobutton"  >
+			<input
+				type="radio"
+				id="Easy"
+				value="00:20:00"
+				v-model="selectDifficulty"
+			/>
+			<label for="Easy">Easy</label>
+			<input
+				type="radio"
+				id="Medium"
+				value="00:03:00"
+				v-model="selectDifficulty"
+			/>
+			<label for="Medium">Medium</label>
+			<input
+				type="radio"
+				id="Hard"
+				value="00:01:00"
+				v-model="selectDifficulty"
+				/>
+			<label for="Hard">Hard</label>
+		</div>
+		<br /><br /><br />
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
 		</button>
@@ -10,6 +34,7 @@
 			ARTIST PLAY
 		</button>
 		<br /><br /><br />
+		
 		<button v-on:click="routeToProfile" class="profile options">
 			MY PROFILE
 		</button>
@@ -39,6 +64,8 @@ export default {
 				"Auguste Edouart",
 				"Frederic Remington",
 			],
+
+			selectDifficulty: "",
 			topScores: [],
 		};
 	},
@@ -50,15 +77,25 @@ export default {
 		this.getFavouritedArtists();
 		this.getTopUserScores();
 	},
+
+	watch: {
+		selectDifficulty() {
+			this.$store.commit("setMaxTime", this.selectDifficulty);
+			console.log(this.$store.state.maxTime);
+		},
+	},
 	methods: {
 		routeToGame: function () {
-			this.$router.push({ path: "/game", query: { artist: "random" } });
+			this.$router.push({
+				path: "/game",
+				query: { artist: "random" },
+			});
 		},
 		selectArtist: function () {
-			this.$router.push("/selectArtist");
+			this.$router.push({ path: "/selectArtist" });
 		},
 		routeToProfile: function () {
-			this.$router.push("/profile");
+			this.$router.push({ path: "/profile" });
 		},
 		logout: function () {
 			this.$router.push("/");
@@ -96,6 +133,14 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+.radioButtons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 20px;
+	font-weight: bold;
+	color: #FFFFFF;
 }
 
 .options {

@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<span>{{ time }}</span>
+		<span v-if="maxTime != '00:20:00'">{{ time }} out of {{ maxTime }}</span>
+		<span v-else> No Time Limit! {{ time }}</span>
 	</div>
 </template>
 
@@ -18,7 +19,13 @@ export default {
 			runTime: 0,
 			started: null,
 			running: false,
+			maxTime: this.$store.state.maxTime,
 		};
+	},
+	computed: {
+		remainingTime() {
+			return this.maxTime - this.time;
+		},
 	},
 	watch: {
 		state: {
@@ -31,6 +38,9 @@ export default {
 					this.end();
 				}
 			},
+		},
+		time() {
+			this.$emit("update", this.time);
 		},
 	},
 	methods: {

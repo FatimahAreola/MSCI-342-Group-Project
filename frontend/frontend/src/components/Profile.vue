@@ -37,6 +37,8 @@ export default {
 		routeToHome: function () {
 			this.$router.push("/home");
 		},
+		
+
 	},
 };
 </script>

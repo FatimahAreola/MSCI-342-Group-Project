@@ -3,7 +3,7 @@
 		<div class="summary">
 			<h3>Your Best Time: {{this.$store.state.userBestTime}}</h3>
 			<h2>Matched: {{ this.countMatched }}</h2>
-			<Timer :state="timerState" />
+			<Timer ref="timer" :state="timerState" @update="updateTime" />
 			<br />
 			<button class="summaryButton" @click="stopGame">STOP GAME</button>
 			<button class="summaryButton" @click="returnHome">HOME</button>
@@ -37,7 +37,6 @@ export default {
 	},
 	mounted() {
 		let artist = this.$route.query.artist;
-
 		let data = {
 			selectedArtist: artist,
 		};
@@ -54,6 +53,7 @@ export default {
 			countFlipped: 0,
 			flipped: [],
 			showMatchModal: false,
+			gametime: "00:00:00",
 		};
 	},
 	computed: {
@@ -71,6 +71,11 @@ export default {
 			if (this.countFlipped == 2) {
 				this.showMatchModal = true;
 				this.timerState = "stopped";
+			}
+		},
+		gametime() {
+			if (this.gametime == this.$store.state.maxTime) {
+				this.stopGame();
 			}
 		},
 	},
@@ -108,6 +113,9 @@ export default {
 				}
 			});
 		},
+		updateTime(gameTime) {
+			this.gametime = gameTime;
+		},
 		setTimerState() {
 			this.timerState = "stopped";
 		},
@@ -135,7 +143,14 @@ export default {
 	display: flex;
 	align-content: space-between;
 }
-
+.gameSummary {
+	display: flex;
+	flex-direction: column;
+	/* text */
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+}
 .timer {
 	width: 200px;
 	height: 70px;
