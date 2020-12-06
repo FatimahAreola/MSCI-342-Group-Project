@@ -1,20 +1,7 @@
 <template>
 	<div class="home">
 		<br />
-<<<<<<< Updated upstream
-
-		<button v-on:click="routeToGame" class="play-button options">
-			RANDOM PLAY
-		</button>
-		<br />
-		<button v-on:click="selectArtist" class="play-button options">
-			ARTIST PLAY
-		</button>
-		<br /><br /><br />
-		<div id="v-model-radiobutton">
-=======
 		<div id="v-model-radiobutton"  >
->>>>>>> Stashed changes
 			<input
 				type="radio"
 				id="Easy"
@@ -93,14 +80,10 @@ export default {
 	},
 	methods: {
 		routeToGame: function () {
-<<<<<<< Updated upstream
 			this.$router.push({
 				path: "/game",
 				query: { artist: "random" },
 			});
-=======
-			this.$router.push({ path: "/game", query: { artist: "random" },});
->>>>>>> Stashed changes
 		},
 		selectArtist: function () {
 			this.$router.push({ path: "/selectArtist" });
