@@ -75,8 +75,8 @@ export default {
 				this.timerState = "stopped";
 			}
 		},
-		watchTime() {
-			if (this.gametime >= this.$store.state.maxTime) {
+		gametime() {
+			if (this.gametime == this.$store.state.maxTime) {
 				this.stopGame();
 			}
 		},
