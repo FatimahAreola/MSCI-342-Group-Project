@@ -18,11 +18,11 @@
 			<label for="Medium">Medium</label>
 			<input
 				type="radio"
-				id="Challenging"
+				id="Hard"
 				value="00:01:00"
 				v-model="selectDifficulty"
 				/>
-			<label for="Challenging">Challenging</label>
+			<label for="Hard">Hard</label>
 		</div>
 		<br /><br /><br />
 		<button v-on:click="routeToGame" class="play-button options">
@@ -128,7 +128,7 @@ export default {
 	align-items: center;
 	font-size: 20px;
 	font-weight: bold;
-	color: #ece281;
+	color: #FFFFFF;
 }
 
 .options {

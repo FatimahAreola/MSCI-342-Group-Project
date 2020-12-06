@@ -16,7 +16,6 @@
 				v-for="artist in artists"
 				:artistName="artist.name"
 				:artistSummary="artist.summary"
-				:maxTime = "this.$route.query.selectDifficulty"
 				v-bind:key="artist.artistName"
 			/>
 		</div>
