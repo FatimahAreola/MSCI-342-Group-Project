@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<span v-if="maxTime != '00:20:00'">{{ time }} out of {{ maxTime }}</span>
-		<span v-else="No Time Limit!">{{ time }}</span>
+	        <span v-else>No Time Limit! {{ time }}</span>
 	</div>
 </template>
 
