@@ -1,5 +1,6 @@
 <template>
 	<div class="home">
+		<GlobalScore :topScores="topScores" />
 		<br />
 		<div id="v-model-radiobutton"  >
 			<input
@@ -44,10 +45,13 @@
 
 <script>
 import axios from "axios";
+import GlobalScore from "./GlobalScore.vue";
 
 export default {
 	name: "HelloWorld",
-	components: {},
+	components: {
+		GlobalScore,
+	},
 	data() {
 		return {
 			artist: [
@@ -62,6 +66,7 @@ export default {
 			],
 
 			selectDifficulty: "",
+			topScores: [],
 		};
 	},
 	props: {
@@ -70,6 +75,7 @@ export default {
 	mounted() {
 		this.test_axios();
 		this.getFavouritedArtists();
+		this.getTopUserScores();
 	},
 
 	watch: {
@@ -112,6 +118,12 @@ export default {
 				this.$store.commit("setFavouritedArtists", response.data);
 			});
 		},
+		getTopUserScores: function () {
+			const baseURI = process.env.VUE_APP_HOST_URL + "api/topScores";
+			axios.get(baseURI).then((response) => {
+				this.topScores = response.data;
+			});
+		},
 	},
 };
 </script>
@@ -133,11 +145,11 @@ export default {
 
 .options {
 	/* button */
-	width: 800px;
-	height: 100px;
+	width: 350px;
+	height: 45px;
 	background-color: #ece281;
 	/* text */
-	font-size: 50px;
+	font-size: 25px;
 	font-weight: bold;
 	color: #040563;
 }

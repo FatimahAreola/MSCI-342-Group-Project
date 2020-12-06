@@ -155,7 +155,6 @@ export default {
 	width: 200px;
 	height: 70px;
 }
-
 .summary {
 	margin-left: 200px;
 	/* text */
