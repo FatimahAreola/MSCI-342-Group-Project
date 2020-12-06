@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<span>{{ remainingTime }}</span>
+		<span>{{ time }} out of {{ maxTime }}</span>
 	</div>
 </template>
 
@@ -21,11 +21,7 @@ export default {
 			maxTime: this.$store.state.maxTime,
 		};
 	},
-	computed: {
-		remainingTime() {
-			return this.maxTime - this.time;
-		},
-	},
+	computed: {},
 	watch: {
 		state: {
 			immediate: true,
@@ -37,6 +33,9 @@ export default {
 					this.end();
 				}
 			},
+		},
+		time() {
+			this.$emit("update", this.time);
 		},
 	},
 	methods: {

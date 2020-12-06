@@ -5,7 +5,7 @@
 				<h3>Your Best Time: {{ this.$store.state.userBestTime }}</h3>
 			</div>
 			<h2>Matched: {{ this.countMatched }}</h2>
-			<Timer ref="timer" :state="timerState" />
+			<Timer ref="timer" :state="timerState" @update="updateTime" />
 			<br />
 			<button class="summaryButton" @click="stopGame">STOP GAME</button>
 			<button class="summaryButton" @click="returnHome">HOME</button>
@@ -55,6 +55,7 @@ export default {
 			countFlipped: 0,
 			flipped: [],
 			showMatchModal: false,
+			gametime: "00:00:00",
 		};
 	},
 	computed: {
@@ -63,12 +64,6 @@ export default {
 		},
 		timeLeft() {
 			return this.timerState;
-		},
-		watchTime() {
-			//THIS IS WHERE THE BUG IS!!!!! the refs thing isn't working! need to google this
-
-			console.log(this.$refs.timer);
-			return this.$refs.timer;
 		},
 	},
 	watch: {
@@ -84,7 +79,7 @@ export default {
 			}
 		},
 		watchTime() {
-			if (this.watchTime >= this.$store.state.maxTime) {
+			if (this.gametime >= this.$store.state.maxTime) {
 				this.stopGame();
 			}
 		},
@@ -122,6 +117,9 @@ export default {
 					card.active = !card.active;
 				}
 			});
+		},
+		updateTime(gameTime) {
+			this.gametime = gameTime;
 		},
 		setTimerState() {
 			this.timerState = "stopped";
