@@ -61,7 +61,7 @@ export default {
 			return _.shuffle(this.cards);
 		},
 		timeLeft() {
-      			return this.timerState;
+			return this.timerState;
 		},
 		watchTime() {
 			//THIS IS WHERE THE BUG IS!!!!! the refs thing isn't working! need to google this

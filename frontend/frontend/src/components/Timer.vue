@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<span>{{remainingTime}}</span>
+		<span>{{ time }} out of {{ maxTime }}</span>
 	</div>
 </template>
 
