@@ -1,6 +1,7 @@
 <template>
 	<div class="board">
 		<div class="summary">
+			<h3>Your Best Time: {{this.$store.state.userBestTime}}</h3>
 			<h2>Matched: {{ this.countMatched }}</h2>
 			<Timer :state="timerState" />
 			<br />
@@ -139,7 +140,6 @@ export default {
 	width: 200px;
 	height: 70px;
 }
-
 .summary {
 	margin-left: 200px;
 	/* text */
