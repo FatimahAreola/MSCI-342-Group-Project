@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<span>{{ time }} out of {{ maxTime }}</span>
+		<span v-if="maxTime != '00:20:00'">{{ time }} out of {{ maxTime }}</span>
+		<span v-else>{{ time }}</span>
 	</div>
 </template>
 
