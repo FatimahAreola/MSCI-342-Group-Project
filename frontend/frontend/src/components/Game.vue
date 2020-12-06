@@ -18,7 +18,6 @@
 			@close="completeMatch"
 		/>
 	</div>
-
 </template>
 
 <script>
@@ -54,18 +53,12 @@ export default {
 			countFlipped: 0,
 			flipped: [],
 			showMatchModal: false,
-			watchTime: "00:00:00",
+			gametime: "00:00:00",
 		};
 	},
 	computed: {
 		shuffled() {
 			return _.shuffle(this.cards);
-		},
-		timeLeft() {
-			return this.timerState;
-		},
-		watchTime() {
-			return this.$refs.timer;
 		},
 	},
 	watch: {
@@ -80,8 +73,8 @@ export default {
 				this.timerState = "stopped";
 			}
 		},
-		watchTime() {
-			if (this.watchTime == this.$store.state.maxTime) {
+		gametime() {
+			if (this.gametime == this.$store.state.maxTime) {
 				this.stopGame();
 			}
 		},
@@ -119,6 +112,9 @@ export default {
 					card.active = !card.active;
 				}
 			});
+		},
+		updateTime(gameTime) {
+			this.gametime = gameTime;
 		},
 		setTimerState() {
 			this.timerState = "stopped";

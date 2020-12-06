@@ -1,7 +1,7 @@
 <template>
 	<div class="home">
 		<br />
-		
+
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
 		</button>
@@ -38,9 +38,7 @@
 			MY PROFILE
 		</button>
 		<br />
-		<button v-on:click="logout" class="profile options">
-			LOGOUT
-		</button>
+		<button v-on:click="logout" class="profile options">LOGOUT</button>
 	</div>
 </template>
 
@@ -63,7 +61,7 @@ export default {
 				"Frederic Remington",
 			],
 
-			selectDifficulty: ''
+			selectDifficulty: "",
 		};
 	},
 	props: {
@@ -82,7 +80,10 @@ export default {
 	},
 	methods: {
 		routeToGame: function () {
-			this.$router.push({ path: "/game", query: { artist: "random" });
+			this.$router.push({
+				path: "/game",
+				query: { artist: "random" },
+			});
 		},
 		selectArtist: function () {
 			this.$router.push({ path: "/selectArtist" });

@@ -19,6 +19,7 @@ export default {
 			runTime: 0,
 			started: null,
 			running: false,
+			maxTime: this.$store.state.maxTime,
 		};
 	},
 	computed: {
@@ -37,11 +38,9 @@ export default {
 					this.end();
 				}
 			},
-		
-
-
-
-
+		},
+		time() {
+			this.$emit("update", this.time);
 		},
 	},
 	methods: {
