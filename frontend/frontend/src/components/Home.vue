@@ -14,21 +14,21 @@
 			<input
 				type="radio"
 				id="Easy"
-				value="20:00:00"
+				value="00:20:00"
 				v-model="selectDifficulty"
 			/>
 			<label for="Easy">Easy</label>
 			<input
 				type="radio"
 				id="Medium"
-				value="03:00:00"
+				value="00:03:00"
 				v-model="selectDifficulty"
 			/>
 			<label for="Medium">Medium</label>
 			<input
 				type="radio"
 				id="Challenging"
-				value="01:00:00"
+				value="00:01:00"
 				v-model="selectDifficulty"
 			/>
 			<label for="Challenging">Challenging</label>

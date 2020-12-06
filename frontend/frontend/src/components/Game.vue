@@ -62,9 +62,6 @@ export default {
 		shuffled() {
 			return _.shuffle(this.cards);
 		},
-		timeLeft() {
-			return this.timerState;
-		},
 	},
 	watch: {
 		countMatched() {
