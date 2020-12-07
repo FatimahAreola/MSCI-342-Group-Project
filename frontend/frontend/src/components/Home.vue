@@ -1,5 +1,6 @@
 <template>
 	<div class="home">
+		<GlobalScore :topScores="topScores" />
 		<br />
 		<button v-on:click="routeToGame" class="play-button options">
 			RANDOM PLAY
@@ -13,18 +14,19 @@
 			MY PROFILE
 		</button>
 		<br />
-		<button v-on:click="logout" class="profile options">
-			LOGOUT
-		</button>
+		<button v-on:click="logout" class="profile options">LOGOUT</button>
 	</div>
 </template>
 
 <script>
 import axios from "axios";
+import GlobalScore from "./GlobalScore.vue";
 
 export default {
 	name: "HelloWorld",
-	components: {},
+	components: {
+		GlobalScore,
+	},
 	data() {
 		return {
 			artist: [
@@ -37,6 +39,7 @@ export default {
 				"Auguste Edouart",
 				"Frederic Remington",
 			],
+			topScores: [],
 		};
 	},
 	props: {
@@ -45,6 +48,7 @@ export default {
 	mounted() {
 		this.test_axios();
 		this.getFavouritedArtists();
+		this.getTopUserScores();
 	},
 	methods: {
 		routeToGame: function () {
@@ -77,6 +81,12 @@ export default {
 				this.$store.commit("setFavouritedArtists", response.data);
 			});
 		},
+		getTopUserScores: function () {
+			const baseURI = process.env.VUE_APP_HOST_URL + "api/topScores";
+			axios.get(baseURI).then((response) => {
+				this.topScores = response.data;
+			});
+		},
 	},
 };
 </script>
@@ -90,11 +100,11 @@ export default {
 
 .options {
 	/* button */
-	width: 800px;
-	height: 100px;
+	width: 350px;
+	height: 45px;
 	background-color: #ece281;
 	/* text */
-	font-size: 50px;
+	font-size: 25px;
 	font-weight: bold;
 	color: #040563;
 }
