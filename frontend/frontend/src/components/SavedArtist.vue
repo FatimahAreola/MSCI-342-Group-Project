@@ -64,10 +64,11 @@ export default {
 .artist-bin {
 	display: flex;
 	justify-content: space-between;
-	width: 400px;
+	width: 500px;
 }
 .left {
 	display: inline-block;
+	width: 500px;
 }
 .right {
 	display: inline-block;

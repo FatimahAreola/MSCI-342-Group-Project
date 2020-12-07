@@ -10,10 +10,10 @@
 		<h3>Total Game Play Time: {{ this.$store.state.timer }}</h3>
 		<h3>Best Game Play Time: {{ bestTime }}</h3>
 		<h3>Match Count: {{ this.$route.params.matches }}</h3>
-		<button class="homeButton" v-on:click="routeToHome">HOME</button>
+		<br /><br />
 		<div class="game">
-			<GlobalScore class="gameChild scores" :topScores="topScores" />
-			<div class="gameChild artists">
+			<GlobalScore :topScores="topScores" />
+			<div>
 				<h4 id="artistTitle">Artists In Game</h4>
 				<SavedArtist
 					v-for="name in artistNames"
@@ -22,7 +22,7 @@
 				/>
 			</div>
 		</div>
-		<br /><br />
+		<button class="homeButton" v-on:click="routeToHome">HOME</button>
 	</div>
 </template>
 
@@ -133,18 +133,12 @@ export default {
 	font-weight: bold;
 	color: #ffffff;
 }
-.gameChild {
-	float: left;
-}
-.scores {
-	margin-left: 50px;
-}
-.artists {
-	width: 150px;
-	margin-left: 100px;
-}
 .game {
-	margin-left: 350px;
+	margin: 0px 100px 0px 100px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	display: flex;
+	justify-content: space-evenly;
 }
 h3 {
 	margin-top: 7px;
@@ -152,7 +146,7 @@ h3 {
 }
 h4 {
 	width: 150px;
-	margin-left: 100px;
+	margin: auto;
 }
 
 .homeButton {
