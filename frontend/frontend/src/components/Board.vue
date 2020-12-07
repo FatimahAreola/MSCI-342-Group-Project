@@ -42,7 +42,7 @@ export default {
 
 .card-slot {
 	margin: 5px;
-	background-color: #f1d6d6;
+	background-color: #ece281;
 	height: 200px;
 	align-content: center;
 	text-align: center;
